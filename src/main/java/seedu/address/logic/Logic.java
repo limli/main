@@ -71,7 +71,7 @@ public interface Logic {
      * Selected member in the filtered member list.
      * null if no member is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedMemberProperty()
      */
     ReadOnlyProperty<Member> selectedMemberProperty();
 
@@ -79,7 +79,7 @@ public interface Logic {
      * Selected booking in the filtered booking list.
      * null if no booking is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedBookingProperty()
      */
     ReadOnlyProperty<Booking> selectedBookingProperty();
 
@@ -87,7 +87,7 @@ public interface Logic {
      * Selected ingredient in the filtered ingredient list.
      * null if no ingredient is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedIngredientProperty()
      */
     ReadOnlyProperty<Ingredient> selectedIngredientProperty();
 
@@ -95,35 +95,35 @@ public interface Logic {
      * Selected staff in the filtered staff list.
      * null if no staff is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedStaffProperty()
      */
     ReadOnlyProperty<Staff> selectedStaffProperty();
 
     /**
      * Sets the selected member in the filtered member list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Member)
+     * @see seedu.address.model.Model#setSelectedMember(Member)
      */
     void setSelectedMember(Member member);
 
     /**
      * Sets the selected booking in the filtered booking list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Booking)
+     * @see seedu.address.model.Model#setSelectedBooking(Booking)
      */
     void setSelectedBooking(Booking booking);
 
     /**
      * Sets the selected ingredient in the filtered ingredient list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Ingredient)
+     * @see seedu.address.model.Model#setSelectedIngredient(Ingredient)
      */
     void setSelectedIngredient(Ingredient ingredient);
 
     /**
      * Sets the selected staff in the filtered staff list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Staff)
+     * @see seedu.address.model.Model#setSelectedStaff(Staff)
      */
     void setSelectedStaff(Staff staff);
 }

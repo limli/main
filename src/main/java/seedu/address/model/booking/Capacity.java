@@ -17,7 +17,7 @@ public class Capacity {
     public static final int DEFAULT_CAPACITY = 200;
     public static final String MESSAGE_CONSTRAINTS = "Capacity should be an integer between 1 and "
             + MAX_CAPACITY + " inclusive.";
-    private int value;
+    private final int value;
 
     public Capacity(int intCapacity) {
         checkArgument(isValidCapacity(intCapacity), MESSAGE_CONSTRAINTS);

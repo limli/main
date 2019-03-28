@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.time.LocalDateTime;
 
 import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
+import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
 
@@ -21,8 +22,11 @@ public class EditBookingDescriptorBuilder {
         this.descriptor = new EditBookingDescriptor(descriptor);
     }
 
+    public EditBookingDescriptorBuilder(Booking booking) {
+        this(booking.getNumMembers(), booking.getBookingWindow());
+    }
+
     public EditBookingDescriptorBuilder(BookingSize bookingSize, BookingWindow bookingWindow) {
-        descriptor = new EditBookingDescriptor();
         descriptor = new EditBookingDescriptor();
         descriptor.setBookingSize(bookingSize);
         descriptor.setBookingWindow(bookingWindow);

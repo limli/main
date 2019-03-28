@@ -31,6 +31,9 @@ public class TypicalBookings {
     public static final Booking DANIEL_BOOKING =
             new Booking(new BookingWindow(START_TIME.minusDays(1)), DANIEL, new BookingSize(5));
 
+    public static final Booking DANIEL_BOOKING_SECOND =
+            new Booking(new BookingWindow(START_TIME.plusDays(3)), DANIEL, new BookingSize(5));
+
     public static RestaurantBook getTypicalAddressBook() {
         RestaurantBook ab = new RestaurantBook();
         // members should be loaded first before bookings
@@ -44,6 +47,7 @@ public class TypicalBookings {
     }
 
     public static List<Booking> getTypicalBookings() {
-        return new ArrayList<>(Arrays.asList(DANIEL_BOOKING, ALICE_BOOKING, BENSON_BOOKING, CARL_BOOKING));
+        return new ArrayList<>(Arrays.asList(DANIEL_BOOKING, ALICE_BOOKING, BENSON_BOOKING, CARL_BOOKING,
+                DANIEL_BOOKING_SECOND));
     }
 }
