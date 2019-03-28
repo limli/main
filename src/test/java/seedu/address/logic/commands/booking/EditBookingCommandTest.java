@@ -2,10 +2,11 @@ package seedu.address.logic.commands.booking;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalBookings.DANIEL_BOOKING;
 import static seedu.address.testutil.TypicalBookings.DANIEL_BOOKING_SECOND;
+import static seedu.address.logic.commands.CommandTestUtil.showBookingAtIndex;
 import static seedu.address.testutil.TypicalBookings.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.time.LocalDateTime;
 
@@ -14,20 +15,16 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import static seedu.address.logic.commands.CommandTestUtil.showBookingAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
-import seedu.address.logic.CustomerIndexedBooking;
+
 import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
-import seedu.address.logic.commands.add.AddBookingCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.booking.Booking;
 import seedu.address.testutil.BookingBuilder;
-import seedu.address.testutil.CustomerIndexedBookingBuilder;
 import seedu.address.testutil.EditBookingDescriptorBuilder;
 
 public class EditBookingCommandTest {
