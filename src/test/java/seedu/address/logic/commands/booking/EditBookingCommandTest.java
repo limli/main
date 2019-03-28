@@ -2,8 +2,8 @@ package seedu.address.logic.commands.booking;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalBookings.DANIEL_BOOKING_SECOND;
 import static seedu.address.logic.commands.CommandTestUtil.showBookingAtIndex;
+import static seedu.address.testutil.TypicalBookings.DANIEL_BOOKING_SECOND;
 import static seedu.address.testutil.TypicalBookings.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -15,7 +15,6 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-
 
 import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
