@@ -9,9 +9,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Shift implements Comparable<Shift> {
 
-    public final DayOfWeek dayOfWeek;
-    public final LocalTime startTime;
-    public final LocalTime endTime;
+    private final DayOfWeek dayOfWeek;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
 
     /**
      * Constructs a {@code Shift}.
@@ -27,7 +27,7 @@ public class Shift implements Comparable<Shift> {
     }
 
     public Shift(String dayOfWeekString, String startTimeString, String endTimeString) {
-        // TODO: ensure starttime < endtime
+        // TODO: ensure starttime < endtime (shift is of non-zero duration)
         try {
             dayOfWeek = DayOfWeek.valueOf(dayOfWeekString);
             startTime = LocalTime.parse(startTimeString);
@@ -35,6 +35,20 @@ public class Shift implements Comparable<Shift> {
         } catch (DateTimeParseException | IllegalArgumentException e) {
             throw new IllegalArgumentException();
         }
+    }
+
+    /**
+     * Checks if this shift conflicts with {@code otherShift}
+     *
+     * @param otherShift The shift to check for conflicts with.
+     * @return true if the two shifts conflict, false otherwise.
+     */
+    public boolean conflictsWith(Shift otherShift) {
+        if (otherShift.dayOfWeek == dayOfWeek) {
+            return otherShift.endTime.compareTo(startTime) == -1
+                    || otherShift.startTime.compareTo(endTime) == 1;
+        }
+        return false;
     }
 
     @Override
