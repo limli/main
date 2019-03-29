@@ -53,6 +53,7 @@ public class ShiftRoster {
         } else {
             List<Shift> newShiftRoster = new ArrayList<>(shifts);
             newShiftRoster.add(shift);
+            Collections.sort(newShiftRoster);
             return new ShiftRoster(newShiftRoster);
         }
     }
@@ -66,6 +67,10 @@ public class ShiftRoster {
         List<Shift> newShiftRoster = new ArrayList<>(shifts);
         newShiftRoster.remove(shift);
         return new ShiftRoster(newShiftRoster);
+    }
+
+    public List<Shift> getShifts() {
+        return shifts;
     }
 
     @Override
