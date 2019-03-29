@@ -1,19 +1,30 @@
 package seedu.address.model.person.staff;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents a collection of shifts for a single staff in the restaurant book.
+ *
+ * Guarantees: immutable;
  */
 public class ShiftRoster {
 
-    private ArrayList<Shift> shifts;
+    public static final String MESSAGE_CONSTRAINTS =
+            "The shift roster for a certain staff member should not contain any shifts that clash with each other.";
+
+    private final List<Shift> shifts;
 
     /**
      * Constructs a new {@code ShiftRoster}
      */
-    public ShiftRoster() {
-        this.shifts = new ArrayList<>();
+    public ShiftRoster(Shift... shifts) {
+        this.shifts = List.of(shifts);
+    }
+
+    public ShiftRoster(List<Shift> shifts) {
+        this.shifts = Collections.unmodifiableList(shifts);
     }
 
     /**
@@ -36,22 +47,25 @@ public class ShiftRoster {
      *
      * @param shift The shift to add to the roster.
      */
-    public void addShift(Shift shift) {
+    public ShiftRoster addShift(Shift shift) {
         if (conflictsWith(shift)) {
-            // TODO: fail to add shift
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         } else {
-            shifts.add(shift);
+            List<Shift> newShiftRoster = new ArrayList<>(shifts);
+            newShiftRoster.add(shift);
+            return new ShiftRoster(newShiftRoster);
         }
     }
 
     /**
-     * Removes a shift to the roster.
+     * Removes a shift to the roster if it exists.
      *
      * @param shift The shift to remove from the roster.
      */
-    public void deleteShift(Shift shift) {
-        // TODO: add checks
-        shifts.remove(shift);
+    public ShiftRoster deleteShift(Shift shift) {
+        List<Shift> newShiftRoster = new ArrayList<>(shifts);
+        newShiftRoster.remove(shift);
+        return new ShiftRoster(newShiftRoster);
     }
 
     @Override

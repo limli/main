@@ -19,10 +19,10 @@ public class Staff extends Person {
     /**
      * Every field must be present and not null.
      */
-    public Staff(Name name, Phone phone, Email email, Appointment appointment) {
+    public Staff(Name name, Phone phone, Email email, Appointment appointment, ShiftRoster shiftRoster) {
         super(name, phone, email);
         this.appointment = appointment;
-        this.shiftRoster = new ShiftRoster();
+        this.shiftRoster = shiftRoster;
     }
 
     public Appointment getAppointment() {
