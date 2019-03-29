@@ -14,6 +14,7 @@ import seedu.address.model.person.Phone;
 public class Staff extends Person {
 
     private Appointment appointment;
+    private ShiftRoster shiftRoster;
 
     /**
      * Every field must be present and not null.
@@ -21,11 +22,14 @@ public class Staff extends Person {
     public Staff(Name name, Phone phone, Email email, Appointment appointment) {
         super(name, phone, email);
         this.appointment = appointment;
+        this.shiftRoster = new ShiftRoster();
     }
 
     public Appointment getAppointment() {
         return appointment;
     }
+
+    public ShiftRoster getShiftRoster() { return shiftRoster; }
 
     /**
      * Returns true if both staff of the same name have at least one other identity field that is the same.
