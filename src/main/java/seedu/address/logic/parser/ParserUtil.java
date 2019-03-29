@@ -2,6 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,6 +21,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.recipe.RecipeIngredientSet;
+import seedu.address.model.recipe.RecipeName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -27,6 +34,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -115,7 +123,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String name} into an {@code IngredientName}.
      * Leading and trailing whitespaces will be trimmed.
-     *
      */
     public static IngredientName parseIngredientName(String name) throws ParseException {
         requireNonNull(name);
@@ -129,7 +136,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String quantity} into an {@code IngredientQuantity}.
      * Leading and trailing whitespaces will be trimmed.
-     *
      */
 
     public static IngredientQuantity parseIngredientQuantity(String quantity) throws ParseException {
@@ -144,7 +150,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String unit} into an {@code IngredientUnit}.
      * Leading and trailing whitespaces will be trimmed.
-     *
      */
 
     public static IngredientUnit parseIngredientUnit(String unit) throws ParseException {
@@ -159,7 +164,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String warningAmount} into an {@code IngredientWarningAmount}.
      * Leading and trailing whitespaces will be trimmed.
-     *
      */
 
     public static IngredientWarningAmount parseIngredientWarningAmount(String warningAmount) throws ParseException {
@@ -170,6 +174,49 @@ public class ParserUtil {
         }
         return new IngredientWarningAmount(Integer.parseInt(trimmedWarningAmount));
     }
+
+    /**
+     * Parses a {@code String name} into an {@code RecipeName}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static RecipeName parseRecipeName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedRecipeName = name.trim();
+        if (!RecipeName.isValidRecipeName(trimmedRecipeName)) {
+            throw new ParseException(RecipeName.MESSAGE_CONSTRAINTS);
+        }
+        return new RecipeName(trimmedRecipeName);
+    }
+
+    /**
+     * Parses a {@code Collection<String> pairs} into an {@code Set<Pair<Index, IngredientQuantity>>}.
+     * Each string is split by the '&'.
+     * If '&' symbol not present, or there are more than 1 '&' symbols, ParseException is thrown.
+     * Index and IngredientQuantity is parsed, and if fail format, ParseException is also thrown.
+     */
+    public static Set<Pair<Index, IngredientQuantity>>
+        parseRecipeIngredientSet(Collection<String> ingredsToSplit) throws ParseException {
+
+        requireNonNull(ingredsToSplit);
+        final Set<Pair<Index, IngredientQuantity>> ingredientSet = new HashSet<>();
+        for (String ingred : ingredsToSplit) {
+            try {
+                String[] ingredValues = ingred.split("&");
+                if (ingredValues.length != 2) {
+                    throw new ParseException(RecipeIngredientSet.MESSAGE_CONSTRAINTS);
+                }
+                Index index = parseIndex(ingredValues[0]);
+                IngredientQuantity qty = parseIngredientQuantity(ingredValues[1]);
+                Pair<Index, IngredientQuantity> ingredPair = new Pair(index, qty);
+                ingredientSet.add(ingredPair);
+            } catch (ParseException e) {
+                //Parsing Iindex or ingredientQuantity throws parseException
+                throw new ParseException(RecipeIngredientSet.MESSAGE_CONSTRAINTS);
+            }
+        }
+        return ingredientSet;
+    }
+
 
     /**
      * Creates a new BookingWindow object that parses the time. Uses the yyyy-MM-dd HH:mm format.
