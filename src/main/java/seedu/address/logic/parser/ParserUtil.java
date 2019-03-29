@@ -17,6 +17,9 @@ import seedu.address.model.person.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -195,6 +198,34 @@ public class ParserUtil {
             return new BookingSize(trimmedBookingSize);
         } catch (IllegalArgumentException e) {
             throw new ParseException(BookingSize.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into a {@code DayOfWeek}.
+     */
+    public static DayOfWeek parseDayOfWeek(String dayOfWeek) throws ParseException {
+        requireNonNull(dayOfWeek);
+        String trimmedDayOfWeek = dayOfWeek.trim();
+        try {
+            return DayOfWeek.valueOf(dayOfWeek);
+        } catch (IllegalArgumentException e) {
+            // TODO: Throw ParseException
+            //throw new ParseException(BookingSize.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        try {
+            return LocalTime.parse(time);
+        } catch (IllegalArgumentException e) {
+            // TODO: Throw ParseException
+            //throw new ParseException(BookingSize.MESSAGE_CONSTRAINTS);
         }
     }
 }
