@@ -1,11 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.model.person.staff;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.Name;
 import seedu.address.testutil.Assert;
 
 public class AppointmentTest {
