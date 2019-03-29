@@ -19,6 +19,7 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.RestaurantOverbookedException;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * Wraps all data at the restaurant-book level
@@ -29,6 +30,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     private final UniqueItemList<Member> members;
     private final UniqueItemList<Booking> bookings;
     private final UniqueItemList<Ingredient> ingredients;
+    private final UniqueItemList<Recipe> recipes;
     private final UniqueItemList<Staff> staff;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
@@ -44,6 +46,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         members = new UniqueItemList<>();
         bookings = new UniqueItemList<>();
         ingredients = new UniqueItemList<>();
+        recipes = new UniqueItemList<>();
         staff = new UniqueItemList<>();
     }
 
@@ -86,6 +89,16 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         indicateModified();
     }
 
+
+    /**
+     * Replaces the contents of the recipe list with {@code recipes}.
+     * {@code recipes} must not contain duplicate recipes.
+     */
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes.setItems(recipes);
+        indicateModified();
+    }
+
     /**
      * Replaces the contents of the booking list with {@code staff}.
      * {@code staff} must not contain duplicate staff.
@@ -102,10 +115,10 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void resetData(ReadOnlyRestaurantBook newData) {
         requireNonNull(newData);
-
         setMembers(newData.getMemberList());
         setBookings(newData.getBookingList());
         setIngredients(newData.getIngredientList());
+        setRecipes(newData.getRecipeList());
         setStaffList(newData.getStaffList());
         capacity = newData.getCapacity();
     }
@@ -149,6 +162,14 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     }
 
     /**
+     * Returns true if a recipe with the same identity as {@code recipe} exists in the restaurant book.
+     */
+    public boolean hasRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        return recipes.contains(recipe);
+    }
+
+    /**
      * Returns true if a staff with the same identity as {@code staff} exists in the restaurant book.
      */
     public boolean hasStaff(Staff staff) {
@@ -185,6 +206,16 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
+        indicateModified();
+    }
+
+    /**
+     * Adds a recipe to the restaurant book.
+     * The recipe must not already exist in the restaurant book.
+     */
+    public void addRecipe(Recipe recipe) {
+        recipes.add(recipe);
+        System.out.println("within nested" + recipe);
         indicateModified();
     }
 
@@ -254,6 +285,17 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         indicateModified();
     }
 
+    /**
+     * Replaces the given recipe {@code target} in the list with {@code editedRecipe}.
+     * {@code target} must exist in the restaurant book.
+     * The recipe identity of {@code editedRecipe} must not be the
+     * same as another existing recipe in the restaurant book.
+     */
+    public void setRecipe(Recipe target, Recipe editedRecipe) {
+        recipes.setItem(target, editedRecipe);
+        indicateModified();
+    }
+
 
     /**
      * Replaces the given member {@code target} in the list with {@code editedStaff}.
@@ -295,6 +337,15 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
+        indicateModified();
+    }
+
+    /**
+     * Removes {@code key} from this {@code RestaurantBook}.
+     * {@code key} must exist in the restaurant book.
+     */
+    public void removeRecipe(Recipe key) {
+        recipes.remove(key);
         indicateModified();
     }
 
@@ -363,6 +414,12 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         return ingredients.asUnmodifiableObservableList();
     }
 
+
+    @Override
+    public ObservableList<Recipe> getRecipeList() {
+        return recipes.asUnmodifiableObservableList();
+    }
+
     @Override
     public ObservableList<Staff> getStaffList() {
         return staff.asUnmodifiableObservableList();
@@ -375,11 +432,12 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
                 && members.equals(((RestaurantBook) other).members)
                 && bookings.equals(((RestaurantBook) other).bookings)
                 && ingredients.equals(((RestaurantBook) other).ingredients)
+                && recipes.equals(((RestaurantBook) other).recipes)
                 && staff.equals(((RestaurantBook) other).staff));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(members, bookings, ingredients, staff);
+        return Objects.hash(members, bookings, ingredients, recipes, staff);
     }
 }

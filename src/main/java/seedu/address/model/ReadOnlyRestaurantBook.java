@@ -7,6 +7,7 @@ import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * Unmodifiable view of an address book
@@ -30,6 +31,12 @@ public interface ReadOnlyRestaurantBook extends Observable {
      * This list will not contain any duplicate ingredients.
      */
     ObservableList<Ingredient> getIngredientList();
+
+    /**
+     * Returns an unmodifiable view of {@code Recipe} list.
+     * This list will not contain any duplicate recipes.
+     */
+    ObservableList<Recipe> getRecipeList();
 
     /**
      * Returns an unmodifiable view of {@code Staff} list.
