@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.person.staff.Staff;
 import seedu.address.testutil.StaffBuilder;
 
 public class StaffTest {

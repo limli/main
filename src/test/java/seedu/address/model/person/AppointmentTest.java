@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.address.model.person.staff.Appointment;
 import seedu.address.testutil.Assert;
 
 public class AppointmentTest {

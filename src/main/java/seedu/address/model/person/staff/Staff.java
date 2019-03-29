@@ -1,6 +1,11 @@
-package seedu.address.model.person;
+package seedu.address.model.person.staff;
 
 import java.util.Objects;
+
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Represents a Staff in the restaurant book.

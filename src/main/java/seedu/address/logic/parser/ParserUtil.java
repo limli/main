@@ -11,7 +11,7 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientQuantity;
 import seedu.address.model.ingredient.IngredientUnit;
 import seedu.address.model.ingredient.IngredientWarningAmount;
-import seedu.address.model.person.Appointment;
+import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LoyaltyPoints;
 import seedu.address.model.person.Name;
