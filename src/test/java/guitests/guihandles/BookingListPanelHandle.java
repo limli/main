@@ -102,6 +102,10 @@ public class BookingListPanelHandle extends NodeHandle<ListView<Booking>> {
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public BookingCardHandle getBookingCardHandle(int index) {
+        System.out.println(getAllCardNodes().stream()
+                .map(BookingCardHandle::new)
+                .filter(handle -> handle.equals(getBooking(index)))
+                .count());
         return getAllCardNodes().stream()
                 .map(BookingCardHandle::new)
                 .filter(handle -> handle.equals(getBooking(index)))
