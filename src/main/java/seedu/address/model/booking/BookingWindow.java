@@ -13,7 +13,7 @@ public class BookingWindow implements Comparable<BookingWindow> {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Please follow the time format of yyyy-MM-ddTHH:mm, e.g. 2019-03-12T12:00";
+            "Please follow the time format of yyyy-MM-ddTHH:mm (e.g. 2019-03-12T12:00) or HH:mm (e.g. 12:00)";
 
     private static final Duration DEFAULT_DURATION = Duration.ofHours(1);
 
@@ -37,6 +37,14 @@ public class BookingWindow implements Comparable<BookingWindow> {
         endTime = startTime.plus(DEFAULT_DURATION);
     }
 
+    public BookingWindow(LocalDateTime startTime) {
+        this.startTime = startTime;
+        this.endTime = startTime.plus(DEFAULT_DURATION);
+    }
+
+    /**
+     * Checks if {@code s} is a valid LocalDateTime.
+     */
     private boolean isValidDateTime(String s) {
         try {
             LocalDateTime.parse(s);
@@ -46,6 +54,9 @@ public class BookingWindow implements Comparable<BookingWindow> {
         }
     }
 
+    /**
+     * Checks if {@code s} is a valid LocalTime.
+     */
     private boolean isValidTime(String s) {
         try {
             LocalTime.parse(s);
@@ -53,11 +64,6 @@ public class BookingWindow implements Comparable<BookingWindow> {
         } catch (DateTimeException e) {
             return false;
         }
-    }
-
-    public BookingWindow(LocalDateTime startTime) {
-        this.startTime = startTime;
-        this.endTime = startTime.plusHours(1);
     }
 
     public LocalDateTime getStartTime() {
