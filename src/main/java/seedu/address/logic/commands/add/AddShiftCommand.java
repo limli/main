@@ -79,9 +79,13 @@ public class AddShiftCommand extends Command {
      */
     private static Staff createStaffWithShiftAdded(Staff staffToAddShift, Shift shift) {
         assert staffToAddShift != null;
-        // TODO
 
-        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAppointment);
+        ShiftRoster newShiftRoster = staffToAddShift.getShiftRoster().addShift(shift);
+        return new Staff(staffToAddShift.getName(),
+                staffToAddShift.getPhone(),
+                staffToAddShift.getEmail(),
+                staffToAddShift.getAppointment(),
+                newShiftRoster);
     }
 
     @Override
