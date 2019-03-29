@@ -1,5 +1,6 @@
 package seedu.address.model.booking;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalMembers.ALICE;
@@ -80,5 +81,12 @@ public class CapacityTest {
 
         // a capacity of 10 is sufficient
         assertTrue(new Capacity(10).canAccommodate(bookingList));
+    }
+
+    @Test
+    public void constructorTest() {
+        // checks that the same object is returned when using String and int
+        assertEquals(new Capacity(1), new Capacity("1"));
+        assertEquals(new Capacity(Capacity.MAX_CAPACITY), new Capacity(Integer.toString(Capacity.MAX_CAPACITY)));
     }
 }

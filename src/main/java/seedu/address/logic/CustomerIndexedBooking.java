@@ -16,9 +16,9 @@ import seedu.address.model.person.Member;
  * Represents a booking with the member given by index instead of the actual details.
  */
 public class CustomerIndexedBooking {
-    private BookingWindow bookingWindow;
-    private Index memberIndex;
-    private BookingSize numMembers;
+    private final BookingWindow bookingWindow;
+    private final Index memberIndex;
+    private final BookingSize numMembers;
 
 
     public CustomerIndexedBooking(BookingWindow bookingWindow, Index memberIndex, BookingSize numMembers) {

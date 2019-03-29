@@ -120,8 +120,7 @@ public class EditMemberCommandTest {
         showMemberAtIndex(model, INDEX_FIRST);
 
         // edit member in filtered list into a duplicate in address book
-        Member memberInList =
-                model.getRestaurantBook().getMemberList().get(INDEX_SECOND.getZeroBased());
+        Member memberInList = model.getRestaurantBook().getMemberList().get(INDEX_SECOND.getZeroBased());
         EditMemberCommand editMemberCommand = new EditMemberCommand(INDEX_FIRST,
                 new EditMemberDescriptorBuilder(memberInList).build());
 

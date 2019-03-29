@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
+
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.booking.Booking;
@@ -30,6 +32,12 @@ public class BookingBuilder {
         numPersons = new BookingSize(DEFAULT_BOOKING_SIZE);
     }
 
+    public BookingBuilder(Booking booking) {
+        customer = booking.getCustomer();
+        bookingWindow = booking.getBookingWindow();
+        numPersons = booking.getNumMembers();
+    }
+
     /**
      * Sets the {@code Customer} of the {@code Booking} that we are building.
      */
@@ -46,6 +54,13 @@ public class BookingBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Date} of the {@code Booking} that we are building.
+     */
+    public BookingBuilder withDate(LocalDateTime startTime) {
+        this.bookingWindow = new BookingWindow(startTime);
+        return this;
+    }
     /**
      * Sets the {@code numPersons} of the {@code Booking} that we are building.
      */
