@@ -16,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.staff.Shift;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -210,8 +211,7 @@ public class ParserUtil {
         try {
             return DayOfWeek.valueOf(dayOfWeek);
         } catch (IllegalArgumentException e) {
-            // TODO: Throw ParseException
-            //throw new ParseException(BookingSize.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -224,8 +224,7 @@ public class ParserUtil {
         try {
             return LocalTime.parse(time);
         } catch (IllegalArgumentException e) {
-            // TODO: Throw ParseException
-            //throw new ParseException(BookingSize.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
         }
     }
 }

@@ -9,6 +9,10 @@ import java.time.format.DateTimeParseException;
  */
 public class Shift implements Comparable<Shift> {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Day of week should be specified as MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY.\n"
+                    + "Start time and end time should be in the HH:MM format.\n";
+
     private final DayOfWeek dayOfWeek;
     private final LocalTime startTime;
     private final LocalTime endTime;
