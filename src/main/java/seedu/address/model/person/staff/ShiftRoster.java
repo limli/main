@@ -52,4 +52,21 @@ public class ShiftRoster {
         // TODO: add checks
         this.shifts.remove(shift);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof ShiftRoster) {
+            if (shifts.size() != ((ShiftRoster) other).shifts.size()) {
+                return false;
+            }
+            for (int i = 0; i < shifts.size(); i++) {
+                if (!shifts.get(i).equals(((ShiftRoster) other).shifts.get(i))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

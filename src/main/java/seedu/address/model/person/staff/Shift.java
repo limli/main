@@ -60,4 +60,15 @@ public class Shift implements Comparable<Shift> {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Shift) {
+            return dayOfWeek.equals(((Shift) other).dayOfWeek)
+                    && startTime.equals(((Shift) other).startTime)
+                    && endTime.equals(((Shift) other).endTime);
+        } else {
+            return false;
+        }
+    }
+
 }
