@@ -89,4 +89,13 @@ public class ShiftRoster {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (Shift shift : shifts) {
+            output += shift + "\n";
+        }
+        return output;
+    }
 }

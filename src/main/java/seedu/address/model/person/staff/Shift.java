@@ -1,5 +1,8 @@
 package seedu.address.model.person.staff;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -30,7 +33,10 @@ public class Shift implements Comparable<Shift> {
         this.endTime = endTime;
     }
 
-    public Shift(String dayOfWeekString, String startTimeString, String endTimeString) {
+    @JsonCreator
+    private Shift(@JsonProperty("dayOfWeek") String dayOfWeekString,
+                  @JsonProperty("startTime") String startTimeString,
+                  @JsonProperty("endTime") String endTimeString) {
         // TODO: ensure starttime < endtime (shift is of non-zero duration)
         try {
             dayOfWeek = DayOfWeek.valueOf(dayOfWeekString);
@@ -73,6 +79,11 @@ public class Shift implements Comparable<Shift> {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s to %s", dayOfWeek, startTime, endTime);
     }
 
 }
