@@ -37,10 +37,11 @@ public class ShiftRoster {
      * @param shift The shift to add to the roster.
      */
     public void addShift(Shift shift) {
-        if (this.conflictsWith(shift)) {
+        if (conflictsWith(shift)) {
             // TODO: fail to add shift
+        } else {
+            shifts.add(shift);
         }
-        this.shifts.add(shift);
     }
 
     /**
@@ -50,7 +51,7 @@ public class ShiftRoster {
      */
     public void deleteShift(Shift shift) {
         // TODO: add checks
-        this.shifts.remove(shift);
+        shifts.remove(shift);
     }
 
     @Override

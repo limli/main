@@ -15,8 +15,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_INGREDIENT_WARNINGAMOUNT = new Prefix("w/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
     public static final Prefix PREFIX_START_TIME = new Prefix("ts/");
+    public static final Prefix PREFIX_END_TIME = new Prefix("te/");
+    public static final Prefix PREFIX_DAY_OF_WEEK = new Prefix("d/");
     public static final Prefix PREFIX_CUSTOMER = new Prefix("c/");
     public static final Prefix PREFIX_NUMBER_PERSONS = new Prefix("n/");
     public static final Prefix PREFIX_APPOINTMENT = new Prefix("a/");
     public static final Prefix PREFIX_LOYALTY_POINTS = new Prefix("l/");
+
 }

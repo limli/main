@@ -67,7 +67,8 @@ public class Staff extends Person {
         return otherStaff.getName().equals(getName())
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
-                && otherStaff.getAppointment().equals(getAppointment());
+                && otherStaff.getAppointment().equals(getAppointment())
+                && otherStaff.getShiftRoster().equals(getShiftRoster());
     }
 
     @Override
