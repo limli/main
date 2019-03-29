@@ -5,6 +5,7 @@
     "email": "invalid@email!3e"
   } ],
   "ingredients" : [ ],
+  "recipes": [ ],
   "staff" : [ ],
   "bookings" : [ ],
   "intCapacity" : 200

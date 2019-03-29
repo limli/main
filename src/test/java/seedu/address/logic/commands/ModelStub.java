@@ -14,6 +14,7 @@ import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * A default model stub that have all of the methods failing.
@@ -60,6 +61,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void addRecipe(Recipe recipe) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void addIngredient(Ingredient ingredient) {
         throw new AssertionError("This method should not be called.");
     }
@@ -100,6 +106,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasRecipe(Recipe recipe) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasStaff(Staff staff) {
         throw new AssertionError("This method should not be called.");
     }
@@ -111,6 +122,11 @@ public class ModelStub implements Model {
 
     @Override
     public void deleteBooking(Booking target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteRecipe(Recipe target) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -145,7 +161,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setIngredient(Ingredient target, Ingredient editedMember) {
+    public void setIngredient(Ingredient target, Ingredient editedIngredient) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setRecipe(Recipe target, Recipe editedRecipe) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -161,6 +182,11 @@ public class ModelStub implements Model {
 
     @Override
     public ObservableList<Ingredient> getFilteredIngredientList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Recipe> getFilteredRecipeList() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -181,6 +207,11 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -230,6 +261,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ReadOnlyProperty<Recipe> selectedRecipeProperty() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ReadOnlyProperty<Staff> selectedStaffProperty() {
         throw new AssertionError("This method should not be called.");
     }
@@ -246,6 +282,11 @@ public class ModelStub implements Model {
 
     @Override
     public Ingredient getSelectedIngredient() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Recipe getSelectedRecipe() {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -268,6 +309,12 @@ public class ModelStub implements Model {
     public void setSelectedIngredient(Ingredient ingredient) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void setSelectedRecipe(Recipe recipe) {
+        throw new AssertionError("This method should not be called.");
+    }
+
 
     @Override
     public void setSelectedStaff(Staff staff) {
