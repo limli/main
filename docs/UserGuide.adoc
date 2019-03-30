@@ -427,7 +427,7 @@ Deletes a booking.
 Format: `deleteBooking INDEX`
 
 ****
-• Cancels the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
+• Deletes the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
 ****
 
 Example:
@@ -436,7 +436,7 @@ Example:
 +
 `deleteBooking 3`
 
-Cancels the booking with index 3.
+Deletes the booking with index 3.
 
 // end::booking[]
 
