@@ -2,16 +2,15 @@ package seedu.address.model.recipe;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Set;
+import java.util.Map;
 
-import javafx.util.Pair;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientQuantity;
 
 /**
- *  A class to represent the set of ingredients used in a recipe.
+ *  A class to represent the ingredients used in a recipe.
  *  The Ingredient is stored along with the respective ingredientQuantity required in the recipe,
- *  as a Pair containing Ingredient and IngredientQuantity.
+ *  as a Map containing Ingredient as key and IngredientQuantity as value.
  *  TODO: toString for RecipeIngredientSet
  */
 
@@ -25,21 +24,21 @@ public class RecipeIngredientSet {
             + IngredientQuantity.MESSAGE_CONSTRAINTS + "\n"
             + "INGREDIENT_INDEX and INGREDIENT_QUANTITY should be separated by the symbol '&'";
 
-    private Set<Pair<Ingredient, IngredientQuantity>> ingredientSet;
+    private Map<Ingredient, IngredientQuantity> ingredientSet;
 
 
     /**
      * Constructs a {@code RecipeIngredientSet}.
      *
-     * @param set A valid set of pairs containing ingredient and ingredientQuantity
+     * @param map A valid map containing ingredient as key and ingredientQuantity as value.
      *
      */
-    public RecipeIngredientSet(Set<Pair<Ingredient, IngredientQuantity>> set) {
-        requireNonNull(set);
-        this.ingredientSet = set;
+    public RecipeIngredientSet(Map<Ingredient, IngredientQuantity> map) {
+        requireNonNull(map);
+        this.ingredientSet = map;
     }
 
-    public Set<Pair<Ingredient, IngredientQuantity>> getIngredientSet() {
+    public Map<Ingredient, IngredientQuantity> getIngredientSet() {
         return ingredientSet;
     }
 

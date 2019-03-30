@@ -2,9 +2,10 @@ package seedu.address.logic;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,7 +39,7 @@ public class IngredientIndexedRecipe {
      */
     public Optional<Recipe> getRecipe(Model model) {
         requireNonNull(model);
-        Set<Pair<Ingredient, IngredientQuantity>> ingredsInRecipe = new HashSet<>();
+        Map<Ingredient, IngredientQuantity> ingredsInRecipe = new HashMap<>();
         List<Ingredient> lastShownList = model.getFilteredIngredientList();
 
         Iterator<Pair<Index, IngredientQuantity>> it = ingredientIndexedSet.iterator();
@@ -51,8 +52,7 @@ public class IngredientIndexedRecipe {
             } else {
                 Ingredient ingredient = lastShownList.get(ingredientIndex.getZeroBased());
                 IngredientQuantity quantityForRecipe = indexedIngred.getValue();
-                Pair<Ingredient, IngredientQuantity> processedIngred = new Pair(ingredient, quantityForRecipe);
-                ingredsInRecipe.add(processedIngred);
+                ingredsInRecipe.put(ingredient, quantityForRecipe);
             }
         }
 

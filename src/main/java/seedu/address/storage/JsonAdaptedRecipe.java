@@ -1,10 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -45,9 +45,16 @@ public class JsonAdaptedRecipe {
      */
     public JsonAdaptedRecipe(Recipe source) {
         recipeName = source.getRecipeName().getName();
-        ingredListJson.addAll(source.getRecipeIngredientSet().getIngredientSet().stream()
-                .map(JsonAdaptedIngredientAndQuantity::new)
-                .collect(Collectors.toList()));
+        Map<Ingredient, IngredientQuantity> ingredMap = source.getRecipeIngredientSet().getIngredientSet();
+
+        Iterator it = ingredMap.keySet().iterator();
+        while (it.hasNext()) {
+            Ingredient ingred = (Ingredient) it.next();
+            IngredientQuantity ingredQuantity = ingredMap.get(ingred);
+            JsonAdaptedIngredientAndQuantity jsonAdaptedIngredientAndQuantity =
+                    new JsonAdaptedIngredientAndQuantity(new Pair<>(ingred, ingredQuantity));
+            ingredListJson.add(jsonAdaptedIngredientAndQuantity);
+        }
     }
 
     /**
@@ -78,7 +85,11 @@ public class JsonAdaptedRecipe {
                     Recipe.class.getSimpleName()));
         }
 
-        final Set<Pair<Ingredient, IngredientQuantity>> modelIngreds = new HashSet<>(modelIngredList);
+        Map<Ingredient, IngredientQuantity> modelIngreds = new HashMap<>();
+        for (Pair<Ingredient, IngredientQuantity> ingredientAndQuantityPair : modelIngredList) {
+            modelIngreds.put(ingredientAndQuantityPair.getKey(), ingredientAndQuantityPair.getValue());
+        }
+
         RecipeIngredientSet modelIngredSet = new RecipeIngredientSet(modelIngreds);
         Recipe newRecipe = new Recipe(modelRecipe, modelIngredSet);
         return newRecipe;

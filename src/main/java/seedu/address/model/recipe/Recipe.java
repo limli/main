@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.Item;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientQuantity;
 
 /**
  *  A class to represent a recipe.
@@ -25,6 +27,16 @@ public class Recipe implements Item {
         requireAllNonNull(name, set);
         recipeName = name;
         ingredientsInRecipe = set;
+    }
+
+    /**
+     * Updates the set of ingredients due to a change in ingredients.
+     *
+     */
+    public Recipe editIngredientSet(Ingredient target, Ingredient editedIngredient) {
+        IngredientQuantity quantity = ingredientsInRecipe.getIngredientSet().remove(target);
+        ingredientsInRecipe.getIngredientSet().put(editedIngredient, quantity);
+        return new Recipe(recipeName, ingredientsInRecipe);
     }
 
 
