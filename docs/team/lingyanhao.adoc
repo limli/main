@@ -17,7 +17,7 @@ REstaurant Manager (REM) is a desktop application that turns your restaurant int
 
 * *Major enhancement*: added *booking feature*
 ** What it does: allows the user to manage bookings. The system will reject new bookings and suggest better alternative timeslots if the restaurant hits capacity.
-** Justification: When a restaurant needs to manage a large number of bookings, the restaurant can be overbooked. 
+** Justification: When a restaurant needs to manage a large number of bookings, the restaurant can be overbooked.
 ** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component. The implementation too was challenging as it required changes to existing commands.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
