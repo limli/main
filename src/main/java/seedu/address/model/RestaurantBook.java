@@ -36,13 +36,13 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
 
     private Capacity capacity = Capacity.getDefaultCapacity();
 
-        /*
-        * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-        * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-        *
-        * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-        *   among constructors.
-        */ {
+     /*
+     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */ {
         members = new UniqueItemList<>();
         bookings = new UniqueItemList<>();
         ingredients = new UniqueItemList<>();
@@ -62,6 +62,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     }
 
     //// list overwrite operations
+
     /**
      * Replaces the contents of the member list with {@code members}.
      * {@code members} must not contain duplicate members.
@@ -146,7 +147,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public boolean canAccommodate(Booking booking) {
         List<Booking> newList = new ArrayList<>();
-        for (Booking b: bookings) {
+        for (Booking b : bookings) {
             newList.add(b);
         } // copy all the bookings over as booking list is immutable
         newList.add(booking);
@@ -264,7 +265,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public boolean canAccommodateEdit(Booking target, Booking editedBooking) {
         // newList simulates what happens when the target is replaced
         List<Booking> newList = new ArrayList<>();
-        for (Booking b: bookings) {
+        for (Booking b : bookings) {
             if (!b.equals(target)) {
                 newList.add(b);
             } else {
@@ -275,13 +276,20 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     }
 
     /**
-     * Replaces the given member {@code target} in the list with {@code editedIngredient}.
+     * Replaces the given ingredient {@code target} in the list with {@code editedIngredient}.
      * {@code target} must exist in the restaurant book.
-     * The member identity of {@code editedIngredient} must not be the
-     * same as another existing ingredient in the restaurant book.
+     * Recipes that include the ingredient must also be updated with the change in the ingredient.
      */
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         ingredients.setItem(target, editedIngredient);
+        ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
+        Predicate<Recipe> recipeContainsTarget =
+            r -> r.getRecipeIngredientSet().getIngredientSet()
+                        .keySet().stream().anyMatch(ingred -> ingred.equals(target));
+        Function<Recipe, Recipe>
+                updateRecipe = r -> r.editIngredientSet(target, editedIngredient);
+        setRecipes(recipeObservableList.stream().filter(recipeContainsTarget)
+                .map(updateRecipe).collect(Collectors.toList()));
         indicateModified();
     }
 
@@ -295,7 +303,6 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         recipes.setItem(target, editedRecipe);
         indicateModified();
     }
-
 
     /**
      * Replaces the given member {@code target} in the list with {@code editedStaff}.
@@ -334,9 +341,17 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     /**
      * Removes {@code key} from this {@code RestaurantBook}.
      * {@code key} must exist in the restaurant book.
+     * Recipes that include this ingredient must also be removed.
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
+
+        // When an ingred is deleted, all associated recipes are also deleted.
+        Predicate<Recipe> isValidRecipe =
+            r -> r.getRecipeIngredientSet().getIngredientSet()
+                        .keySet().stream().noneMatch(ingred -> ingred.equals(key));
+        ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
+        setRecipes(recipeObservableList.stream().filter(isValidRecipe).collect(Collectors.toList()));
         indicateModified();
     }
 
