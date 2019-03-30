@@ -7,9 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
@@ -23,11 +21,11 @@ import seedu.address.model.recipe.RecipeName;
  */
 public class IngredientIndexedRecipe {
     private RecipeName recipeName;
-    private Set<Pair<Index, IngredientQuantity>> ingredientIndexedSet;
+    private Map<Index, IngredientQuantity> ingredientIndexedSet;
 
-    public IngredientIndexedRecipe(RecipeName name, Set<Pair<Index, IngredientQuantity>> set) {
+    public IngredientIndexedRecipe(RecipeName name, Map<Index, IngredientQuantity> map) {
         this.recipeName = name;
-        this.ingredientIndexedSet = set;
+        this.ingredientIndexedSet = map;
     }
 
     /**
@@ -42,16 +40,15 @@ public class IngredientIndexedRecipe {
         Map<Ingredient, IngredientQuantity> ingredsInRecipe = new HashMap<>();
         List<Ingredient> lastShownList = model.getFilteredIngredientList();
 
-        Iterator<Pair<Index, IngredientQuantity>> it = ingredientIndexedSet.iterator();
+        Iterator<Index> it = ingredientIndexedSet.keySet().iterator();
 
         while (((Iterator) it).hasNext()) {
-            Pair<Index, IngredientQuantity> indexedIngred = it.next();
-            Index ingredientIndex = indexedIngred.getKey();
+            Index ingredientIndex = (Index) it.next();
             if (ingredientIndex.getZeroBased() >= lastShownList.size()) {
                 return Optional.empty();
             } else {
                 Ingredient ingredient = lastShownList.get(ingredientIndex.getZeroBased());
-                IngredientQuantity quantityForRecipe = indexedIngred.getValue();
+                IngredientQuantity quantityForRecipe = ingredientIndexedSet.get(ingredientIndex);
                 ingredsInRecipe.put(ingredient, quantityForRecipe);
             }
         }

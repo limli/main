@@ -4,9 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECIPE_INGREDIENT_AND_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECIPE_NAME;
 
-import java.util.Set;
+import java.util.Map;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.IngredientIndexedRecipe;
 import seedu.address.logic.commands.add.AddRecipeCommand;
@@ -39,7 +38,7 @@ public class AddRecipeCommandParser implements Parser<AddRecipeCommand> {
         RecipeName recipeName =
                 ParserUtil.parseRecipeName(argMultimap.getValue(PREFIX_RECIPE_NAME).get());
 
-        Set<Pair<Index, IngredientQuantity>> ingredientIndexedSet =
+        Map<Index, IngredientQuantity> ingredientIndexedSet =
                 ParserUtil.parseRecipeIngredientSet(argMultimap.getAllValues(PREFIX_RECIPE_INGREDIENT_AND_QUANTITY));
 
         return new AddRecipeCommand(new IngredientIndexedRecipe(recipeName, ingredientIndexedSet));

@@ -3,10 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -194,11 +193,11 @@ public class ParserUtil {
      * If '&' symbol not present, or there are more than 1 '&' symbols, ParseException is thrown.
      * Index and IngredientQuantity is parsed, and if fail format, ParseException is also thrown.
      */
-    public static Set<Pair<Index, IngredientQuantity>>
+    public static Map<Index, IngredientQuantity>
         parseRecipeIngredientSet(Collection<String> ingredsToSplit) throws ParseException {
 
         requireNonNull(ingredsToSplit);
-        final Set<Pair<Index, IngredientQuantity>> ingredientSet = new HashSet<>();
+        final Map<Index, IngredientQuantity> ingredientSet = new HashMap<>();
         for (String ingred : ingredsToSplit) {
             try {
                 String[] ingredValues = ingred.split("&");
@@ -207,10 +206,9 @@ public class ParserUtil {
                 }
                 Index index = parseIndex(ingredValues[0]);
                 IngredientQuantity qty = parseIngredientQuantity(ingredValues[1]);
-                Pair<Index, IngredientQuantity> ingredPair = new Pair(index, qty);
-                ingredientSet.add(ingredPair);
+                ingredientSet.put(index, qty);
             } catch (ParseException e) {
-                //Parsing Iindex or ingredientQuantity throws parseException
+                //Parsing index or ingredientQuantity throws parseException
                 throw new ParseException(RecipeIngredientSet.MESSAGE_CONSTRAINTS);
             }
         }
