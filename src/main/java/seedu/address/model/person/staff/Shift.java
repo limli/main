@@ -18,30 +18,30 @@ public class Shift implements Comparable<Shift> {
                     + "Start time and end time should be in the HH:MM format.\n";
 
     private final DayOfWeek startDayOfWeek;
-    private final DayOfWeek endDayOfWeek;
     private final LocalTime startTime;
+    private final DayOfWeek endDayOfWeek;
     private final LocalTime endTime;
 
     /**
      * Constructs a {@code Shift}.
      *
      * @param startDayOfWeek The start day of the week of the shift.
-     * @param endDayOfWeek The start day of the week of the shift.
      * @param startTime The time the shift begins.
+     * @param endDayOfWeek The start day of the week of the shift.
      * @param endTime The time the shift ends.
      */
-    public Shift(DayOfWeek startDayOfWeek, DayOfWeek endDayOfWeek, LocalTime startTime, LocalTime endTime) {
+    public Shift(DayOfWeek startDayOfWeek, LocalTime startTime, DayOfWeek endDayOfWeek, LocalTime endTime) {
         this.startDayOfWeek = startDayOfWeek;
-        this.endDayOfWeek = endDayOfWeek;
         this.startTime = startTime;
+        this.endDayOfWeek = endDayOfWeek;
         this.endTime = endTime;
     }
 
     @JsonCreator
     public Shift(@JsonProperty("startDayOfWeek") String startDayOfWeekString,
-                  @JsonProperty("endDayOfWeek") String endDayOfWeekString,
                   @JsonProperty("startTime") String startTimeString,
-                  @JsonProperty("endTime") String endTimeString) {
+                 @JsonProperty("endDayOfWeek") String endDayOfWeekString,
+                 @JsonProperty("endTime") String endTimeString) {
         // TODO: ensure starttime < endtime (shift is of non-zero duration)
         try {
             startDayOfWeek = DayOfWeek.valueOf(startDayOfWeekString);

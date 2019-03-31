@@ -26,6 +26,8 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.staff.ShiftRoster;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.EditStaffDescriptorBuilder;
@@ -79,6 +81,10 @@ public class CommandTestUtil {
     public static final String STAFF_VALID_APPOINTMENT_BOB = "Cook";
     public static final String STAFF_APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENT + STAFF_VALID_APPOINTMENT_AMY;
     public static final String STAFF_APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENT + STAFF_VALID_APPOINTMENT_BOB;
+    public static final ShiftRoster STAFF_VALID_SHIFT_ROSTER_AMY =
+            new ShiftRoster(new Shift("MONDAY", "12:00", "MONDAY", "14:00"));
+    public static final ShiftRoster STAFF_VALID_SHIFT_ROSTER_BOB =
+            new ShiftRoster(new Shift("TUESDAY", "08:00", "TUESDAY", "10:00"));
 
     //Related to ingredients
     public static final String INGREDIENT_VALID_NAME_CHEESE = "cheese";
