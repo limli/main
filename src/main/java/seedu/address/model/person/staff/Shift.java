@@ -1,11 +1,15 @@
 package seedu.address.model.person.staff;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 /**
@@ -15,7 +19,10 @@ public class Shift implements Comparable<Shift> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Day of week should be specified as MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY.\n"
-                    + "Start time and end time should be in the HH:MM format.\n";
+                    + "Start time and end time should be in the HH:MM format.\n"
+                    + "A shift must last for a positive duration of time.\n"
+                    + "If a shift lasts more than 24 hours, the starting day of week of the shift and ending day "
+                    + "of week of the shift must be different.\n";
 
     private final DayOfWeek startDayOfWeek;
     private final LocalTime startTime;
@@ -31,6 +38,11 @@ public class Shift implements Comparable<Shift> {
      * @param endTime The time the shift ends.
      */
     public Shift(DayOfWeek startDayOfWeek, LocalTime startTime, DayOfWeek endDayOfWeek, LocalTime endTime) {
+        requireNonNull(startDayOfWeek);
+        requireNonNull(startTime);
+        requireNonNull(endDayOfWeek);
+        requireNonNull(endTime);
+        checkArgument(isValidShift(startDayOfWeek, startTime, endDayOfWeek, endTime), MESSAGE_CONSTRAINTS);
         this.startDayOfWeek = startDayOfWeek;
         this.startTime = startTime;
         this.endDayOfWeek = endDayOfWeek;
@@ -42,13 +54,15 @@ public class Shift implements Comparable<Shift> {
                   @JsonProperty("startTime") String startTimeString,
                  @JsonProperty("endDayOfWeek") String endDayOfWeekString,
                  @JsonProperty("endTime") String endTimeString) {
-        // TODO: ensure starttime < endtime (shift is of non-zero duration)
         try {
             startDayOfWeek = DayOfWeek.valueOf(startDayOfWeekString);
-            endDayOfWeek = DayOfWeek.valueOf(endDayOfWeekString);
             startTime = LocalTime.parse(startTimeString);
+            endDayOfWeek = DayOfWeek.valueOf(endDayOfWeekString);
             endTime = LocalTime.parse(endTimeString);
         } catch (DateTimeParseException | IllegalArgumentException e) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
+        if (!isValidShift(startDayOfWeek, startTime, endDayOfWeek, endTime)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
@@ -83,6 +97,14 @@ public class Shift implements Comparable<Shift> {
                     && (!this.endTime.isAfter(otherShift.startTime))));
         }
         return true;
+    }
+
+    /**
+     * Returns true if a shift is valid.
+     */
+    public static boolean isValidShift(DayOfWeek startDayOfWeek, LocalTime startTime,
+                                       DayOfWeek endDayOfWeek, LocalTime endTime) {
+        return (!startDayOfWeek.equals(endDayOfWeek) || endTime.isAfter(startTime));
     }
 
     @Override

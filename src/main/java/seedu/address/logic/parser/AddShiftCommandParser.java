@@ -41,10 +41,10 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
         }
 
         DayOfWeek startDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY_OF_WEEK).get());
-        DayOfWeek endDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_END_DAY_OF_WEEK).get());
         LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        DayOfWeek endDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_END_DAY_OF_WEEK).get());
         LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
-        Shift shift = new Shift(startDayOfWeek, startTime, endDayOfWeek, endTime);
+        Shift shift = ParserUtil.parseShift(startDayOfWeek, startTime, endDayOfWeek, endTime);
 
         return new AddShiftCommand(index, shift);
     }

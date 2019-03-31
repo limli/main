@@ -209,7 +209,7 @@ public class ParserUtil {
         requireNonNull(dayOfWeek);
         String trimmedDayOfWeek = dayOfWeek.trim();
         try {
-            return DayOfWeek.valueOf(dayOfWeek);
+            return DayOfWeek.valueOf(trimmedDayOfWeek);
         } catch (IllegalArgumentException e) {
             throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
         }
@@ -222,9 +222,24 @@ public class ParserUtil {
         requireNonNull(time);
         String trimmedTime = time.trim();
         try {
-            return LocalTime.parse(time);
+            return LocalTime.parse(trimmedTime);
         } catch (IllegalArgumentException e) {
             throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Creates a new Shift object that parses the shift.
+     */
+    public static Shift parseShift(DayOfWeek startDayOfWeek, LocalTime startTime,
+                                   DayOfWeek endDayOfWeek, LocalTime endTime) throws ParseException {
+        requireNonNull(startDayOfWeek);
+        requireNonNull(startTime);
+        requireNonNull(endDayOfWeek);
+        requireNonNull(endTime);
+        if (!Shift.isValidShift(startDayOfWeek, startTime, endDayOfWeek, endTime)) {
+            throw new ParseException(String.format(Shift.MESSAGE_CONSTRAINTS));
+        }
+        return new Shift(startDayOfWeek, startTime, endDayOfWeek, endTime);
     }
 }
