@@ -25,6 +25,7 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 import seedu.address.testutil.MemberBuilder;
 
 public class RestaurantBookTest {
@@ -134,6 +135,11 @@ public class RestaurantBookTest {
 
         @Override
         public ObservableList<Ingredient> getIngredientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Recipe> getRecipeList() {
             throw new AssertionError("This method should not be called.");
         }
 

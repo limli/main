@@ -16,6 +16,7 @@ import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * An Immutable RestaurantBook that is serializable to JSON format.
@@ -26,11 +27,13 @@ class JsonSerializableRestaurantBook {
     public static final String MESSAGE_DUPLICATE_MEMBER = "Members list contains duplicate member(s).";
     public static final String MESSAGE_DUPLICATE_BOOKING = "Bookings list contains duplicate booking(s).";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Ingredient list contains duplicate ingredient(s).";
+    public static final String MESSAGE_DUPLICATE_RECIPE = "Recipe list contains duplicate recipe(s).";
     public static final String MESSAGE_DUPLICATE_STAFF = "Staff list contains duplicate staff(s).";
 
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
     private final List<JsonAdaptedIngredient> ingredients = new ArrayList<>();
+    private final List<JsonAdaptedRecipe> recipes = new ArrayList<>();
     private final List<JsonAdaptedStaff> staff = new ArrayList<>();
     private final List<JsonAdaptedBooking> bookings = new ArrayList<>();
     private final int intCapacity;
@@ -41,12 +44,14 @@ class JsonSerializableRestaurantBook {
     @JsonCreator
     public JsonSerializableRestaurantBook(@JsonProperty("members") List<JsonAdaptedMember> members,
                                           @JsonProperty("ingredients") List<JsonAdaptedIngredient> ingredients,
+                                          @JsonProperty("recipes") List<JsonAdaptedRecipe> recipes,
                                           @JsonProperty("staff") List<JsonAdaptedStaff> staff,
                                           @JsonProperty("bookings") List<JsonAdaptedBooking> bookings,
                                           @JsonProperty("capacity") int intCapacity) {
 
         this.members.addAll(members);
         this.ingredients.addAll(ingredients);
+        this.recipes.addAll(recipes);
         this.staff.addAll(staff);
         this.bookings.addAll(bookings);
         this.intCapacity = intCapacity;
@@ -63,6 +68,8 @@ class JsonSerializableRestaurantBook {
                 .map(JsonAdaptedMember::new).collect(Collectors.toList()));
         ingredients.addAll(source.getIngredientList().stream()
                 .map(JsonAdaptedIngredient::new).collect(Collectors.toList()));
+        recipes.addAll(source.getRecipeList().stream()
+                .map(JsonAdaptedRecipe::new).collect(Collectors.toList()));
         staff.addAll(source.getStaffList().stream()
                 .map(JsonAdaptedStaff::new).collect(Collectors.toList()));
         bookings.addAll(source.getBookingList().stream()
@@ -93,6 +100,14 @@ class JsonSerializableRestaurantBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_INGREDIENT);
             }
             restaurantBook.addIngredient(ingredient);
+        }
+
+        for (JsonAdaptedRecipe jsonAdaptedRecipe : recipes) {
+            Recipe recipe = jsonAdaptedRecipe.toModelType();
+            if (restaurantBook.hasRecipe(recipe)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RECIPE);
+            }
+            restaurantBook.addRecipe(recipe);
         }
 
         for (JsonAdaptedStaff jsonAdaptedStaff : staff) {

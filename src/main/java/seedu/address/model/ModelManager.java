@@ -21,6 +21,7 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.exceptions.ItemNotFoundException;
 import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * Represents the in-memory model of the restaurant book data.
@@ -38,6 +39,10 @@ public class ModelManager implements Model {
 
     private final FilteredList<Ingredient> filteredIngredients;
     private final SimpleObjectProperty<Ingredient> selectedIngredient = new SimpleObjectProperty<>();
+
+    private final FilteredList<Recipe> filteredRecipes;
+    private final SimpleObjectProperty<Recipe> selectedRecipe = new SimpleObjectProperty<>();
+
 
     private final FilteredList<Staff> filteredStaff;
     private final SimpleObjectProperty<Staff> selectedStaff = new SimpleObjectProperty<>();
@@ -59,6 +64,8 @@ public class ModelManager implements Model {
         filteredBookings = new FilteredList<>(versionedRestaurantBook.getBookingList());
 
         filteredIngredients = new FilteredList<>(versionedRestaurantBook.getIngredientList());
+
+        filteredRecipes = new FilteredList<>(versionedRestaurantBook.getRecipeList());
 
         filteredStaff = new FilteredList<>(versionedRestaurantBook.getStaffList());
     }
@@ -139,6 +146,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        return versionedRestaurantBook.hasRecipe(recipe);
+    }
+
+    @Override
     public boolean hasStaff(Staff staff) {
         requireNonNull(staff);
         return versionedRestaurantBook.hasStaff(staff);
@@ -160,6 +173,12 @@ public class ModelManager implements Model {
     public void deleteIngredient(Ingredient target) {
         requireNonNull(target);
         versionedRestaurantBook.removeIngredient(target);
+    }
+
+    @Override
+    public void deleteRecipe(Recipe target) {
+        requireNonNull(target);
+        versionedRestaurantBook.removeRecipe(target);
     }
 
     @Override
@@ -187,6 +206,13 @@ public class ModelManager implements Model {
         requireNonNull(ingredient);
         versionedRestaurantBook.addIngredient(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+    }
+
+    @Override
+    public void addRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        versionedRestaurantBook.addRecipe(recipe);
+        updateFilteredRecipeList(PREDICATE_SHOW_ALL_RECIPES);
     }
 
     @Override
@@ -226,6 +252,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setRecipe(Recipe target, Recipe editedRecipe) {
+        requireAllNonNull(target, editedRecipe);
+        versionedRestaurantBook.setRecipe(target, editedRecipe);
+    }
+
+    @Override
     public Capacity getCapacity() {
         return versionedRestaurantBook.getCapacity();
     }
@@ -257,6 +289,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Recipe> getFilteredRecipeList() {
+        return filteredRecipes;
+    }
+
+    @Override
     public ObservableList<Ingredient> getFilteredIngredientList() {
         return filteredIngredients;
     }
@@ -279,6 +316,11 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
         filteredIngredients.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredRecipeList(Predicate<Recipe> predicate) {
+        filteredRecipes.setPredicate(predicate);
     }
 
     @Override
@@ -331,6 +373,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReadOnlyProperty<Recipe> selectedRecipeProperty() {
+        return selectedRecipe;
+    }
+
+    @Override
     public ReadOnlyProperty<Staff> selectedStaffProperty() {
         return selectedStaff;
     }
@@ -348,6 +395,11 @@ public class ModelManager implements Model {
     @Override
     public Ingredient getSelectedIngredient() {
         return selectedIngredient.getValue();
+    }
+
+    @Override
+    public Recipe getSelectedRecipe() {
+        return selectedRecipe.getValue();
     }
 
     @Override
@@ -377,6 +429,14 @@ public class ModelManager implements Model {
             throw new ItemNotFoundException();
         }
         selectedIngredient.setValue(ingredient);
+    }
+
+    @Override
+    public void setSelectedRecipe(Recipe recipe) {
+        if (recipe != null && !filteredRecipes.contains(recipe)) {
+            throw new ItemNotFoundException();
+        }
+        selectedRecipe.setValue(recipe);
     }
 
     @Override

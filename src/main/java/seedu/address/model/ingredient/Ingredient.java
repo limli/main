@@ -1,5 +1,7 @@
 package seedu.address.model.ingredient;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.Item;
@@ -18,10 +20,11 @@ public class Ingredient implements Item {
     private IngredientWarningAmount ingredientWarningAmount;
 
     /**
-     * Every field must be present and not null.
+     * IngredientName, and IngredientUnit must be present. Other fields are optional.
      */
     public Ingredient(IngredientName name, IngredientQuantity quantity, IngredientUnit unit,
                       IngredientWarningAmount warningAmount) {
+        requireAllNonNull(name, unit);
         this.ingredientName = name;
         this.ingredientQuantity = quantity;
         this.ingredientUnit = unit;

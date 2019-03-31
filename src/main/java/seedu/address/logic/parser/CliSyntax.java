@@ -13,6 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_INGREDIENT_UNIT = new Prefix("u/");
     public static final Prefix PREFIX_INGREDIENT_QUANTITY = new Prefix("q/");
     public static final Prefix PREFIX_INGREDIENT_WARNINGAMOUNT = new Prefix("w/");
+    public static final Prefix PREFIX_RECIPE_NAME = new Prefix("r/");
+    public static final Prefix PREFIX_RECIPE_INGREDIENT_AND_QUANTITY = new Prefix("iq/");
     public static final Prefix PREFIX_INDEX = new Prefix("i/");
     public static final Prefix PREFIX_START_TIME = new Prefix("ts/");
     public static final Prefix PREFIX_END_TIME = new Prefix("te/");
