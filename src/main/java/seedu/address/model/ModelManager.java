@@ -435,7 +435,9 @@ public class ModelManager implements Model {
                 && filteredMembers.equals(other.filteredMembers)
                 && Objects.equals(selectedMember.get(), other.selectedMember.get())
                 && filteredBookings.equals(other.filteredBookings)
-                && Objects.equals(selectedBooking.get(), other.selectedBooking.get());
+                && Objects.equals(selectedBooking.get(), other.selectedBooking.get())
+                && filteredStaff.equals(other.filteredStaff)
+                && Objects.equals(selectedStaff.get(), other.selectedStaff.get());
     }
 
 }

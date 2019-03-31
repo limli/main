@@ -15,7 +15,7 @@ public class StaffBuilder {
     public static final String DEFAULT_NAME = "Jack Smith";
     public static final String DEFAULT_PHONE = "91234567";
     public static final String DEFAULT_EMAIL = "jacksmith@example.com";
-    public static final String DEFAILT_APPOINTMENT = "Chef";
+    public static final String DEFAULT_APPOINTMENT = "Chef";
 
     private Name name;
     private Phone phone;
@@ -27,7 +27,7 @@ public class StaffBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        appointment = new Appointment(DEFAILT_APPOINTMENT);
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
         shiftRoster = new ShiftRosterBuilder().build();
     }
 
@@ -79,6 +79,14 @@ public class StaffBuilder {
      */
     public StaffBuilder withShiftRoster(ShiftRoster shiftRoster) {
         this.shiftRoster = shiftRoster;
+        return this;
+    }
+
+    /**
+     * Sets the {@code ShiftRoster} of the {@code Staff} to an empty ShiftRoster.
+     */
+    public StaffBuilder withEmptyShiftRoster() {
+        this.shiftRoster = new ShiftRoster();
         return this;
     }
 

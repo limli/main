@@ -88,7 +88,9 @@ public class Staff extends Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Appointment: ")
-                .append(getAppointment());
+                .append(getAppointment())
+                .append("\nShifts:\n")
+                .append(getShiftRoster());
         return builder.toString();
     }
 

@@ -21,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.ShiftRoster;
 import seedu.address.model.person.staff.Staff;
 
 /**
@@ -96,8 +97,9 @@ public class EditStaffCommand extends Command {
         Phone updatedPhone = editStaffDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editStaffDescriptor.getEmail().orElse(staffToEdit.getEmail());
         Appointment updatedAppointment = editStaffDescriptor.getAppointment().orElse(staffToEdit.getAppointment());
+        ShiftRoster shiftRoster = staffToEdit.getShiftRoster();
 
-        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAppointment, staffToEdit.getShiftRoster());
+        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAppointment, shiftRoster);
     }
 
     @Override
