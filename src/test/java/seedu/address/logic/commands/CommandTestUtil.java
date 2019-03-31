@@ -26,8 +26,6 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.staff.Shift;
-import seedu.address.model.person.staff.ShiftRoster;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.EditStaffDescriptorBuilder;
