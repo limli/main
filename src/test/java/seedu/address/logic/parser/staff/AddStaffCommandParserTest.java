@@ -29,10 +29,10 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.add.AddStaffCommand;
 import seedu.address.logic.parser.AddStaffCommandParser;
-import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.testutil.StaffBuilder;
 

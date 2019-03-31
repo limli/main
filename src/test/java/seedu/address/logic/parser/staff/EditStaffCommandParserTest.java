@@ -29,10 +29,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditStaffCommand;
 import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.logic.parser.EditStaffCommandParser;
-import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.staff.Appointment;
 import seedu.address.testutil.EditStaffDescriptorBuilder;
 
 public class EditStaffCommandParserTest {

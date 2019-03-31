@@ -95,8 +95,8 @@ public class JsonAdaptedStaffTest {
 
     @Test
     public void toModelType_nullAppointment_throwsIllegalValueException() {
-        JsonAdaptedStaff staff = new JsonAdaptedStaff(VALID_NAME, VALID_PHONE, VALID_EMAIL, null
-                , VALID_SHIFT_ROSTER);
+        JsonAdaptedStaff staff = new JsonAdaptedStaff(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+                VALID_SHIFT_ROSTER);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Appointment.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, staff::toModelType);
     }
