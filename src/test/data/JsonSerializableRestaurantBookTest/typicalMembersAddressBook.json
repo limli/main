@@ -30,6 +30,7 @@
     "email" : "anna@example.com"
   } ],
   "ingredients" : [ ],
+  "recipes": [ ],
   "staff" : [ ],
   "bookings" : [ ],
   "intCapacity" : 200
