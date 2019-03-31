@@ -1,11 +1,12 @@
 package seedu.address.model.person.staff;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 /**
  * Represents a single shift of a staff member in the restaurant book.
@@ -16,34 +17,39 @@ public class Shift implements Comparable<Shift> {
             "Day of week should be specified as MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY or SUNDAY.\n"
                     + "Start time and end time should be in the HH:MM format.\n";
 
-    private final DayOfWeek dayOfWeek;
+    private final DayOfWeek startDayOfWeek;
+    private final DayOfWeek endDayOfWeek;
     private final LocalTime startTime;
     private final LocalTime endTime;
 
     /**
      * Constructs a {@code Shift}.
      *
-     * @param dayOfWeek The day of the week of the shift.
+     * @param startDayOfWeek The start day of the week of the shift.
+     * @param endDayOfWeek The start day of the week of the shift.
      * @param startTime The time the shift begins.
      * @param endTime The time the shift ends.
      */
-    public Shift(DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime) {
-        this.dayOfWeek = dayOfWeek;
+    public Shift(DayOfWeek startDayOfWeek, DayOfWeek endDayOfWeek, LocalTime startTime, LocalTime endTime) {
+        this.startDayOfWeek = startDayOfWeek;
+        this.endDayOfWeek = endDayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
     @JsonCreator
-    private Shift(@JsonProperty("dayOfWeek") String dayOfWeekString,
+    public Shift(@JsonProperty("startDayOfWeek") String startDayOfWeekString,
+                  @JsonProperty("endDayOfWeek") String endDayOfWeekString,
                   @JsonProperty("startTime") String startTimeString,
                   @JsonProperty("endTime") String endTimeString) {
         // TODO: ensure starttime < endtime (shift is of non-zero duration)
         try {
-            dayOfWeek = DayOfWeek.valueOf(dayOfWeekString);
+            startDayOfWeek = DayOfWeek.valueOf(startDayOfWeekString);
+            endDayOfWeek = DayOfWeek.valueOf(endDayOfWeekString);
             startTime = LocalTime.parse(startTimeString);
             endTime = LocalTime.parse(endTimeString);
         } catch (DateTimeParseException | IllegalArgumentException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -54,26 +60,45 @@ public class Shift implements Comparable<Shift> {
      * @return true if the two shifts conflict, false otherwise.
      */
     public boolean conflictsWith(Shift otherShift) {
-        if (otherShift.dayOfWeek == dayOfWeek) {
-            return otherShift.endTime.compareTo(startTime) == -1
-                    || otherShift.startTime.compareTo(endTime) == 1;
+        int thisStartDayOfWeek = this.startDayOfWeek.getValue();
+        int thisEndDayOfWeek = this.endDayOfWeek.getValue();
+        int otherStartDayOfWeek = otherShift.startDayOfWeek.getValue();
+        int otherEndDayOfWeek = otherShift.endDayOfWeek.getValue();
+
+        if (thisStartDayOfWeek <= thisEndDayOfWeek && otherStartDayOfWeek <= otherEndDayOfWeek) {
+            return !(thisEndDayOfWeek < otherStartDayOfWeek || otherEndDayOfWeek < thisStartDayOfWeek
+                    || (thisEndDayOfWeek == otherStartDayOfWeek && !this.endTime.isAfter(otherShift.startTime))
+                    || (otherEndDayOfWeek == thisStartDayOfWeek && !otherShift.endTime.isAfter(this.startTime)));
+        } else if (thisStartDayOfWeek <= thisEndDayOfWeek && otherStartDayOfWeek > otherEndDayOfWeek) {
+            return !((otherEndDayOfWeek < thisStartDayOfWeek && thisEndDayOfWeek < otherStartDayOfWeek)
+                    || (otherEndDayOfWeek < thisStartDayOfWeek && thisEndDayOfWeek == otherStartDayOfWeek
+                        && (!this.endTime.isAfter(otherShift.startTime)))
+                    || (otherEndDayOfWeek == thisStartDayOfWeek && thisEndDayOfWeek < otherStartDayOfWeek
+                        && (!otherShift.endTime.isAfter(this.startTime))));
+        } else if (thisStartDayOfWeek > thisEndDayOfWeek && otherStartDayOfWeek <= otherEndDayOfWeek) {
+            return !((thisEndDayOfWeek < otherStartDayOfWeek && otherEndDayOfWeek < thisStartDayOfWeek)
+                    || (thisEndDayOfWeek < otherStartDayOfWeek && otherEndDayOfWeek == thisStartDayOfWeek
+                    && (!otherShift.endTime.isAfter(this.startTime)))
+                    || (thisEndDayOfWeek == otherStartDayOfWeek && otherEndDayOfWeek < thisStartDayOfWeek
+                    && (!this.endTime.isAfter(otherShift.startTime))));
         }
-        return false;
+        return true;
     }
 
     @Override
     public int compareTo(Shift otherShift) {
-        if (dayOfWeek == otherShift.dayOfWeek) {
+        if (startDayOfWeek == otherShift.startDayOfWeek) {
             return startTime.compareTo(otherShift.startTime);
         } else {
-            return dayOfWeek.compareTo(otherShift.dayOfWeek);
+            return startDayOfWeek.compareTo(otherShift.startDayOfWeek);
         }
     }
 
     @Override
     public boolean equals(Object other) {
         if (other instanceof Shift) {
-            return dayOfWeek.equals(((Shift) other).dayOfWeek)
+            return startDayOfWeek.equals(((Shift) other).startDayOfWeek)
+                    && endDayOfWeek.equals(((Shift) other).endDayOfWeek)
                     && startTime.equals(((Shift) other).startTime)
                     && endTime.equals(((Shift) other).endTime);
         } else {
@@ -83,7 +108,7 @@ public class Shift implements Comparable<Shift> {
 
     @Override
     public String toString() {
-        return String.format("%s, %s to %s", dayOfWeek, startTime, endTime);
+        return String.format("%s, %s to %s, %s", startDayOfWeek, startTime, endDayOfWeek, endTime);
     }
 
 }

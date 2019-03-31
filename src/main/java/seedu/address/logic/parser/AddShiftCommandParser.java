@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_OF_WEEK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DAY_OF_WEEK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DAY_OF_WEEK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
@@ -27,7 +28,8 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
     public AddShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DAY_OF_WEEK, PREFIX_START_TIME, PREFIX_END_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
+                        PREFIX_START_TIME, PREFIX_END_TIME);
 
         Index index;
 
@@ -38,10 +40,11 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
                     AddShiftCommand.MESSAGE_USAGE), pe);
         }
 
-        DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY_OF_WEEK).get());
-        LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_DAY_OF_WEEK).get());
-        LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_DAY_OF_WEEK).get());
-        Shift shift = new Shift(dayOfWeek, startTime, endTime);
+        DayOfWeek startDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY_OF_WEEK).get());
+        DayOfWeek endDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_END_DAY_OF_WEEK).get());
+        LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        Shift shift = new Shift(startDayOfWeek, endDayOfWeek, startTime, endTime);
 
         return new AddShiftCommand(index, shift);
     }
