@@ -19,8 +19,8 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.exceptions.ItemNotFoundException;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * Represents the in-memory model of the restaurant book data.

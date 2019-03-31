@@ -16,12 +16,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.staff.Staff;
 import seedu.address.model.person.exceptions.DuplicateItemException;
+import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * Edits the details of an existing staff in the address book.

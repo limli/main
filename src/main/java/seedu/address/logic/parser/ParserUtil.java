@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -11,15 +14,13 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientQuantity;
 import seedu.address.model.ingredient.IngredientUnit;
 import seedu.address.model.ingredient.IngredientWarningAmount;
-import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.staff.Appointment;
 import seedu.address.model.person.staff.Shift;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

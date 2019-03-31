@@ -29,7 +29,9 @@ public class Staff extends Person {
         return appointment;
     }
 
-    public ShiftRoster getShiftRoster() { return shiftRoster; }
+    public ShiftRoster getShiftRoster() {
+        return shiftRoster;
+    }
 
     /**
      * Returns true if both staff of the same name have at least one other identity field that is the same.
