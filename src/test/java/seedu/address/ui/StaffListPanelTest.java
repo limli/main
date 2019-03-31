@@ -15,11 +15,13 @@ import guitests.guihandles.StaffListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.staff.ShiftRoster;
+import seedu.address.model.person.staff.Staff;
 
 public class StaffListPanelTest extends GuiUnitTest {
     private static final ObservableList<Staff> TYPICAL_STAFF =
@@ -81,7 +83,8 @@ public class StaffListPanelTest extends GuiUnitTest {
             Phone phone = new Phone("000");
             Email email = new Email("a@aa");
             Appointment appointment = new Appointment("aaaa");
-            Staff staff = new Staff(name, phone, email, appointment);
+            ShiftRoster shiftRoster = new ShiftRoster(new Shift("MONDAY", "12:00", "MONDAY", "14:00"));
+            Staff staff = new Staff(name, phone, email, appointment, shiftRoster);
             backingList.add(staff);
         }
         return backingList;

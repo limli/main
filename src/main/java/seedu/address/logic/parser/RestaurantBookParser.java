@@ -34,6 +34,7 @@ import seedu.address.logic.commands.add.AddBookingCommand;
 import seedu.address.logic.commands.add.AddIngredientCommand;
 import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.logic.commands.add.AddRecipeCommand;
+import seedu.address.logic.commands.add.AddShiftCommand;
 import seedu.address.logic.commands.add.AddStaffCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -83,6 +84,10 @@ public class RestaurantBookParser {
         case AddStaffCommand.COMMAND_WORD:
         case AddStaffCommand.COMMAND_ALIAS:
             return new AddStaffCommandParser().parse(arguments);
+
+        case AddShiftCommand.COMMAND_WORD:
+        case AddShiftCommand.COMMAND_ALIAS:
+            return new AddShiftCommandParser().parse(arguments);
 
         case UpdateCapacityCommand.COMMAND_WORD:
             return new UpdateCapacityCommandParser().parse(arguments);

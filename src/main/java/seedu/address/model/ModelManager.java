@@ -19,8 +19,8 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.ItemNotFoundException;
+import seedu.address.model.person.staff.Staff;
 import seedu.address.model.recipe.Recipe;
 
 /**
@@ -495,7 +495,9 @@ public class ModelManager implements Model {
                 && filteredMembers.equals(other.filteredMembers)
                 && Objects.equals(selectedMember.get(), other.selectedMember.get())
                 && filteredBookings.equals(other.filteredBookings)
-                && Objects.equals(selectedBooking.get(), other.selectedBooking.get());
+                && Objects.equals(selectedBooking.get(), other.selectedBooking.get())
+                && filteredStaff.equals(other.filteredStaff)
+                && Objects.equals(selectedStaff.get(), other.selectedStaff.get());
     }
 
 }
