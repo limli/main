@@ -94,7 +94,7 @@ public class ShiftRoster {
     public String toString() {
         String output = "";
         for (Shift shift : shifts) {
-            output += shift + "; ";
+            output += shift + "\n";
         }
         return output;
     }
