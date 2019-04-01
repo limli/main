@@ -191,6 +191,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
+// tag::model[]
 [[Design-Model]]
 === Model component
 
@@ -208,6 +209,8 @@ The `Model`,
 * stores the Restaurant Book data.
 * exposes an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+
+// end::model[]
 
 [[Design-Storage]]
 === Storage component
@@ -352,7 +355,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
+// tag::ds[]
 === Data structure for holding records
 
 Following the AB4 structure, the `RestaurantBook` (originally `AddressBook`) class serves as the main database, holding information of all records in the system. However, the database system required is more complicated than the one in AB4- there are four different kinds of records that need to be stored. The main operations are still largely CRUD (create, read, update, delete) in nature which are very similarly done. However, there are some differences between the types of records:
@@ -387,6 +390,9 @@ We created the interface `Item` to represent a record. A `UniqueItemList` was us
 ** Cons: Violates Separation of Concerns principle, due to the differences across the similar-looking methods. Since the implementation of various `add` commands are slightly different (`addBooking` needs to check the restaurant capacity first), many if-else statements will be required in the control flow of `RestaurantBook#addItem` method, potentially using `instanceof` checks. These `instanceof` checks can potentially violate type safety.
 
 * Decision: Alternative 1 was adopted as we value simplicity over the potential problems that might arise with the generic methods.
+// end::ds[]
+
+// tag::editcmd[]
 
 === The `editMember` command
 
@@ -413,6 +419,7 @@ When `RestaurantBook#setMember()` is called, the bookings are replaced with a ne
 ** Cons: Uses additional data structure to store the mappings, potentially making the code more difficult to maintain.
 
 * Decision: Alternative 1 was adopted as we felt that it was the simplest way to implement the feature. The additional efficiency gained may not even be significant, considering that in simple GUI apps like this, updating the UI is often the part of the program that uses the most resources. Optimizing the backend operations may not actually lead to a significant performance improvement.
+// end::editcmd[]
 
 === Delete Feature
 
@@ -438,7 +445,6 @@ image::DeleteIngredientSequenceDiagram.png[width="1000"]
 
 * When a member is deleted, all booking objects containing the deleted member must be similarly deleted.  Also, when an ingredient is deleted, all recipe objects containing the deleted ingredient must also be deleted.
 In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngredient() is called, this triggers all related bookings or ingredients to be deleted as well.
-
 
 ==== Design Considerations
 

@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Ling Yan Hao
 image::lingyanhao.png[width="150", align="left"]
-{empty}[https://github.com/lingyanhao[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/lingyanhao[github]] [<<lingyanhao#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: Deliverables and deadlines, Scheduling and tracking, in charge of Model component +
