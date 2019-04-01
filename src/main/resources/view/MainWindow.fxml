@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Label?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="Booking App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -61,12 +62,20 @@
             <StackPane fx:id="bookingListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <VBox fx:id="ingredientList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="ingredientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
+          <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS" orientation="VERTICAL">
+            <VBox fx:id="ingredientList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="ingredientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            <VBox fx:id="recipeList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="recipeListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+          </SplitPane>
 
           <VBox fx:id="staffList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
