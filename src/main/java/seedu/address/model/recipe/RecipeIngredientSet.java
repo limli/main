@@ -53,7 +53,8 @@ public class RecipeIngredientSet {
     public String toString() {
         String ingredientsList = "";
         for (Ingredient ingredientKey : ingredientMap.keySet()) {
-            ingredientsList += ingredientKey.getIngredientName() + ": " + ingredientMap.get(ingredientKey) + " " + ingredientKey.getIngredientUnit() + "\n";
+            ingredientsList += ingredientKey.getIngredientName() + ": " + ingredientMap.get(ingredientKey)
+                    + " " + ingredientKey.getIngredientUnit() + "\n";
         }
         return ingredientsList;
     }
