@@ -37,7 +37,7 @@ public class RecipeCard extends UiPart<Region> {
         this.recipe = recipe;
         id.setText(displayedIndex + ". ");
         name.setText(recipe.getRecipeName().getName());
-        ingredients.setText("Temp");
+        ingredients.setText(recipe.getRecipeIngredientSet().toString());
     }
 
     @Override

@@ -283,7 +283,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         ingredients.setItem(target, editedIngredient);
         ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
         Predicate<Recipe> recipeContainsTarget =
-            r -> r.getRecipeIngredientSet().getIngredientSet()
+            r -> r.getRecipeIngredientSet().getIngredientMap()
                         .keySet().stream().anyMatch(ingred -> ingred.equals(target));
         Function<Recipe, Recipe>
                 updateRecipe = r -> r.editIngredientSet(target, editedIngredient);
@@ -347,7 +347,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
 
         // When an ingred is deleted, all associated recipes are also deleted.
         Predicate<Recipe> isValidRecipe =
-            r -> r.getRecipeIngredientSet().getIngredientSet()
+            r -> r.getRecipeIngredientSet().getIngredientMap()
                         .keySet().stream().noneMatch(ingred -> ingred.equals(key));
         ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
         setRecipes(recipeObservableList.stream().filter(isValidRecipe).collect(Collectors.toList()));

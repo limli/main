@@ -45,7 +45,7 @@ public class JsonAdaptedRecipe {
      */
     public JsonAdaptedRecipe(Recipe source) {
         recipeName = source.getRecipeName().getName();
-        Map<Ingredient, IngredientQuantity> ingredMap = source.getRecipeIngredientSet().getIngredientSet();
+        Map<Ingredient, IngredientQuantity> ingredMap = source.getRecipeIngredientSet().getIngredientMap();
 
         Iterator it = ingredMap.keySet().iterator();
         while (it.hasNext()) {
