@@ -438,13 +438,13 @@ Therefore, there are some design considerations that we have to make when it com
 * There are separate delete commands for each of the 4 components, namely `deleteMember`, `deleteBooking`, `deleteStaff`, `deleteIngredient` and `deleteRecipe`, and the command explicitly specifies the object being deleted. Each specific delete command has a `DeleteCommand` class that extends abstract class `Command` and is supported by a `CommandParser` class (e.g. `deleteIngredient` command has `deleteIngredientCommand` class and `deleteIngredientCommandParser` class).
 
 .Sequence Diagram for DeleteIngredient
-image::DeleteIngredientSequenceDiagram.png[width="1000"]
+image::DeleteIngredientSequenceDiagram.png[width="800"]
 
 
 * The delete commands are called by typing the component-specific command, followed by an index, which refers to the index number shown in the most recent listing (e.g. `deleteIngredient 3`).
 
 * When a member is deleted, all booking objects containing the deleted member must be similarly deleted.  Also, when an ingredient is deleted, all recipe objects containing the deleted ingredient must also be deleted.
-In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngredient() is called, this triggers all related bookings or ingredients to be deleted as well.
+In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngredient() is called, this triggers all related bookings or recipes to be deleted as well.
 
 ==== Design Considerations
 
@@ -481,7 +481,7 @@ In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngre
 ** Variations in command format for each delete command. They may have different prefixes and fields that the user has to type in.
 ** Some records are identified by more than 1 field, and all necessary fields must be provided for successful deletion of a record, making the command longer and harder to type (e.g. `deleteBooking` command requires `bookingWindow` and `customerName` fields to be present to delete a record).
 
-* Decision: Alternative 1 was adopted as we felt it was the simplest way to implement the feature.
+* Decision: Alternative 1 was adopted for greater standardisation across the 5 components (Member, Bookings, Ingredient, Recipe, and Staff).
 
 
 ===== Aspect: Highly coupled records
