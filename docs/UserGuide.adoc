@@ -59,7 +59,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Features]]
 == Features
-
 ====
 *Command Format*
 
@@ -180,6 +179,7 @@ Example:
 
 * `notifySMS l/100 ss/true`
 
+// tag::inventory[]
 === Inventory Management
 
 ==== List Ingredients: `listIngredients`
@@ -337,6 +337,7 @@ Displays the number of dishes that can be made for each recipe, calculated based
 and the quantity required in each recipe.
 
 Format: `recipeSummary`
+// end::inventory[]
 
 // tag::booking[]
 === Booking Management
