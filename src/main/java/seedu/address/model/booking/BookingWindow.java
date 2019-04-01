@@ -43,11 +43,11 @@ public class BookingWindow implements Comparable<BookingWindow> {
     }
 
     /**
-     * Checks if {@code s} is a valid LocalDateTime.
+     * Checks if {@code stringToCheck} is a valid LocalDateTime.
      */
-    private boolean isValidDateTime(String s) {
+    private boolean isValidDateTime(String stringToCheck) {
         try {
-            LocalDateTime.parse(s);
+            LocalDateTime.parse(stringToCheck);
             return true;
         } catch (DateTimeException e) {
             return false;
@@ -55,11 +55,11 @@ public class BookingWindow implements Comparable<BookingWindow> {
     }
 
     /**
-     * Checks if {@code s} is a valid LocalTime.
+     * Checks if {@code stringToCheck} is a valid LocalTime.
      */
-    private boolean isValidTime(String s) {
+    private boolean isValidTime(String stringToCheck) {
         try {
-            LocalTime.parse(s);
+            LocalTime.parse(stringToCheck);
             return true;
         } catch (DateTimeException e) {
             return false;

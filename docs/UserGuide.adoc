@@ -405,7 +405,7 @@ Adds a booking for the first customer on the current list, on 23 Feb, at 1430 hr
 ==== Edit Booking: `editBooking`
 Edits a booking by changing either the time, number of persons of both.
 
-Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
+Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PEOPLE]`
 
 ****
 • Edits the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing. REM will not execute this operation if this causes capacity to be exceeded.
