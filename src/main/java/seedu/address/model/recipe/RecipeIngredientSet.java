@@ -24,7 +24,7 @@ public class RecipeIngredientSet {
             + IngredientQuantity.MESSAGE_CONSTRAINTS + "\n"
             + "INGREDIENT_INDEX and INGREDIENT_QUANTITY should be separated by the symbol '&'";
 
-    private Map<Ingredient, IngredientQuantity> ingredientSet;
+    private Map<Ingredient, IngredientQuantity> ingredientMap;
 
 
     /**
@@ -35,18 +35,28 @@ public class RecipeIngredientSet {
      */
     public RecipeIngredientSet(Map<Ingredient, IngredientQuantity> map) {
         requireNonNull(map);
-        this.ingredientSet = map;
+        this.ingredientMap = map;
     }
 
-    public Map<Ingredient, IngredientQuantity> getIngredientSet() {
-        return ingredientSet;
+    public Map<Ingredient, IngredientQuantity> getIngredientMap() {
+        return ingredientMap;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RecipeIngredientSet// instanceof handles nulls
-                && ingredientSet.equals(((RecipeIngredientSet) other).ingredientSet)); // state check
+                && ingredientMap.equals(((RecipeIngredientSet) other).ingredientMap)); // state check
+    }
+
+    @Override
+    public String toString() {
+        String ingredientsList = "";
+        for (Ingredient ingredientKey : ingredientMap.keySet()) {
+            ingredientsList += ingredientKey.getIngredientName() + ": " + ingredientMap.get(ingredientKey)
+                    + " " + ingredientKey.getIngredientUnit() + "\n";
+        }
+        return ingredientsList;
     }
 
 }

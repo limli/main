@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -72,8 +72,8 @@ public class Statistics {
 
     private String formatTime(int hour) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(TIME_PATTERN);
-        return LocalDateTime.of(0, 1, 1, hour, 0).format(formatter)
-                + " - " + LocalDateTime.of(0, 1, 1, hour, 59).format(formatter);
+        return LocalTime.of(hour, 0).format(formatter)
+                + " - " + LocalTime.of(hour, 59).format(formatter);
     }
 
     /**
