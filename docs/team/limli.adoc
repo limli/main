@@ -16,7 +16,7 @@ REstaurant Manager (REM) is a desktop application that turns your restaurant int
 * *Major enhancement*: added *statistics feature*
 ** What it does: allows the user to view statistics of the history of bookings made.
 ** Justification: When the restaurant wants to analyze trends so as to make decisions such as when to hire more staff, it is beneficial to view the statistics so that they can make a more informed decision.
-** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component. The implementation too was challenging as it required changes to existing commands.
+** Highlights: This feature requires the familiarity of the javafx library, as the statistics would be displayed using the `Chart` in javafx, which has a steep learning curve.
 
 * *Minor enhancement*:
 ** Implemented the UI for the staffs, bookings, ingredients, and recipes.
