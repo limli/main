@@ -1,0 +1,59 @@
+= Ren Ying - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: REstaurant Manager
+
+---
+
+== Overview
+This portfolio summarises my contributions made throughout the project.
+
+REstaurant Manager (REM) is a desktop application tailored to restaurant owners of small/medium size restaurants.
+This application provides a single platform for them to manage many areas of the restaurant:
+customers with membership, staff, bookings, ingredient and recipe inventory.
+
+== Summary of contributions
+
+* *Major enhancement*: added *ingredient and recipe feature*
+** What it does: allows the user to add, restock and consume ingredients, keeping track of the quantity of ingredient remaining in the inventory. Ingredients with quantity in inventory falling below the user-inputted warning amount can also be listed.
+ User can also add recipes, keeping track of the ingredients, and its required quantity in each recipe.
+** Justification:
+This feature improves the product significantly, as the recipe and ingredient features help to keep track of dishes served in the restaurant and inventory status for the ingredients. This can enable the users to make decisions, such as to restock ingredients, or limit number of bookings, to ensure smooth running of restaurant.
+** Highlights: (insert highlights)
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management: (insert contributions)
+
+*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Wrote tests to increase coverage (Pull requests https://github.com[#28], https://github.com[#35], https://github.com[#78], https://github.com[#110], https://github.com[#118])
+
+** Documentation:
+*** Did cosmetic tweaks to existing contents of the User Guide: (Pull requests https://github.com[#28], https://github.com[#127])
+** Community:
+*** PRs reviewed (with non-trivial review comments):  (Pull requests https://github.com[#106], https://github.com[#104])
+
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=inventory]
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=delete]
+include::../DeveloperGuide.adoc[tag=appendixAB]
+
