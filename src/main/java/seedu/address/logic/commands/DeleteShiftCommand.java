@@ -46,12 +46,14 @@ public class DeleteShiftCommand extends Command {
             + PREFIX_END_TIME + "14:00 ";
 
     public static final String MESSAGE_DELETE_SHIFT_SUCCESS = "Deleted Shift: %1$s";
+    public static final String MESSAGE_SHIFT_DOES_NOT_EXIST = "The specified shift does not exist!";
 
     private final Index targetIndex;
     private Shift toDelete;
 
-    public DeleteShiftCommand(Index targetIndex) {
+    public DeleteShiftCommand(Index targetIndex, Shift toDelete) {
         this.targetIndex = targetIndex;
+        this.toDelete = toDelete;
     }
 
     @Override
@@ -73,7 +75,7 @@ public class DeleteShiftCommand extends Command {
     /**
      * Creates and returns a {@code Staff} with the shift {@code toDelete} deleted.
      */
-    private Staff deleteShiftFromStaff(Staff staffToDeleteShift) {
+    private Staff deleteShiftFromStaff(Staff staffToDeleteShift) throws CommandException {
         assert staffToDeleteShift != null;
 
         Name name = staffToDeleteShift.getName();
@@ -81,6 +83,11 @@ public class DeleteShiftCommand extends Command {
         Email email = staffToDeleteShift.getEmail();
         Appointment appointment = staffToDeleteShift.getAppointment();
         ShiftRoster oldShiftRoster = staffToDeleteShift.getShiftRoster();
+
+        if (!oldShiftRoster.containsShift(toDelete)) {
+            throw new CommandException(MESSAGE_SHIFT_DOES_NOT_EXIST);
+        }
+
         ShiftRoster shiftRosterWithShiftDeleted = oldShiftRoster.deleteShift(toDelete);
 
         return new Staff(name, phone, email, appointment, shiftRosterWithShiftDeleted);
