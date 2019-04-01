@@ -354,7 +354,7 @@ Format: `listBookings [ts/TIME_START] [te/TIME_END]`
 
 Example:
 
-* `listBookinsg ts/2019-03-01 12:00 te/2019-03-04 15:00`
+* `listBookings ts/2019-03-01 12:00 te/2019-03-04 15:00`
 
 ==== Update Restaurant Capacity: `updateCapacity`
 
