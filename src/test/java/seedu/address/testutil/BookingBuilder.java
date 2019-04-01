@@ -7,7 +7,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * A utility class to help with building Booking objects.

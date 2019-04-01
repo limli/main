@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.model.recipe.Recipe;

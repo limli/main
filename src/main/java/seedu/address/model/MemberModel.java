@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * The API that stores the member side of the model.

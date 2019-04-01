@@ -1,0 +1,49 @@
+= Lim Li - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: REstaurant Manager
+
+---
+
+== Overview
+
+REstaurant Manager (REM) is a desktop application that turns your restaurant into a smart restaurant. It is meant for restaurant owners to manage their member base, staff, bookings and food inventory.
+
+== Summary of contributions
+
+* *Major enhancement*: added *statistics feature*
+** What it does: allows the user to view statistics of the history of bookings made.
+** Justification: When the restaurant wants to analyze trends so as to make decisions such as when to hire more staff, it is beneficial to view the statistics so that they can make a more informed decision.
+** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component. The implementation too was challenging as it required changes to existing commands.
+
+* *Minor enhancement*:
+** Implemented the UI for the staffs, bookings, ingredients, and recipes.
+** Implemented loyalty points for members
+
+* *Code contributed*: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=limli&sort=displayName&since=2019-02-10&until=2019-03-26&timeframe=day&reverse=false&repoSort=true[Link to Code Contributions]
+
+* Community:
+** PRs reviewed
+* Documentation:
+** Wrote user stories, use cases for v1.0
+** Updated description of user guide to match application design
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=stats]
+include::../UserGuide.adoc[tag=member]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=stats]
+include::../DeveloperGuide.adoc[tag=usecases]

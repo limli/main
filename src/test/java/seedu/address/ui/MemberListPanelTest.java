@@ -16,8 +16,8 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.LoyaltyPoints;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.LoyaltyPoints;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 

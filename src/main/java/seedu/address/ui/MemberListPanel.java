@@ -7,7 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * Panel containing the list of members.

@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.add.AddMemberCommand;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * A utility class for Member.

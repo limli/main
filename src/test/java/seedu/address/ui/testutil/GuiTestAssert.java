@@ -12,7 +12,7 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StaffCardHandle;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.staff.Staff;
 
 /**

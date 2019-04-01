@@ -29,7 +29,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.LoyaltyPoints;
+import seedu.address.model.person.member.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditMemberDescriptorBuilder;

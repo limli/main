@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.staff.Staff;
 import seedu.address.model.recipe.Recipe;
 import seedu.address.storage.Storage;

@@ -3,8 +3,8 @@ package seedu.address.model.util;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.LoyaltyPoints;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.LoyaltyPoints;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 

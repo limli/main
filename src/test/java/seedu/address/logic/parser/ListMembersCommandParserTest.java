@@ -12,7 +12,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.address.logic.commands.ListMembersCommand;
-import seedu.address.model.person.NameAndLoyaltyPointsPredicate;
+import seedu.address.model.person.member.NameAndLoyaltyPointsPredicate;
 
 public class ListMembersCommandParserTest {
 

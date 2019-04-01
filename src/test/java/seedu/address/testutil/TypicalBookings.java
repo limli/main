@@ -14,7 +14,7 @@ import seedu.address.model.RestaurantBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * A utility class containing a list of {@code Booking} objects to be used in tests.

@@ -11,8 +11,8 @@ import java.util.Optional;
 import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.LoyaltyPoints;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.LoyaltyPoints;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 

@@ -32,7 +32,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.MemberBuilder;
