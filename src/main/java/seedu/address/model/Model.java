@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 /**
  * The API of the Model component.
  */
-public interface Model extends MemberModel, BookingModel, IngredientModel, StaffModel {
+public interface Model extends MemberModel, BookingModel, IngredientModel, RecipeModel, StaffModel {
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */

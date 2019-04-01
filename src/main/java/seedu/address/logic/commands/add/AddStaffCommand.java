@@ -11,7 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * A command that adds a staff to the restaurant book.

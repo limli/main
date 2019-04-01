@@ -16,12 +16,13 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.DuplicateItemException;
+import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.ShiftRoster;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * Edits the details of an existing staff in the address book.
@@ -96,8 +97,9 @@ public class EditStaffCommand extends Command {
         Phone updatedPhone = editStaffDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editStaffDescriptor.getEmail().orElse(staffToEdit.getEmail());
         Appointment updatedAppointment = editStaffDescriptor.getAppointment().orElse(staffToEdit.getAppointment());
+        ShiftRoster shiftRoster = staffToEdit.getShiftRoster();
 
-        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAppointment);
+        return new Staff(updatedName, updatedPhone, updatedEmail, updatedAppointment, shiftRoster);
     }
 
     @Override

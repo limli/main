@@ -17,8 +17,9 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.RestaurantOverbookedException;
+import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * Wraps all data at the restaurant-book level
@@ -29,21 +30,23 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     private final UniqueItemList<Member> members;
     private final UniqueItemList<Booking> bookings;
     private final UniqueItemList<Ingredient> ingredients;
+    private final UniqueItemList<Recipe> recipes;
     private final UniqueItemList<Staff> staff;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     private Capacity capacity = Capacity.getDefaultCapacity();
 
-        /*
-        * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-        * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-        *
-        * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-        *   among constructors.
-        */ {
+     /*
+     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */ {
         members = new UniqueItemList<>();
         bookings = new UniqueItemList<>();
         ingredients = new UniqueItemList<>();
+        recipes = new UniqueItemList<>();
         staff = new UniqueItemList<>();
     }
 
@@ -59,6 +62,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     }
 
     //// list overwrite operations
+
     /**
      * Replaces the contents of the member list with {@code members}.
      * {@code members} must not contain duplicate members.
@@ -86,6 +90,16 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         indicateModified();
     }
 
+
+    /**
+     * Replaces the contents of the recipe list with {@code recipes}.
+     * {@code recipes} must not contain duplicate recipes.
+     */
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes.setItems(recipes);
+        indicateModified();
+    }
+
     /**
      * Replaces the contents of the booking list with {@code staff}.
      * {@code staff} must not contain duplicate staff.
@@ -102,10 +116,10 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void resetData(ReadOnlyRestaurantBook newData) {
         requireNonNull(newData);
-
         setMembers(newData.getMemberList());
         setBookings(newData.getBookingList());
         setIngredients(newData.getIngredientList());
+        setRecipes(newData.getRecipeList());
         setStaffList(newData.getStaffList());
         capacity = newData.getCapacity();
     }
@@ -133,7 +147,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public boolean canAccommodate(Booking booking) {
         List<Booking> newList = new ArrayList<>();
-        for (Booking b: bookings) {
+        for (Booking b : bookings) {
             newList.add(b);
         } // copy all the bookings over as booking list is immutable
         newList.add(booking);
@@ -146,6 +160,14 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
         return ingredients.contains(ingredient);
+    }
+
+    /**
+     * Returns true if a recipe with the same identity as {@code recipe} exists in the restaurant book.
+     */
+    public boolean hasRecipe(Recipe recipe) {
+        requireNonNull(recipe);
+        return recipes.contains(recipe);
     }
 
     /**
@@ -185,6 +207,16 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void addIngredient(Ingredient ingredient) {
         ingredients.add(ingredient);
+        indicateModified();
+    }
+
+    /**
+     * Adds a recipe to the restaurant book.
+     * The recipe must not already exist in the restaurant book.
+     */
+    public void addRecipe(Recipe recipe) {
+        recipes.add(recipe);
+        System.out.println("within nested" + recipe);
         indicateModified();
     }
 
@@ -233,7 +265,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public boolean canAccommodateEdit(Booking target, Booking editedBooking) {
         // newList simulates what happens when the target is replaced
         List<Booking> newList = new ArrayList<>();
-        for (Booking b: bookings) {
+        for (Booking b : bookings) {
             if (!b.equals(target)) {
                 newList.add(b);
             } else {
@@ -244,16 +276,33 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     }
 
     /**
-     * Replaces the given member {@code target} in the list with {@code editedIngredient}.
+     * Replaces the given ingredient {@code target} in the list with {@code editedIngredient}.
      * {@code target} must exist in the restaurant book.
-     * The member identity of {@code editedIngredient} must not be the
-     * same as another existing ingredient in the restaurant book.
+     * Recipes that include the ingredient must also be updated with the change in the ingredient.
      */
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         ingredients.setItem(target, editedIngredient);
+        ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
+        Predicate<Recipe> recipeContainsTarget =
+            r -> r.getRecipeIngredientSet().getIngredientSet()
+                        .keySet().stream().anyMatch(ingred -> ingred.equals(target));
+        Function<Recipe, Recipe>
+                updateRecipe = r -> r.editIngredientSet(target, editedIngredient);
+        setRecipes(recipeObservableList.stream().filter(recipeContainsTarget)
+                .map(updateRecipe).collect(Collectors.toList()));
         indicateModified();
     }
 
+    /**
+     * Replaces the given recipe {@code target} in the list with {@code editedRecipe}.
+     * {@code target} must exist in the restaurant book.
+     * The recipe identity of {@code editedRecipe} must not be the
+     * same as another existing recipe in the restaurant book.
+     */
+    public void setRecipe(Recipe target, Recipe editedRecipe) {
+        recipes.setItem(target, editedRecipe);
+        indicateModified();
+    }
 
     /**
      * Replaces the given member {@code target} in the list with {@code editedStaff}.
@@ -292,9 +341,26 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     /**
      * Removes {@code key} from this {@code RestaurantBook}.
      * {@code key} must exist in the restaurant book.
+     * Recipes that include this ingredient must also be removed.
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
+
+        // When an ingred is deleted, all associated recipes are also deleted.
+        Predicate<Recipe> isValidRecipe =
+            r -> r.getRecipeIngredientSet().getIngredientSet()
+                        .keySet().stream().noneMatch(ingred -> ingred.equals(key));
+        ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
+        setRecipes(recipeObservableList.stream().filter(isValidRecipe).collect(Collectors.toList()));
+        indicateModified();
+    }
+
+    /**
+     * Removes {@code key} from this {@code RestaurantBook}.
+     * {@code key} must exist in the restaurant book.
+     */
+    public void removeRecipe(Recipe key) {
+        recipes.remove(key);
         indicateModified();
     }
 
@@ -363,6 +429,12 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         return ingredients.asUnmodifiableObservableList();
     }
 
+
+    @Override
+    public ObservableList<Recipe> getRecipeList() {
+        return recipes.asUnmodifiableObservableList();
+    }
+
     @Override
     public ObservableList<Staff> getStaffList() {
         return staff.asUnmodifiableObservableList();
@@ -375,11 +447,12 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
                 && members.equals(((RestaurantBook) other).members)
                 && bookings.equals(((RestaurantBook) other).bookings)
                 && ingredients.equals(((RestaurantBook) other).ingredients)
+                && recipes.equals(((RestaurantBook) other).recipes)
                 && staff.equals(((RestaurantBook) other).staff));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(members, bookings, ingredients, staff);
+        return Objects.hash(members, bookings, ingredients, recipes, staff);
     }
 }

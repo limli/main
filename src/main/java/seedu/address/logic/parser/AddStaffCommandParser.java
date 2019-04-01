@@ -8,11 +8,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.logic.commands.add.AddStaffCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.ShiftRoster;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * Parses input arguments and creates a new AddStaffCommand object.
@@ -38,7 +39,7 @@ public class AddStaffCommandParser implements Parser<AddStaffCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Appointment appointment = ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get());
 
-        Staff staff = new Staff(name, phone, email, appointment);
+        Staff staff = new Staff(name, phone, email, appointment, new ShiftRoster());
 
         return new AddStaffCommand(staff);
     }

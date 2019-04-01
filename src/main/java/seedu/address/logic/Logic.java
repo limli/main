@@ -12,7 +12,7 @@ import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * API of the Logic component

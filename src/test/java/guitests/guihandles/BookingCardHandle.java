@@ -54,9 +54,13 @@ public class BookingCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code booking}.
      */
     public boolean equals(Booking booking) {
+        System.out.println(booking.getCustomer().getName().fullName + " | " + getName());
+        System.out.println("(" + booking.getNumMembers() + " person(s))" + " | " + getNumMembers());
+        System.out.println(booking.getCustomer().getPhone() + " | " + getPhone());
+        System.out.println(booking.getStartTimeString() + " | " + getDate());
         return getName().equals(booking.getCustomer().getName().fullName)
-                && getNumMembers().equals(booking.getNumMembers())
-                && getPhone().equals(booking.getCustomer().getPhone())
+                && getNumMembers().equals("(" + booking.getNumMembers() + " person(s))")
+                && getPhone().equals(booking.getCustomer().getPhone().value)
                 && getDate().equals(booking.getStartTimeString());
     }
 }

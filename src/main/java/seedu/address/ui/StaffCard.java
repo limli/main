@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * An UI component that displays information of a {@code Staff}.
@@ -37,6 +37,8 @@ public class StaffCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label appointment;
+    @FXML
+    private Label shifts;
 
     public StaffCard(Staff staff, int displayedIndex) {
         super(FXML);
@@ -46,6 +48,7 @@ public class StaffCard extends UiPart<Region> {
         phone.setText(staff.getPhone().value);
         email.setText(staff.getEmail().value);
         appointment.setText(staff.getAppointment().appointmentName);
+        shifts.setText(staff.getShiftRoster().toString());
     }
 
     @Override
