@@ -33,6 +33,8 @@ As REM is targeted at _restaurant owners_, it aims to facilitate the management 
 * Overall
     ** Collation of feedback by customers, and general statistics of the performance of the restaurant
 
+This user guide is designed to provide assistance to Restaurant Managers who utilise REM.
+
 Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
@@ -46,7 +48,7 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+** Some example commands you can try:
 
 * *`listMembers`* : lists all members of the restaurant
 * **`addMember`**`addMember n/John Doe e/johnd@gmail.com p/81234567` : adds a member named `John Doe` to the restaurant.
@@ -67,7 +69,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Items in square brackets are optional.
     ** e.g. `notifySMS [l/LOYALTY_POINTS_MINIMUM]`
 * Items with `...` after them can be used multiple times including zero times
-    ** e.g. `addRecipe r/RECIPE_NAME n/NUMBER_OF_INGREDIENTS 1/INGREDIENT_1&AMOUNT_IN_UNITS 2/INGREDIENT_2&AMOUNT_IN_UNITS ...`
+    ** e.g. `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 * Parameters can be in any order
 ====
 *Date and Time Format*
@@ -198,21 +200,19 @@ Format: `listIngredients [in/INGREDIENT_NAME] [w/]`
 
 Example:
 
-* `listIngredient in/tomato`
+* `listIngredients in/tomato`
 
 All ingredients with name containing the word 'tomato' will be listed,
 e.g. 'tomato sauce', 'tomato ketchup' will be listed.
 
-* `listIngredient w/`
+* `listIngredients w/`
 
 All ingredients with ingredient quantity falling below ingredient warning amount will be listed.
 
-* `listIngredient in/tomato w/`
+* `listIngredients in/tomato w/`
 
 All ingredients with name containing the word 'tomato', and having ingredient quantity that falls below
 ingredient warning amount will be listed.
-
-
 
 ==== Add Ingredient: `addIngredient`
 
@@ -223,59 +223,31 @@ Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTI
 ****
 • If ingredient quantity or warning amount is not specified, they are respectively set to 0.
 
-• User inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT` , and when the quantity in inventory
+• User inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
 falls below this stated amount, there is a need for restock of this ingredient.
 Calling `listIngredients w/` will display all ingredients that fall below their corresponding warning values.
 ****
 
 Example:
 
-* `addIngredient in/chicken u/full chickens`
+* `addIngredient in/chicken wings u/packets`
 
-Adds new ingredient, chicken (with default ingredient quantity as 0), into inventory.
+Adds new ingredient, chicken wings (with default ingredient quantity as 0), counted in terms of packets, into inventory.
 
-* `addIngredient in/chicken q/10 u/full chickens`
+* `addIngredient in/chicken wings q/10 u/packets`
 
-Adds 10 full chickens into inventory.
+Adds 10 packets of chicken wings into inventory.
 
-* `addIngredient in/chicken q/10 u/full chickens w/2`
+* `addIngredient in/chicken wings q/10 u/packets w/2`
 
-Adds 10 full chickens into inventory and when amount falls below 2, `listIngredients w/` will display chicken.
+Adds 10 packets of chicken wing into inventory and when quantity in inventory falls below 2 packets, `listIngredients w/` will display chicken.
 
-==== Restock Ingredient: `restockIngredient`
-
-Restock an ingredient in inventory, by a particular amount, based on specified `INDEX` via `listIngredients`.
-Previously existing in inventory before.
-
-Format: `restockIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY`
-
-Example:
-
-* `listIngredients` (returns chicken as 3rd index)
-+
-`restockIngredient i/3 q/10`
-
-Increases the quantity of chickens by 10 in the inventory.
-
-==== Consume Ingredient: `consumeIngredient`
-
-Consume a particular amount of ingredient from inventory, based on specified `INDEX` via `listIngredients`.
-
-Format: `consumeIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY`
-
-Example:
-
-* `listIngredients` (returns chicken as 3rd index)
-+
-`consumeIngredient i/3 q/10`
-
-Decreases the quantity of chickens by 10 in the inventory.
 
 ==== Delete Ingredient: `deleteIngredient`
 
-Delete ingredient from inventory based on specified `INDEX` via `listIngredients`.
+Deletes the specified ingredient from the restaurant book. Note that this action also deletes all recipes that contain this ingredient.
 
-Format: `deleteIngredient INGREDIENT_INDEX`
+Format: `deleteIngredient INDEX`
 
 ****
 • The index refers to the index number shown in the most recent listing.
@@ -289,25 +261,48 @@ Example:
 
 Delete chicken from inventory
 
-==== List Recipes: `listRecipes`
+==== Restock Ingredient: `restockIngredient`
 
-List all recipes.
+Restock an ingredient in inventory, by a particular amount, based on specified `INDEX` via `listIngredients`.
+Previously existing in inventory before.
 
-Format: `listRecipes`
+Format: `restockIngredient i/INDEX q/INGREDIENT_QUANTITY`
+
+Example:
+
+* `listIngredients` (returns chicken as 3rd index)
++
+`restockIngredient i/3 q/10`
+
+Increases the quantity of chickens by 10 in the inventory.
+
+==== Consume Ingredient: `consumeIngredient`
+
+Consume a particular amount of ingredient from inventory, based on specified `INDEX` via `listIngredients`.
+
+Format: `consumeIngredient i/INDEX q/INGREDIENT_QUANTITY`
+
+Example:
+
+* `listIngredients` (returns chicken as 3rd index)
++
+`consumeIngredient i/3 q/10`
+
+Decreases the quantity of chickens by 10 in the inventory.
 
 
 ==== Add Recipe: `addRecipe`
 
 Add recipe of dish served at the restaurant.
 
-Format: `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
+Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 
 ****
 • The index refers to the index number shown in the most recent listing of ingredients in the ingredients panel.
 
-• There should be at least 1 ingredient `iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE` input
+• There should be at least 1 ingredient `iq/INDEX&INGREDIENT_QUANTITY_IN_RECIPE` input.
 
-• Each ingredient input should have the format `iq/INGREDIENT_INDEX&NGREDIENT_QUANTITY_IN_RECIPE`
+• Each ingredient input should have the format `iq/INDEX&NGREDIENT_QUANTITY_IN_RECIPE`
 where ingredient index and quantity of ingredient in recipe is separated by &.
 Both the ingredient index and quantity must be an whole number.
 ****
@@ -325,17 +320,15 @@ Adds a new recipe, chicken rice, which requires 1 full chicken and 3 bowls of ri
 
 Delete a recipe based on specified INDEX via `listRecipes`.
 
-Format: `deleteRecipe RECIPE_INDEX`
+Format: `deleteRecipe INDEX`
 
 ****
-• The index refers to the index number shown in the most recent listing.
+• Deletes the recipe at the specified `INDEX`. The index refers to the index number shown in the most recent listing of recipe.
 ****
 
 Example:
 
-* `listRecipes`
-+
-`deleteRecipe 3`
+* `deleteRecipe 3`
 
 Delete recipe at index 3.
 
@@ -348,11 +341,11 @@ Format: `recipeSummary`
 // tag::booking[]
 === Booking Management
 
-==== View Booking: `listBooking` [Coming in v2.0]
+==== List Booking: `listBookings` [Coming in v2.0]
 
 View the current lists of bookings within a certain time frame
 
-Format: `listBooking [ts/TIME_START] [te/TIME_END]`
+Format: `listBookings [ts/TIME_START] [te/TIME_END]`
 
 ****
 • The start and end times are optional arguments. If not specified, the list of all bookings (i.e. including future and past bookings) made so far will be displayed.
@@ -360,7 +353,7 @@ Format: `listBooking [ts/TIME_START] [te/TIME_END]`
 
 Example:
 
-* `listBooking ts/2019-03-01 12:00 te/2019-03-04 15:00`
+* `listBookinsg ts/2019-03-01 12:00 te/2019-03-04 15:00`
 
 ==== Update Restaurant Capacity: `updateCapacity`
 
@@ -378,9 +371,9 @@ Example:
 
 * `updateCapacity 50`
 
-This updates the restaurants to cater for a capacity for 50 customers.
+This updates the restaurants to cater for a capacity of 50 customers.
 
-==== Create New Booking: `addBooking`
+==== Add New Booking: `addBooking`
 
 Creates a new booking.
 
@@ -398,7 +391,7 @@ Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/START_TIME`
 
 Example:
 
-* `addBooking c/1 n/5 ts/2019-02-23 14:30`
+* `addBooking c/1 n/5 ts/2019-02-23T14:30`
 
 Adds a booking for the first customer on the current list, on 23 Feb, at 1430 hrs
 
@@ -432,9 +425,7 @@ Format: `deleteBooking INDEX`
 
 Example:
 
-* `listBooking`
-+
-`deleteBooking 3`
+* `deleteBooking 3`
 
 Deletes the booking with index 3.
 
@@ -458,7 +449,7 @@ Adds a new staff with name John Doe, phone number 91234567, email john@example.c
 
 Deletes the staff member with the specified index.
 
-Format: `deleteStaff STAFF_INDEX`
+Format: `deleteStaff INDEX`
 
 Example
 
@@ -468,7 +459,7 @@ Example
 
 Edits the staff member with the specified index.
 
-Format: `editStaff STAFF_INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
+Format: `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
 
 Example
 
@@ -514,13 +505,13 @@ Example:
 
 === Overall
 
-==== View Feedback: `viewFeedback`
+==== View Feedback: `viewFeedback` [Coming in v2.0]
 
 Lists all feedback submitted by customers.
 
 Format: `viewFeedback`
 
-==== Add Feedback: `addFeedback`
+==== Add Feedback: `addFeedback` [Coming in v2.0]
 
 Adds a feedback submitted by a customer.
 
@@ -530,7 +521,7 @@ Example
 
 * `addFeedback Good service and food!`
 
-==== Add Rating: `addRating`
+==== Add Rating: `addRating` [Coming in v2.0]
 
 Adds a rating submitted by a customer. Ratings are on a 5 point scale.
 
@@ -544,13 +535,13 @@ Example
 
 * `addRating 5`
 
-==== View Graph Rating: `graphRating`
+==== View Graph Rating: `graphRating` [Coming in v2.0]
 
 Displays a graph of average rating per month against months.
 
 Format: `graphRating`
 
-==== View Rating Statistics: `ratingStats`
+==== View Rating Statistics: `ratingStats` [Coming in v2.0]
 
 Displays a summary of the overall rating statistics, such as the average rating and the rating distribution.
 
@@ -580,7 +571,7 @@ e.g. `deleteMember 2`
 e.g. `listIngredients in/tomato w/`
 
 * *addIngredient* `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]` +
-e.g. `addIngredient in/chicken u/full chickens`
+e.g. `addIngredient in/chicken u/full chickens q/100 w/10`
 
 * *restockIngredient* `restockIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY` +
 e.g. `restockIngredient i/3 q/10`
@@ -588,24 +579,22 @@ e.g. `restockIngredient i/3 q/10`
 * *consumeIngredient* `consumeIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY` +
 e.g. `consumeIngredient i/3 q/10`
 
-* *deleteIngredient* `delete INGREDIENT_INDEX` +
+* *deleteIngredient* `delete INDEX` +
 e.g. `deleteIngredient 3`
 
-* *listRecipies* `listRecipes` +
-e.g. `listRecipes`
-
-* *addRecipe*  `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE` +
+* *addRecipe*  `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE ...` +
 e.g. `addRecipe r/Chicken Rice iq/4&1 iq/9&3`
 
-* *deleteRecipe* `delete RECIPE_INDEX` +
+* *deleteRecipe* `delete INDEX` +
 e.g. `deleteRecipe 3`
 
 * *recipeSummary* `recipeSummary` +
 e.g. `recipeSummary`
 
 === Booking Management
-* *listBooking* `listBooking [ts/TIME_START] [te/TIME_END]` +
+* *listBookings* `listBookings [ts/TIME_START] [te/TIME_END]` +
 e.g. `listBooking ts/1200 te/1530`
+
 * *updateCapacity* `updateCapacity NUMBER` +
 e.g. `updateCapacity 50`
 
