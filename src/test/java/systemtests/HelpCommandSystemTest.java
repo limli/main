@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import org.junit.Test;
@@ -55,7 +55,7 @@ public class HelpCommandSystemTest extends RestaurantBookSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
+        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.MESSAGE_SHOWING_HELP, getResultDisplay().getText());
@@ -63,7 +63,7 @@ public class HelpCommandSystemTest extends RestaurantBookSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
-        executeCommand(DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
+        executeCommand(DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
 

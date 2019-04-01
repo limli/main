@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.MEMBER_VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PERSON_VALID_EMAIL_BOB;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BENSON;
@@ -124,7 +124,7 @@ public class ModelManagerTest {
     public void setMember_memberIsSelected_selectedMemberUpdated() {
         modelManager.addMember(ALICE);
         modelManager.setSelectedMember(ALICE);
-        Member updatedAlice = new MemberBuilder(ALICE).withEmail(MEMBER_VALID_EMAIL_BOB).build();
+        Member updatedAlice = new MemberBuilder(ALICE).withEmail(PERSON_VALID_EMAIL_BOB).build();
         modelManager.setMember(ALICE, updatedAlice);
         assertEquals(updatedAlice, modelManager.getSelectedMember());
     }

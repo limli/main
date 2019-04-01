@@ -345,13 +345,14 @@ and the quantity required in each recipe.
 
 Format: `recipeSummary`
 
+// tag::booking[]
 === Booking Management
 
-==== View Booking: `viewBooking`
+==== View Booking: `listBooking` [Coming in v2.0]
 
 View the current lists of bookings within a certain time frame
 
-Format: `viewBooking [ts/TIME_START] [te/TIME_END]`
+Format: `listBooking [ts/TIME_START] [te/TIME_END]`
 
 ****
 • The start and end times are optional arguments. If not specified, the list of all bookings (i.e. including future and past bookings) made so far will be displayed.
@@ -359,7 +360,7 @@ Format: `viewBooking [ts/TIME_START] [te/TIME_END]`
 
 Example:
 
-* `viewBooking ts/2019-03-01 12:00 te/2019-03-04 15:00`
+* `listBooking ts/2019-03-01 12:00 te/2019-03-04 15:00`
 
 ==== Update Restaurant Capacity: `updateCapacity`
 
@@ -383,7 +384,7 @@ This updates the restaurants to cater for a capacity for 50 customers.
 
 Creates a new booking.
 
-Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/START_TIME`
+Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/START_TIME`
 
 ****
 • If the restaurant is full (as determined by the `updateCapacity` command), a message will appear telling the user that the restaurant is fully booked.
@@ -392,7 +393,7 @@ Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/START_TIME`
 
 • Customer INDEX refers to the index of the customer as displayed by the list.
 
-• Bookings are a privileged feature restricted only to members. Thus we do not allow non-members to make bookings.
+• Bookings are a privileged feature restricted only to members. REM does not allow non-members to make bookings.
 ****
 
 Example:
@@ -401,28 +402,43 @@ Example:
 
 Adds a booking for the first customer on the current list, on 23 Feb, at 1430 hrs
 
-==== Cancel Booking: `cancelBooking`
-Cancels a booking permanently.
+==== Edit Booking: `editBooking`
+Edits a booking by changing either the time, number of persons of both.
 
-Format: `cancelBooking INDEX`
+Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PEOPLE]`
 
 ****
-• Cancels the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
+• Edits the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing. REM will not execute this operation if this causes capacity to be exceeded.
 ****
 
 Example:
 
-* `viewBooking`
+*`editBooking 3 ts/12:00 n/6`
+
+Edits the booking at index 3, changing the booking time to 12:00 for 6 persons. Since the date was unspecified, the current date (at the point of entering the command) will be used.
+
+*`editBooking 4 ts/2019-03-30T17:00`
+
+Edits the booking at index 4, changing the booking time to 30 March 2019, 12:00. The number of persons remains unchanged as it was previously unspecified.
+
+==== Delete Booking: `deleteBooking`
+Deletes a booking.
+
+Format: `deleteBooking INDEX`
+
+****
+• Deletes the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
+****
+
+Example:
+
+* `listBooking`
 +
-`cancelBooking 3`
+`deleteBooking 3`
 
-Cancels the booking with index 3.
+Deletes the booking with index 3.
 
-==== View Booking Summary: `bookingSummary`
-
-Displays the overall statistics of bookings done so far. The statistics will reflect the total number of bookings made, the distribution of bookings by time and so on. This differs from the `viewBooking` command in the sense that details of a particular booking will not be shown, but only summarised data.
-
-Format: `bookingSummary`
+// end::booking[]
 
 === Staff Management
 
@@ -473,6 +489,28 @@ Format: `setShift s/STAFF_INDEX ts/TIME_START te/TIME_END`
 Example:
 
 * `setShift s/1 ts/2019-02-23 09:30 ts/2019-02-23 17:30`
+
+=== Statistics
+
+==== View bookings per day: `statsdays`
+
+Displays the number of customers in bookings over the past few days in a bar graph.
+
+Format: `statsdays DAYS`
+
+Example:
+
+* `statsdays 30`
+
+==== View bookings per hour: `statstime`
+
+Displays the number of customers in bookings over the past few days in a bar graph, grouped by hour of the day.
+
+Format: `statstime DAYS`
+
+Example:
+
+* `statstime 30`
 
 === Overall
 
@@ -566,16 +604,16 @@ e.g. `deleteRecipe 3`
 e.g. `recipeSummary`
 
 === Booking Management
-* *viewBooking* `viewBooking [ts/TIME_START] [te/TIME_END]` +
-e.g. `viewBooking ts/1200 te/1530`
+* *listBooking* `listBooking [ts/TIME_START] [te/TIME_END]` +
+e.g. `listBooking ts/1200 te/1530`
 * *updateCapacity* `updateCapacity NUMBER` +
 e.g. `updateCapacity 50`
 
 * *addBooking* `addBooking [c/CUSTOMER_INDEX] n/NUMBER OF MEMBERS t/TIME [d/DATE]` +
 e.g. `addBooking 1 1300 25 Feb`
 
-* *cancelBooking* `cancelBooking INDEX` +
-e.g. `cancelBooking 3`
+* *deleteBooking* `deleteBooking INDEX` +
+e.g. `deleteBooking 3`
 
 * *bookingSummary* `bookingSummary`
 

@@ -16,7 +16,7 @@ public class UpdateCapacityCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Capacity successfully set to %1$s";
     public static final String MESSAGE_FAILURE = "Unable to resize capacity- restaurant will be overbooked.";
 
-    private Capacity capacity;
+    private final Capacity capacity;
     public UpdateCapacityCommand(Capacity capacity) {
         this.capacity = capacity;
     }

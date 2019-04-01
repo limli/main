@@ -17,8 +17,8 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.RestaurantOverbookedException;
+import seedu.address.model.person.staff.Staff;
 import seedu.address.model.recipe.Recipe;
 
 /**
@@ -216,7 +216,6 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
-        System.out.println("within nested" + recipe);
         indicateModified();
     }
 
@@ -284,7 +283,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         ingredients.setItem(target, editedIngredient);
         ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
         Predicate<Recipe> recipeContainsTarget =
-            r -> r.getRecipeIngredientSet().getIngredientSet()
+            r -> r.getRecipeIngredientSet().getIngredientMap()
                         .keySet().stream().anyMatch(ingred -> ingred.equals(target));
         Function<Recipe, Recipe>
                 updateRecipe = r -> r.editIngredientSet(target, editedIngredient);
@@ -348,7 +347,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
 
         // When an ingred is deleted, all associated recipes are also deleted.
         Predicate<Recipe> isValidRecipe =
-            r -> r.getRecipeIngredientSet().getIngredientSet()
+            r -> r.getRecipeIngredientSet().getIngredientMap()
                         .keySet().stream().noneMatch(ingred -> ingred.equals(key));
         ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
         setRecipes(recipeObservableList.stream().filter(isValidRecipe).collect(Collectors.toList()));

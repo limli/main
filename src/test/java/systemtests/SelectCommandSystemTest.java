@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MEMBER_DISPLAY
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_MEMBER_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalMembers.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -25,8 +25,8 @@ public class SelectCommandSystemTest extends RestaurantBookSystemTest {
         /* Case: select the first card in the member list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased() + "   ";
-        assertCommandSuccess(command, INDEX_FIRST_MEMBER);
+        String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + "   ";
+        assertCommandSuccess(command, INDEX_FIRST);
 
         /* Case: select the last card in the member list -> selected */
         Index memberCount = getLastIndex(getModel());
@@ -90,7 +90,7 @@ public class SelectCommandSystemTest extends RestaurantBookSystemTest {
 
         /* Case: select from empty address book -> rejected */
         deleteAllMembers();
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased(),
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
                 MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 

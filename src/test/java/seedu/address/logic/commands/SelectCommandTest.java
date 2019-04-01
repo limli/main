@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.Test;
@@ -31,8 +31,8 @@ public class SelectCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         Index lastMemberIndex = Index.fromOneBased(model.getFilteredMemberList().size());
 
-        assertExecutionSuccess(INDEX_FIRST_MEMBER);
-        assertExecutionSuccess(INDEX_THIRD_MEMBER);
+        assertExecutionSuccess(INDEX_FIRST);
+        assertExecutionSuccess(INDEX_THIRD);
         assertExecutionSuccess(lastMemberIndex);
     }
 
@@ -45,18 +45,18 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
-        showMemberAtIndex(expectedModel, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(expectedModel, INDEX_FIRST);
 
-        assertExecutionSuccess(INDEX_FIRST_MEMBER);
+        assertExecutionSuccess(INDEX_FIRST);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
-        showMemberAtIndex(expectedModel, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
+        showMemberAtIndex(expectedModel, INDEX_FIRST);
 
-        Index outOfBoundsIndex = INDEX_SECOND_MEMBER;
+        Index outOfBoundsIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getRestaurantBook().getMemberList().size());
 
@@ -65,14 +65,14 @@ public class SelectCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_MEMBER);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_MEMBER);
+        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST);
+        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_MEMBER);
+        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false

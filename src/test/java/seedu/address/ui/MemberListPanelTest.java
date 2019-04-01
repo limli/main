@@ -3,7 +3,7 @@ package seedu.address.ui;
 import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalMembers.getTypicalMembers;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysMember;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
@@ -47,11 +47,11 @@ public class MemberListPanelTest extends GuiUnitTest {
     @Test
     public void selection_modelSelectedMemberChanged_selectionChanges() {
         initUi(TYPICAL_MEMBERS);
-        Member secondMember = TYPICAL_MEMBERS.get(INDEX_SECOND_MEMBER.getZeroBased());
+        Member secondMember = TYPICAL_MEMBERS.get(INDEX_SECOND.getZeroBased());
         guiRobot.interact(() -> selectedMember.set(secondMember));
         guiRobot.pauseForHuman();
 
-        MemberCardHandle expectedMember = memberListPanelHandle.getMemberCardHandle(INDEX_SECOND_MEMBER.getZeroBased());
+        MemberCardHandle expectedMember = memberListPanelHandle.getMemberCardHandle(INDEX_SECOND.getZeroBased());
         MemberCardHandle selectedMember = memberListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedMember, selectedMember);
     }

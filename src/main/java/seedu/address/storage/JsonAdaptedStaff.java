@@ -1,14 +1,18 @@
 package seedu.address.storage;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.Shift;
+import seedu.address.model.person.staff.ShiftRoster;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * Jackson-friendly version of {@link Staff}.
@@ -21,17 +25,20 @@ class JsonAdaptedStaff {
     private final String phone;
     private final String email;
     private final String appointment;
+    private final List<Shift> shifts;
 
     /**
      * Constructs a {@code JsonAdaptedStaff} with the given staff details.
      */
     @JsonCreator
     public JsonAdaptedStaff(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("appointment") String appointment) {
+                            @JsonProperty("email") String email, @JsonProperty("appointment") String appointment,
+                            @JsonProperty("shifts") List<Shift> shifts) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.appointment = appointment;
+        this.shifts = shifts;
     }
 
     /**
@@ -42,6 +49,7 @@ class JsonAdaptedStaff {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         appointment = source.getAppointment().appointmentName;
+        shifts = source.getShiftRoster().getShifts();
     }
 
     /**
@@ -84,7 +92,10 @@ class JsonAdaptedStaff {
         }
         final Appointment modelAppointment = new Appointment(appointment);
 
-        return new Staff(modelName, modelPhone, modelEmail, modelAppointment);
+        // TODO: Check if shift roster is valid
+        final ShiftRoster modelShiftRoster = new ShiftRoster(shifts);
+
+        return new Staff(modelName, modelPhone, modelEmail, modelAppointment, modelShiftRoster);
     }
 
 }

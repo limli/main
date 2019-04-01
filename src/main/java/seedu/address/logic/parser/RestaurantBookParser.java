@@ -28,11 +28,13 @@ import seedu.address.logic.commands.RestockIngredientCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UpdateCapacityCommand;
-import seedu.address.logic.commands.ViewStatsCommand;
+import seedu.address.logic.commands.ViewStatsDaysCommand;
+import seedu.address.logic.commands.ViewStatsTimeCommand;
 import seedu.address.logic.commands.add.AddBookingCommand;
 import seedu.address.logic.commands.add.AddIngredientCommand;
 import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.logic.commands.add.AddRecipeCommand;
+import seedu.address.logic.commands.add.AddShiftCommand;
 import seedu.address.logic.commands.add.AddStaffCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -82,6 +84,10 @@ public class RestaurantBookParser {
         case AddStaffCommand.COMMAND_WORD:
         case AddStaffCommand.COMMAND_ALIAS:
             return new AddStaffCommandParser().parse(arguments);
+
+        case AddShiftCommand.COMMAND_WORD:
+        case AddShiftCommand.COMMAND_ALIAS:
+            return new AddShiftCommandParser().parse(arguments);
 
         case UpdateCapacityCommand.COMMAND_WORD:
             return new UpdateCapacityCommandParser().parse(arguments);
@@ -164,8 +170,11 @@ public class RestaurantBookParser {
         case ListIngredientsCommand.COMMAND_WORD:
             return new ListIngredientsCommandParser().parse(arguments);
 
-        case ViewStatsCommand.COMMAND_WORD:
-            return new ViewStatsCommandParser().parse(arguments);
+        case ViewStatsDaysCommand.COMMAND_WORD:
+            return new ViewStatsDaysCommandParser().parse(arguments);
+
+        case ViewStatsTimeCommand.COMMAND_WORD:
+            return new ViewStatsTimeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

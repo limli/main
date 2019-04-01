@@ -9,7 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Staff;
 
 /**
  * Deletes a staff identified using it's displayed index from the restaurant book.
@@ -24,7 +24,7 @@ public class DeleteStaffCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Deleted Staff: %1$s";
+    public static final String MESSAGE_DELETE_STAFF_SUCCESS = "Deleted Staff: %1$s";
 
     private final Index targetIndex;
 
@@ -38,13 +38,13 @@ public class DeleteStaffCommand extends Command {
         List<Staff> lastShownList = model.getFilteredStaffList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STAFF_DISPLAYED_INDEX);
         }
 
         Staff staffToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStaff(staffToDelete);
         model.commitRestaurantBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, staffToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_STAFF_SUCCESS, staffToDelete));
     }
 
     @Override

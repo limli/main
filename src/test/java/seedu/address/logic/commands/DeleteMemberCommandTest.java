@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMemberAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import org.junit.Test;
@@ -31,8 +31,8 @@ public class DeleteMemberCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete);
 
@@ -54,10 +54,10 @@ public class DeleteMemberCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
 
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteMemberCommand.MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete);
 
@@ -71,9 +71,9 @@ public class DeleteMemberCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showMemberAtIndex(model, INDEX_FIRST_MEMBER);
+        showMemberAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_MEMBER;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getMemberList().size());
 
@@ -85,8 +85,8 @@ public class DeleteMemberCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
-        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteMember(memberToDelete);
         expectedModel.commitRestaurantBook();
@@ -126,11 +126,11 @@ public class DeleteMemberCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameMemberDeleted() throws Exception {
-        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
+        DeleteMemberCommand deleteMemberCommand = new DeleteMemberCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
-        showMemberAtIndex(model, INDEX_SECOND_MEMBER);
-        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased());
+        showMemberAtIndex(model, INDEX_SECOND);
+        Member memberToDelete = model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteMember(memberToDelete);
         expectedModel.commitRestaurantBook();
 
@@ -141,7 +141,7 @@ public class DeleteMemberCommandTest {
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(memberToDelete, model.getFilteredMemberList().get(INDEX_FIRST_MEMBER.getZeroBased()));
+        assertNotEquals(memberToDelete, model.getFilteredMemberList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second member in unfiltered member list
         expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -149,14 +149,14 @@ public class DeleteMemberCommandTest {
 
     @Test
     public void equals() {
-        DeleteMemberCommand deleteFirstCommand = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
-        DeleteMemberCommand deleteSecondCommand = new DeleteMemberCommand(INDEX_SECOND_MEMBER);
+        DeleteMemberCommand deleteFirstCommand = new DeleteMemberCommand(INDEX_FIRST);
+        DeleteMemberCommand deleteSecondCommand = new DeleteMemberCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteMemberCommand deleteFirstCommandCopy = new DeleteMemberCommand(INDEX_FIRST_MEMBER);
+        DeleteMemberCommand deleteFirstCommandCopy = new DeleteMemberCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEMBER_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.MEMBER_VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.MEMBER_VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.MEMBER_VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PERSON_VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PERSON_VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PERSON_VALID_PHONE_BOB;
 
 import org.junit.Test;
 
@@ -35,15 +35,15 @@ public class EditMemberDescriptorTest {
 
         // different name -> returns false
         EditMemberDescriptor editedAmy =
-                new EditMemberDescriptorBuilder(MEMBER_DESC_AMY).withName(MEMBER_VALID_NAME_BOB).build();
+                new EditMemberDescriptorBuilder(MEMBER_DESC_AMY).withName(PERSON_VALID_NAME_BOB).build();
         assertFalse(MEMBER_DESC_AMY.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(MEMBER_DESC_AMY).withPhone(MEMBER_VALID_PHONE_BOB).build();
+        editedAmy = new EditMemberDescriptorBuilder(MEMBER_DESC_AMY).withPhone(PERSON_VALID_PHONE_BOB).build();
         assertFalse(MEMBER_DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditMemberDescriptorBuilder(MEMBER_DESC_AMY).withEmail(MEMBER_VALID_EMAIL_BOB).build();
+        editedAmy = new EditMemberDescriptorBuilder(MEMBER_DESC_AMY).withEmail(PERSON_VALID_EMAIL_BOB).build();
         assertFalse(MEMBER_DESC_AMY.equals(editedAmy));
 
     }

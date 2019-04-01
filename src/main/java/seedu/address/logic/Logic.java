@@ -12,7 +12,8 @@ import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Member;
-import seedu.address.model.person.Staff;
+import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * API of the Logic component
@@ -43,6 +44,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of ingredients */
     ObservableList<Ingredient> getFilteredIngredientList();
 
+    /** Returns an unmodifiable view of the filtered list of ingredients */
+    ObservableList<Recipe> getFilteredRecipeList();
+
     /** Returns an unmodifiable view of the filtered list of staff */
     ObservableList<Staff> getFilteredStaffList();
 
@@ -71,7 +75,7 @@ public interface Logic {
      * Selected member in the filtered member list.
      * null if no member is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedMemberProperty()
      */
     ReadOnlyProperty<Member> selectedMemberProperty();
 
@@ -79,7 +83,7 @@ public interface Logic {
      * Selected booking in the filtered booking list.
      * null if no booking is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedBookingProperty()
      */
     ReadOnlyProperty<Booking> selectedBookingProperty();
 
@@ -87,43 +91,58 @@ public interface Logic {
      * Selected ingredient in the filtered ingredient list.
      * null if no ingredient is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedIngredientProperty()
      */
     ReadOnlyProperty<Ingredient> selectedIngredientProperty();
+
+    /**
+     * Selected recipe in the filtered recipe list.
+     * null if no recipe is selected.
+     *
+     * @see seedu.address.model.Model#selectedRecipeProperty()
+     */
+    ReadOnlyProperty<Recipe> selectedRecipeProperty();
 
     /**
      * Selected staff in the filtered staff list.
      * null if no staff is selected.
      *
-     * @see seedu.address.model.Model#selectedItemProperty()
+     * @see seedu.address.model.Model#selectedStaffProperty()
      */
     ReadOnlyProperty<Staff> selectedStaffProperty();
 
     /**
      * Sets the selected member in the filtered member list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Member)
+     * @see seedu.address.model.Model#setSelectedMember(Member)
      */
     void setSelectedMember(Member member);
 
     /**
      * Sets the selected booking in the filtered booking list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Booking)
+     * @see seedu.address.model.Model#setSelectedBooking(Booking)
      */
     void setSelectedBooking(Booking booking);
 
     /**
      * Sets the selected ingredient in the filtered ingredient list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Ingredient)
+     * @see seedu.address.model.Model#setSelectedIngredient(Ingredient)
      */
     void setSelectedIngredient(Ingredient ingredient);
 
     /**
+     * Sets the selected recipe in the filtered recipe list.
+     *
+     * @see seedu.address.model.Model#setSelectedRecipe(Recipe)
+     */
+    void setSelectedRecipe(Recipe recipe);
+
+    /**
      * Sets the selected staff in the filtered staff list.
      *
-     * @see seedu.address.model.Model#setSelectedItem(Staff)
+     * @see seedu.address.model.Model#setSelectedStaff(Staff)
      */
     void setSelectedStaff(Staff staff);
 }

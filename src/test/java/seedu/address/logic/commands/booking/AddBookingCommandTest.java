@@ -2,6 +2,7 @@ package seedu.address.logic.commands.booking;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -82,7 +83,7 @@ public class AddBookingCommandTest {
                 new AddBookingCommand(new CustomerIndexedBookingBuilder().build());
 
         AddBookingCommand differentBookingCommand =
-                new AddBookingCommand(new CustomerIndexedBookingBuilder().withIndex(Index.fromOneBased(2)).build());
+                new AddBookingCommand(new CustomerIndexedBookingBuilder().withIndex(INDEX_SECOND).build());
         // same object -> equal
         assertEquals(defaultBookingCommand, defaultBookingCommand);
 

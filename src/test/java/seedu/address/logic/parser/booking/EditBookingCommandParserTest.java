@@ -5,10 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
 import seedu.address.logic.parser.EditBookingCommandParser;
@@ -53,7 +55,7 @@ public class EditBookingCommandParserTest {
         EditBookingDescriptor ebd = new EditBookingDescriptor();
         ebd.setBookingSize(new BookingSize(5));
         String userInput = "2 " + PREFIX_NUMBER_PERSONS + "5";
-        EditBookingCommand expected = new EditBookingCommand(Index.fromOneBased(2), ebd);
+        EditBookingCommand expected = new EditBookingCommand(INDEX_SECOND, ebd);
         assertParseSuccess(parser, userInput, expected);
 
     }
@@ -64,7 +66,7 @@ public class EditBookingCommandParserTest {
         String startTimeString = "2019-03-24T10:00";
         ebd.setBookingWindow(new BookingWindow(startTimeString));
         String userInput = "1 " + PREFIX_START_TIME + startTimeString;
-        EditBookingCommand expected = new EditBookingCommand(Index.fromOneBased(1), ebd);
+        EditBookingCommand expected = new EditBookingCommand(INDEX_FIRST, ebd);
         assertParseSuccess(parser, userInput, expected);
     }
 
@@ -75,7 +77,7 @@ public class EditBookingCommandParserTest {
         ebd.setBookingWindow(new BookingWindow(startTimeString));
         ebd.setBookingSize(new BookingSize(5));
         String userInput = "3 " + PREFIX_NUMBER_PERSONS + "5 " + PREFIX_START_TIME + startTimeString;
-        EditBookingCommand expected = new EditBookingCommand(Index.fromOneBased(3), ebd);
+        EditBookingCommand expected = new EditBookingCommand(INDEX_THIRD, ebd);
         assertParseSuccess(parser, userInput, expected);
     }
 

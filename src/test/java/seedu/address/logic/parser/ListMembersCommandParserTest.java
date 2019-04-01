@@ -23,6 +23,7 @@ public class ListMembersCommandParserTest {
         ListMembersCommand expectedListMembersCommand =
                 new ListMembersCommand(new NameAndLoyaltyPointsPredicate(new ArrayList<>(), 0));
         assertParseSuccess(parser, "     ", expectedListMembersCommand);
+        assertParseSuccess(parser, " " + PREFIX_NAME + "     ", expectedListMembersCommand);
     }
 
     @Test

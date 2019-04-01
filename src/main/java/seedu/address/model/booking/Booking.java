@@ -10,9 +10,9 @@ import seedu.address.model.person.Member;
  */
 public class Booking implements Item, Comparable<Booking> {
 
-    private BookingWindow bookingWindow;
-    private Member customer;
-    private BookingSize numMembers;
+    private final BookingWindow bookingWindow;
+    private final Member customer;
+    private final BookingSize numMembers;
 
 
     public Booking(BookingWindow bookingWindow, Member customer, BookingSize numMembers) {

@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +17,12 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientQuantity;
 import seedu.address.model.ingredient.IngredientUnit;
 import seedu.address.model.ingredient.IngredientWarningAmount;
-import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.staff.Appointment;
+import seedu.address.model.person.staff.Shift;
 import seedu.address.model.recipe.RecipeIngredientSet;
 import seedu.address.model.recipe.RecipeName;
 
@@ -241,5 +244,46 @@ public class ParserUtil {
         } catch (IllegalArgumentException e) {
             throw new ParseException(BookingSize.MESSAGE_CONSTRAINTS);
         }
+    }
+
+    /**
+     * Parses a {@code String dayOfWeek} into a {@code DayOfWeek}.
+     */
+    public static DayOfWeek parseDayOfWeek(String dayOfWeek) throws ParseException {
+        requireNonNull(dayOfWeek);
+        String trimmedDayOfWeek = dayOfWeek.trim();
+        try {
+            return DayOfWeek.valueOf(trimmedDayOfWeek);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        try {
+            return LocalTime.parse(trimmedTime);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Creates a new Shift object that parses the shift.
+     */
+    public static Shift parseShift(DayOfWeek startDayOfWeek, LocalTime startTime,
+                                   DayOfWeek endDayOfWeek, LocalTime endTime) throws ParseException {
+        requireNonNull(startDayOfWeek);
+        requireNonNull(startTime);
+        requireNonNull(endDayOfWeek);
+        requireNonNull(endTime);
+        if (!Shift.isValidShift(startDayOfWeek, startTime, endDayOfWeek, endTime)) {
+            throw new ParseException(String.format(Shift.MESSAGE_CONSTRAINTS));
+        }
+        return new Shift(startDayOfWeek, startTime, endDayOfWeek, endTime);
     }
 }

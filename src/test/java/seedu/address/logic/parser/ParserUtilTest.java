@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.model.booking.BookingSize.MAX_BOOKING_SIZE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
 
 import org.junit.Rule;
@@ -57,6 +59,7 @@ public class ParserUtilTest {
     private static final String INVALID_FEB_29 = "2019-02-29T12:00";
     private static final String WRONG_DATE_FORMAT = "2019-02-28T1200";
     private static final String VALID_FEB_29 = "2020-02-29T12:00";
+    private static final String TIME_ONLY_NO_DATE = "12:00";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -79,10 +82,10 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(INDEX_FIRST_MEMBER, ParserUtil.parseIndex("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("1"));
 
         // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_MEMBER, ParserUtil.parseIndex("  1  "));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndex("  1  "));
     }
 
     @Test
@@ -343,6 +346,13 @@ public class ParserUtilTest {
     public void parseBookingWindow_validDate_returnsBookingWindow() throws Exception {
         BookingWindow expectedBookingWindow = new BookingWindow(LocalDateTime.of(2020, Month.FEBRUARY, 29, 12, 0));
         assertEquals(expectedBookingWindow, ParserUtil.parseBookingWindow(VALID_FEB_29));
+    }
+
+    @Test
+    public void parseBookingWindow_timeNoDate_returnsBookingWindow() throws Exception {
+        BookingWindow expectedBookingWindow =
+                new BookingWindow(LocalDateTime.of(LocalDate.now(), LocalTime.of(12, 0)));
+        assertEquals(expectedBookingWindow, ParserUtil.parseBookingWindow(TIME_ONLY_NO_DATE));
     }
 
     @Test

@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.DeleteMemberCommand.MESSAGE_DELETE_ME
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMember;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalMembers.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -31,8 +31,8 @@ public class DeleteMemberCommandSystemTest extends RestaurantBookSystemTest {
         /* Case: delete the first member in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteMemberCommand.COMMAND_WORD + "      "
-                + INDEX_FIRST_MEMBER.getOneBased() + "       ";
-        Member deletedMember = removeMember(expectedModel, INDEX_FIRST_MEMBER);
+                + INDEX_FIRST.getOneBased() + "       ";
+        Member deletedMember = removeMember(expectedModel, INDEX_FIRST);
         String expectedResultMessage = String.format(MESSAGE_DELETE_MEMBER_SUCCESS, deletedMember);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -60,7 +60,7 @@ public class DeleteMemberCommandSystemTest extends RestaurantBookSystemTest {
 
         /* Case: filtered member list, delete index within bounds of address book and member list -> deleted */
         showMembersWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_MEMBER;
+        Index index = INDEX_FIRST;
         assertTrue(index.getZeroBased() < getModel().getFilteredMemberList().size());
         assertCommandSuccess(index);
 
