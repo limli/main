@@ -12,7 +12,6 @@ import java.time.LocalTime;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteShiftCommand;
-import seedu.address.logic.commands.add.AddShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.staff.Shift;
 
@@ -31,12 +30,12 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
     public DeleteShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         try {
+
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
                             PREFIX_START_TIME, PREFIX_END_TIME);
 
-            Index index = ParserUtil.parseIndex(args);
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
             DayOfWeek startDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY_OF_WEEK).get());
             LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
