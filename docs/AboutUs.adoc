@@ -22,7 +22,7 @@ Working on: booking management feature
 
 === Wang Zhi Jian
 image::zj-cs2103.png[width="150", align="left"]
-{empty}[http://github.com/zj-cs2103[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/zj-cs2103[github]] [<<wangzhijian#, portfolio>>]
 
 Role: Testing +
 Responsibilities: Integration, in charge of Logic component +
@@ -32,17 +32,17 @@ Working on: staff management feature
 
 === Lim Li
 image::limli.png[width="150", align="left"]
-{empty}[http://github.com/limli[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/limli[github]] [<<limli#, portfolio>>]
 
 Role: Code quality +
 Responsibilities: JavaFX expert, in charge of UI component +
-Working on: customer management feature
+Working on: customer management feature, statistics feature
 
 '''
 
 === Ren Ying
 image::hiyingnn.png[width="150", align="left"]
-{empty}[http://github.com/hiyingnn[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/hiyingnn[github]] [<<renying#, portfolio>>]
 
 Role: Documentation +
 Responsibilities: In charge of Storage component +

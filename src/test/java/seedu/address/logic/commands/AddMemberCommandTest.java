@@ -17,7 +17,7 @@ import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
 public class AddMemberCommandTest {

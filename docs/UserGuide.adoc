@@ -88,6 +88,7 @@ Exit the program.
 
 Format: `exit`
 
+// tag::member[]
 === Member Management
 
 ==== Add Member: `addMember`
@@ -98,8 +99,6 @@ Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
 
 ****
 • If loyalty points is not specified, it will be taken to be 0.
-
-• Email of all members must be unique.
 ****
 
 Example:
@@ -107,19 +106,41 @@ Example:
 * `addMember n/John Doe e/johnd@gmail.com p/81234567`
 
 ==== List Members: `listMembers`
-List members who match all the given condition(s).
+Lists all members whose names contain any of the list of words (case-insensitive) and who has at least the specified amount of loyalty points.
 
-Format: `listMembers [n/NAME] [l/LOYALTY_POINTS_MINIMUM]`
+Format: `listMembers [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]`
+
+****
+• If loyalty points is not specified, it will be taken to be 0.
+
+• The search is case insensitive. e.g hans will match Hans
+
+• The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+
+• Only full words will be matched e.g. Han will not match Hans
+
+• Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+
+• If the name field is not specified, all names will match
+****
 
 Example:
+
+* `listMembers n/Betsy Tim John`
+
+Lists all members having names Betsy, Tim, or John.
 
 * `listMembers l/10`
 
 Lists all members with at least 10 loyalty points.
 
+* `listMembers n/Betsy Tim l/6`
+
+Lists all members having names Betsy or Tim, and with at least 6 loyalty points.
+
 * `listMembers`
 
-All the members will be listed.
+Lists all members.
 
 ==== Delete Members: `deleteMember`
 
@@ -144,6 +165,27 @@ Deletes the 2nd member in the restaurant book.
 `deleteMember 1`
 
 Deletes the 1st member in the results of the listMembers command.
+
+==== Edit Member: `editMember`
+Edits an existing member in the restaurant book.
+
+Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
+
+****
+• Edits the member at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
+****
+
+Example:
+
+*`editmember 1 p/91234567 e/johndoe@example.com`
+
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+
+*`editmember 2 n/Betsy Crower`
+
+Edits the name of the 2nd person to be Betsy Crower.
+
+// end::member[]
 
 ==== Notify Via Email: `notifyEmail` `[coming in v2.0]`
 
@@ -432,13 +474,21 @@ Deletes the booking with index 3.
 
 // end::booking[]
 
+// tag::staff[]
+
 === Staff Management
 
 ==== Add Staff: `addStaff`
 
 Add a new staff member to the list of all staff.
+The name of the new staff member must not be identical to the name of any existing staff member.
 
 Format: `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
+
+* `NAME` must only contain alphanumeric characters and spaces.
+* `PHONE` must contain only digits, and should be at least 3 digits long
+* `EMAIL` must be a valid email address
+* `APPOINTMENT` must only contain alphanumeric characters and spaces.
 
 Example:
 
@@ -448,13 +498,17 @@ Adds a new staff with name John Doe, phone number 91234567, email john@example.c
 
 ==== Delete Staff: `deleteStaff`
 
-Deletes the staff member with the specified index.
+Deletes the staff member with the specified index from the system.
 
 Format: `deleteStaff INDEX`
+
+* `INDEX` must be a valid index number in the most recent listing.
 
 Example
 
 * `deleteStaff 3`
+
+Deletes the staff at index 3 shown in the most recent listing.
 
 ==== Edit Staff: `editStaff`
 
@@ -462,26 +516,49 @@ Edits the staff member with the specified index.
 
 Format: `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
 
+* `INDEX` must be a valid index number in the most recent listing.
+* The requirements for the optional fields `NAME`, `PHONE`, `EMAIL`, `APPOINTMENT` are identical to that of the addStaff command.
+
 Example
 
 * `editStaff 1 p/98765432 a/Manager`
 
-==== View Shift Staff: `shiftStaff`
+Edits the staff at index 1 shown in the most recent listing, by changing the phone number to 97654321 and appointment to Manager.
 
-Lists all staff members working at the current time.
+==== Add Shift to Staff: `addShift`
 
-Format: `shiftStaff`
+Adds a shift to the shift roster of an existing staff member in the restaurant with the specified index.
+The new shift added must start and end on different days of the week, must have a positive duration, and must not clash with any existing shift.
 
-==== Set Shift Staff: `setShift`
+Format: `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
 
-Sets the shift of a staff with the specified `STAFF_INDEX`. If the staff already has a shift, then it will be overwritten.
-
-Format: `setShift s/STAFF_INDEX ts/TIME_START te/TIME_END`
+* `START_DAY_OF_WEEK` and `END_DAY_OF_WEEK` must be one of `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
+* `START_TIME` and `END_TIME` must be valid 24-hour time in `HH:MM` format.
 
 Example:
 
-* `setShift s/1 ts/2019-02-23 09:30 ts/2019-02-23 17:30`
+* `addshift 1 sd/MONDAY ts/12:00 ed/MONDAY te/14:00`
 
+Adds a shift from 12pm to 2pm every Monday to the roster of the staff member with index 1 shown in the most recent listing.
+
+==== Delete Shift from Staff: `deleteShift`
+
+Deletes a shift from the shift roster of an existing staff member in the restaurant with the specified index.
+The shift to be deleted must exist in the specified staff member's shift roster.
+
+Format: `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+
+* The requirements for the fields `START_DAY_OF_WEEK`, `START_TIME`, `END_DAY_OF_WEEK`, `END_TIME` are identical to that of the addShift command.
+
+Example:
+
+* `deleteshift 1 sd/TUESDAY ts/08:00 ed/TUESDAY te/10:30`
+
+Deletes the shift from 8am to 10.30am every Tuesday from the roster of the staff member with index 1 shown in the most recent listing.
+
+// end::staff[]
+
+// tag::stats[]
 === Statistics
 
 ==== View bookings per day: `statsdays`
@@ -489,6 +566,12 @@ Example:
 Displays the number of customers in bookings over the past few days in a bar graph.
 
 Format: `statsdays DAYS`
+
+****
+• `DAYS` is an integer from 1 to 10000, inclusive
+
+• The command considers all bookings from today's date to (todays's date - DAYS + 1)
+****
 
 Example:
 
@@ -500,9 +583,17 @@ Displays the number of customers in bookings over the past few days in a bar gra
 
 Format: `statstime DAYS`
 
+****
+• `DAYS` is an integer from 1 to 10000, inclusive
+
+• The command considers all bookings from today's date to (todays's date - DAYS + 1)
+****
+
 Example:
 
 * `statstime 30`
+
+// end::stats[]
 
 === Overall
 
@@ -609,16 +700,20 @@ e.g. `deleteBooking 3`
 
 === Staff Management
 
-* *addStaff* `addStaff n/STAFF_NAME c/CONTACT_NUMBER a/APPOINTMENT` +
-e.g. `addStaff n/John Doe c/91234567 a/Waiter`
+* *addStaff* `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT` +
+e.g. `addStaff n/John Doe p/91234567 e/john@example.com a/Waiter`
 
-* *deleteStaff* `deleteStaff STAFF_INDEX` +
+* *deleteStaff* `deleteStaff INDEX` +
 e.g. `deleteStaff 3`
 
-* *shiftStaff* `shiftStaff`
+* *editStaff* `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]` +
+e.g. `addshift 1 sd/MONDAY ts/12:00 ed/MONDAY te/14:00`
 
-* *setShift* `setShift s/STAFF_INDEX ts/TIME_START te/TIME_END` +
-e.g. setShift `1 1200 1530`
+* *addShift* `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME` +
+e.g. `setShift 1 1200 1530`
+
+* *deleteShift* `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME` +
+e.g. `deleteshift 1 sd/TUESDAY ts/08:00 ed/TUESDAY te/10:30`
 
 === Overall Management
 

@@ -9,25 +9,30 @@
 
 == Overview
 
-REstaurant Manager (REM) is a desktop application that turns your restaurant into a smart restaurant. It is meant for restaurant owners to manage their member base, staff, bookings and food inventory.
+This portfolio serves to illustrate my contributions to the project REstaurant Manager (REM). REM is a CS2103T project meant for new developers to gain a hands-on experience at software engineering. REM is a desktop application meant for restaurant owners to manage their members, staff, bookings and food inventory.
+
+As a developer, I was primarily in charged of the booking feature which involved the following:
+
+* Add and delete bookings from the system
+* Edit existing bookings
+* Ensure that the restaurant does not get overbooked
+
+As the overall team leader, I was responsible for setting clear goals and directions for the team and listening to teammates' feedback for suggestions. I also ensured that the tasks were done on time and complied with the module requirements.
 
 == Summary of contributions
 
-* Code contributed: (insert link)
+* Code contributed: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=lingyanhao&sort=displayName&since=2019-02-10&until=2019-03-25&timeframe=day&reverse=false&repoSort=true[Code]]
 
 * *Major enhancement*: added *booking feature*
-** What it does: allows the user to manage bookings. The system will reject new bookings and suggest better alternative timeslots if the restaurant hits capacity.
-** Justification: When a restaurant needs to manage a large number of bookings, the restaurant can be overbooked.
-** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
-
-* *Minor enhancement*: (insert enchancement)
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+** What it does: allows the user to manage bookings. The system will reject new bookings and suggest better alternative timeslots if the restaurant is full.
+** Justification: When a restaurant needs to manage a large number of bookings, it can be difficult for owners to keep track of how many people are in the restaurant at each point in time. Having a system that rejects new bookings when the restaurant is full can help prevent overbooking.
+** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component.
 
 * *Other contributions*:
 
-** Project management: (todo)
+** Project management:
+*** Setup organisation/team repo
+*** Setup Travis CI, Appveyor and Coveralls
 
 == Contributions to the User Guide
 

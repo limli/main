@@ -234,6 +234,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::addfeature[]
+
 === Add Feature
 
 The add feature allows the user to add items to the `RestaurantBook`.
@@ -249,10 +251,6 @@ The `AddMemberCommand` class adds the member to the `RestaurantBook` by utilisin
 The state of the `RestaurantBook` is then saved via the `Model#commitRestaurantBook` method exposed by the `Model` interface, which saves the `RestaurantBook` using the `VersionedRestaurantBook#commit` method.
 
 For the `AddBooking` command, the list of bookings is sorted after the new booking is added to ensure that bookings are ordered by time.
-
-The following sequence diagram demonstrates how the add feature works.
-
-<insert sequence diagram>
 
 ==== Design Considerations
 
@@ -275,6 +273,8 @@ The following sequence diagram demonstrates how the add feature works.
 * Decision: Alternative 1 was selected for the following reasons:
 ** A greater variety of add commands is more intuitive than a single complex command.
 ** Separating the add commands allows for greater versatility in customising the various add commands.
+
+// end::addfeature[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -355,7 +355,9 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
 // tag::ds[]
+
 === Data structure for holding records
 
 Following the AB4 structure, the `RestaurantBook` (originally `AddressBook`) class serves as the main database, holding information of all records in the system. However, the database system required is more complicated than the one in AB4- there are four different kinds of records that need to be stored. The main operations are still largely CRUD (create, read, update, delete) in nature which are very similarly done. However, there are some differences between the types of records:
@@ -396,13 +398,18 @@ We created the interface `Item` to represent a record. A `UniqueItemList` was us
 
 === The `editMember` command
 
-When a `Member` details (`Name`, `Phone`, or `Email`) is changed, the `Booking` object must reflect the change. This requires an internal modification to the `Booking` list.
+When a `Member` details (`Name`, `Phone`, or `Email`) is changed, the `Booking` object must reflect the change. This requires an internal modification to the `Booking` objects in some way.
 
 ==== Current implementation
 
-When `RestaurantBook#setMember()` is called, the bookings are replaced with a new set of bookings, in a way such that any `Booking` containing the modified member will be replaced with another `Booking` object that correctly reflects the modified customer.
+When `RestaurantBook#setMember()` is called, the bookings are replaced with a new set of bookings. If an existing booking contains the modified member, the member will be replaced with a new `Booking` object that containing the updated member.
 
-(Insert sequence diagram)
+==== Proposed implementation
+
+Each member is assigned an ID. Along with this, maintain a master list of ID to `Member` mappings. The `Booking` class only keep tracks of the `Member` s id, calling the `MasterMemberList` to obtain the `Member` object when necessary. The following (simplified) class diagram demonstrates the associations between `Booking`, `MasterMemberList` and `Member`:
+
+.A class diagram showing the proposed implementation of managing the `Booking` and `Member` dependencies. This diagram is heavily simplified as unrelated methods and attributes are not shown.
+image::editmemberclassdiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -414,11 +421,11 @@ When `RestaurantBook#setMember()` is called, the bookings are replaced with a ne
 ** Pros: This eases the load on the `RestaurantBook` class and does not require special treatment. It is also more efficient as no additional work is done.
 ** Cons: The current `undo` and `redo` commands rely on the immutabilty of the `Member` class to work correctly. Doing so may require a huge change in implementation of `undo` and `redo` commands. Also, allowing mutable variables can potentially be a source of other bugs.
 
-* **Alternative 3:** Assign each `Member` an ID and store the mapping from ID to `Member`. Instead of storing the full details of the `Member`, the `Booking` object simply stores the `ID` of the member that made the booking. When an update occurs, we simply need to update the ID to `Member` map.
-** Pros: Provides both lookup efficiency as well as immutability of the `Member` objects.
-** Cons: Uses additional data structure to store the mappings, potentially making the code more difficult to maintain.
+* **Alternative 3 (proposed) :** Assign each `Member` an ID and store the mapping from ID to `Member`. Instead of storing the full details of the `Member`, the `Booking` object simply stores the `ID` of the member that made the booking. When an update occurs, we simply need to update the ID to `Member` map.
+** Pros: The `RestaurantBook#setMember()` method does not depend on the `Booking` class, reducing coupling and dependency. The execution of the `editMember` command only changes `Member` objects without changing `Booking` objects.
+** Cons: Uses additional data structure to store the mappings and requires significantly more code changes.
 
-* Decision: Alternative 1 was adopted as we felt that it was the simplest way to implement the feature. The additional efficiency gained may not even be significant, considering that in simple GUI apps like this, updating the UI is often the part of the program that uses the most resources. Optimizing the backend operations may not actually lead to a significant performance improvement.
+* Decision: Alternative 1 was adopted as we felt that it was the simplest way to implement the feature, requiring minimal code changes to the existing codebase. However, we feel that alternative 3 is a better implementation but did not adopt it due to time constraints.
 // end::editcmd[]
 
 // tag::delete[]
@@ -499,13 +506,86 @@ In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngre
 
 // end::delete[]
 
-=== The `stats` command
+// tag::shifts[]
 
-When the `stats` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
+=== Shifts feature
+
+The shifts feature allows users to maintain shift rosters for staff members, as well as
+
+==== Current Implementation
+
+The shifts feature comprises of two main commands: the `addshift` command and the `deleteshift` command.
+The `addshift` command allows shifts to be added to the shift roster of a staff member, and the `deleteshift` command allows shifts to be deleted from the shift roster of a staff member.
+The shifts feature is supported by two models, the `Shift` model and the `ShiftRoster` model. The `Shift` model represents a single shift that takes place during a single interval of time, while the `ShiftRoster` model stores an immutable, sorted list of shifts for a single staff member.
+The following seqeuence diagram shows how the `addshift` command works.
+
+image::AddShiftSequenceDiagram.png[width="700"]
+
+==== Design Considerations
+
+===== Aspect: Implementation of the shift roster
+
+* **Alternative 1 (current choice):** Store a weekly shift roster for each staff member, which stores a list of sorted shifts.
+** Pros:
+*** Enables the possibility of storing shifts for staff members who work multiple shifts.
+** Cons:
+*** Must ensure that there are no clashes between any two shifts in a single shift roster.
+
+* **Alternative 2:** Each staff member can only have one shift over a single interval of time.
+** Pros:
+*** Easy to implement.
+** Cons:
+*** Impossible to represent all the shifts for staff members that work for more than one shift.
+
+** Decision: Alternative 1 was adopted as it provides greater versatility, and it is likely for a single staff member to work different shifts on multiple days in a week.
+
+===== Aspect: Implementation of the time range of shifts
+
+* **Alternative 1 (current choice):** Represent weekly shifts by storing the start day and time as well as the end day and time in a date range, where the start day and end day are different.
+** Pros:
+*** Enables to possibility of storing shifts across multiple days.
+*** Greater certainty as to exactly when a shift starts and ends.
+*** Allows validation checks by ensuring that shifts are of positive duration.
+** Cons:
+*** Tedious to check if two shifts clash in the shift roster.
+
+* **Alternative 2:** Represent weekly shifts by storing only the start day, start time and end time. If the end time is before the start time, then it is assumed that the shift ends on the next day.
+** Pros:
+*** Easy to implement.
+*** Easy to check if two shifts clash in the shift roster.
+** Cons:
+*** Impossible to provide validation checks as there are no invalid shifts.
+*** Implicit assumption that the shift ends on the following day if the end time is earlier than the start time may be confusing for users.
+
+** Decision: Alternative 1 was adopted as it allows shifts to be more flexible, and provides greater certainty for the time intervals of the shifts.
+
+===== Aspect: Implementation of the `deleteShift` command
+
+* **Alternative 1 (current choice):** Requiring the user to specify the exact start day and time as well as the end day and time of the shift to be deleted.
+** Pros:
+*** Provides greater certainty for the shift that is to be deleted as shifts are not indexed.
+*** Requiring the user to key in the exact shift to be deleted acts as a form of confirmation for the deletion.
+** Cons:
+*** Causes the command to be long winded and hard to type.
+
+* ** Alternative 2:** Requiring the user to specify the index of the shift to be deleted.
+** Pros:
+*** Reduces the number of parameters in the `deleteShift` command, thus making the command easier to type.
+** Cons:
+*** As the shifts are not indexed, the user may delete the incorrect shift by mistake.
+
+* Decision: Alternative 1 was adopted as it is more reliable and provides certainty for which shift is to be deleted.
+
+// end::shifts[]
+
+// tag::stats[]
+=== The `statsdays` command
+
+When the `statsdays` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
 
 ==== Current implementation
 
-When the user enters the `stats` command, `RestaurantBookParser` calls the `Statistics` class. The Statistics class fetches the relevant data for user display (ie what are the axes, values, and legends of the bar chart). It would then call the `StatsWindow` class which handles the UI. The bar chart will appear in a new window and does not affect the current window.
+When the user enters the `statsdays` command, `RestaurantBookParser` calls the `Statistics` class. The Statistics class fetches the relevant data for user display (ie what are the axes, values, and legends of the bar chart). It would then call the `StatsWindow` class which handles the UI. The bar chart will appear in a new window and does not affect the current window.
 
 ==== Design Considerations
 
@@ -533,6 +613,9 @@ When the user enters the `stats` command, `RestaurantBookParser` calls the `Stat
 
 * Decision: Alternative 1 was adopted as it is an easier implementation. Implementing the `stats` window as a static window that will not change would not affect the other parts of the app, and there is no need to hide and show the current screen. Moreover, the user might want to view the statistics together with the database, which is only possible with multiple windows.
 
+// end::stats[]
+
+// tag::panelui[]
 === The panel UI for `Member`, `Staff`, `Booking`, and `Ingredient`
 
 The restaurant book displays the entire database in the form of "cards", which is the same as AB4. Each item has its own panel.
@@ -566,6 +649,8 @@ The panel is formatted in the `ItemListPanel.fxml` file, and each item has its o
 ** Cons: Need to duplicate common elements that all the item panels share.
 
 * Decision: Alternative 1 was adopted. Currently, the only difference between the panels is the header (implemented via a `label`) which contains the name of the item type. This only affects a single label, which is easy to edit via code. Hence, sharing the fxml file reduces the code duplication. If the display of the panels were to be modified in the future, say to add more padding or to change the size, only one fxml file needs to be modified.
+// end::panelui[]
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -835,6 +920,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 
 [appendix]
+
+// tag::usecases[]
 == Use Cases
 
 (For all use cases below, the *System* is the `RestaurantBook` and the *Actor* is the `user`, unless specified otherwise)
@@ -894,11 +981,11 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Find member
+=== Use case: List members
 
 *MSS*
 
-1.  User requests to find members and gives a list of words
+1.  User requests to list members and gives a list of words
 2.  RestaurantBook shows a list of members whose name contains any of the words given
 +
 Use case ends.
@@ -909,7 +996,7 @@ Use case ends.
 * 1a. The list of words given is empty
 +
 [none]
-** 3a1. RestaurantBook shows an error message.
+** 3a1. RestaurantBook lists all members instead.
 +
 Use case resumes at step 1.
 
@@ -1022,6 +1109,7 @@ Use case ends.
 Use case resumes at step 2.
 
 _{More to be added}_
+// end::usecases[]
 
 [appendix]
 == Non Functional Requirements
@@ -1033,7 +1121,6 @@ _{More to be added}_
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Should be able to retain and recover restaurant records in the event of a program crash or forced shut-down.
 .  Should still work even without internet access.
-
 
 [appendix]
 == Glossary
