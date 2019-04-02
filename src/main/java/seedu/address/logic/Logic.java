@@ -11,8 +11,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 
 /**
  * API of the Logic component
@@ -42,6 +43,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of ingredients */
     ObservableList<Ingredient> getFilteredIngredientList();
+
+    /** Returns an unmodifiable view of the filtered list of ingredients */
+    ObservableList<Recipe> getFilteredRecipeList();
 
     /** Returns an unmodifiable view of the filtered list of staff */
     ObservableList<Staff> getFilteredStaffList();
@@ -92,6 +96,14 @@ public interface Logic {
     ReadOnlyProperty<Ingredient> selectedIngredientProperty();
 
     /**
+     * Selected recipe in the filtered recipe list.
+     * null if no recipe is selected.
+     *
+     * @see seedu.address.model.Model#selectedRecipeProperty()
+     */
+    ReadOnlyProperty<Recipe> selectedRecipeProperty();
+
+    /**
      * Selected staff in the filtered staff list.
      * null if no staff is selected.
      *
@@ -119,6 +131,13 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedIngredient(Ingredient)
      */
     void setSelectedIngredient(Ingredient ingredient);
+
+    /**
+     * Sets the selected recipe in the filtered recipe list.
+     *
+     * @see seedu.address.model.Model#setSelectedRecipe(Recipe)
+     */
+    void setSelectedRecipe(Recipe recipe);
 
     /**
      * Sets the selected staff in the filtered staff list.

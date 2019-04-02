@@ -17,8 +17,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.model.person.staff.Staff;
+import seedu.address.model.recipe.Recipe;
 import seedu.address.storage.Storage;
 
 /**
@@ -90,6 +91,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Recipe> getFilteredRecipeList() {
+        return model.getFilteredRecipeList();
+    }
+
+    @Override
     public ObservableList<Staff> getFilteredStaffList() {
         return model.getFilteredStaffList();
     }
@@ -130,6 +136,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ReadOnlyProperty<Recipe> selectedRecipeProperty() {
+        return model.selectedRecipeProperty();
+    }
+
+    @Override
     public ReadOnlyProperty<Staff> selectedStaffProperty() {
         return model.selectedStaffProperty();
     }
@@ -147,6 +158,11 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedIngredient(Ingredient ingredient) {
         model.setSelectedIngredient(ingredient);
+    }
+
+    @Override
+    public void setSelectedRecipe(Recipe recipe) {
+        model.setSelectedRecipe(recipe);
     }
 
     @Override

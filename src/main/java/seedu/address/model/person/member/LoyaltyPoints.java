@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.member;
 
 /**
  * Represents a Member's points in the restaurant book.

@@ -25,7 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.MemberBuilder;
 

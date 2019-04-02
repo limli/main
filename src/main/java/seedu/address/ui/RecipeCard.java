@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.member.Member;
+import seedu.address.model.recipe.Recipe;
 
 /**
- * An UI component that displays information of a {@code Member}.
+ * An UI component that displays information of a {@code Recipe}.
  */
-public class MemberCard extends UiPart<Region> {
+public class RecipeCard extends UiPart<Region> {
 
-    private static final String FXML = "MemberListCard.fxml";
+    private static final String FXML = "RecipeListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -21,7 +21,7 @@ public class MemberCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on RestaurantBook level 4</a>
      */
 
-    public final Member member;
+    public final Recipe recipe;
 
     @FXML
     private HBox cardPane;
@@ -30,22 +30,14 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private Label points;
+    private Label ingredients;
 
-    public MemberCard(Member member, int displayedIndex) {
+    public RecipeCard(Recipe recipe, int displayedIndex) {
         super(FXML);
-        this.member = member;
+        this.recipe = recipe;
         id.setText(displayedIndex + ". ");
-        name.setText(member.getName().fullName);
-        phone.setText(member.getPhone().value);
-        email.setText(member.getEmail().value);
-        points.setText(Integer.toString(member.getLoyaltyPoints().value));
+        name.setText(recipe.getRecipeName().getName());
+        ingredients.setText(recipe.getRecipeIngredientSet().toString());
     }
 
     @Override
@@ -56,13 +48,13 @@ public class MemberCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MemberCard)) {
+        if (!(other instanceof RecipeCard)) {
             return false;
         }
 
         // state check
-        MemberCard card = (MemberCard) other;
+        RecipeCard card = (RecipeCard) other;
         return id.getText().equals(card.id.getText())
-                && member.equals(card.member);
+                && recipe.equals(card.recipe);
     }
 }

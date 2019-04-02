@@ -34,8 +34,8 @@ public class Recipe implements Item {
      *
      */
     public Recipe editIngredientSet(Ingredient target, Ingredient editedIngredient) {
-        IngredientQuantity quantity = ingredientsInRecipe.getIngredientSet().remove(target);
-        ingredientsInRecipe.getIngredientSet().put(editedIngredient, quantity);
+        IngredientQuantity quantity = ingredientsInRecipe.getIngredientMap().remove(target);
+        ingredientsInRecipe.getIngredientMap().put(editedIngredient, quantity);
         return new Recipe(recipeName, ingredientsInRecipe);
     }
 
