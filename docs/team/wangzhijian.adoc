@@ -21,7 +21,7 @@ REstaurant Manager (REM) is a desktop application that turns your restaurant int
 ** Highlights: This feature required handling of time ranges for the implementation of the weekly staff shift rosters, which was tricky to implement as care must be taken to handle overnight shifts and shifts across days. It also required an immutable shift roster, which required significant changes to the code.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=zj-cs2103&sort=displayName&since=2019-02-10&until=2019-04-02&timeframe=day&reverse=false&repoSort=true[Link]
 
 * *Other contributions*:
 
