@@ -474,6 +474,8 @@ Deletes the booking with index 3.
 
 // end::booking[]
 
+// tag::staff[]
+
 === Staff Management
 
 ==== Add Staff: `addStaff`
@@ -523,6 +525,8 @@ Format: `setShift s/STAFF_INDEX ts/TIME_START te/TIME_END`
 Example:
 
 * `setShift s/1 ts/2019-02-23 09:30 ts/2019-02-23 17:30`
+
+// end::staff[]
 
 // tag::stats[]
 === Statistics
