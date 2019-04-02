@@ -12,6 +12,7 @@
 This portfolio serves to illustrate my contributions to the project REstaurant Manager (REM). REM is a CS2103T project meant for new developers to gain a hands-on experience at software engineering. REM is a desktop application meant for restaurant owners to manage their members, staff, bookings and food inventory.
 
 As a developer, I was primarily in charged of the booking feature which involved the following:
+
 * Add and delete bookings from the system
 * Edit existing bookings
 * Ensure that the restaurant does not get overbooked
