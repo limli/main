@@ -37,6 +37,7 @@ REstaurant Manager (REM) is a desktop application that turns your restaurant int
 |===
 
 include::../UserGuide.adoc[tag=stats]
+
 include::../UserGuide.adoc[tag=member]
 
 == Contributions to the Developer Guide
@@ -46,4 +47,7 @@ include::../UserGuide.adoc[tag=member]
 |===
 
 include::../DeveloperGuide.adoc[tag=stats]
+
+include::../DeveloperGuide.adoc[tag=panelui]
+
 include::../DeveloperGuide.adoc[tag=usecases]

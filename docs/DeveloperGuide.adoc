@@ -536,6 +536,7 @@ When the user enters the `statsdays` command, `RestaurantBookParser` calls the `
 
 // end::stats[]
 
+// tag::panelui[]
 === The panel UI for `Member`, `Staff`, `Booking`, and `Ingredient`
 
 The restaurant book displays the entire database in the form of "cards", which is the same as AB4. Each item has its own panel.
@@ -569,6 +570,8 @@ The panel is formatted in the `ItemListPanel.fxml` file, and each item has its o
 ** Cons: Need to duplicate common elements that all the item panels share.
 
 * Decision: Alternative 1 was adopted. Currently, the only difference between the panels is the header (implemented via a `label`) which contains the name of the item type. This only affects a single label, which is easy to edit via code. Hence, sharing the fxml file reduces the code duplication. If the display of the panels were to be modified in the future, say to add more padding or to change the size, only one fxml file needs to be modified.
+// end::panelui[]
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
