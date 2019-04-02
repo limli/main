@@ -355,7 +355,9 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
 // tag::ds[]
+
 === Data structure for holding records
 
 Following the AB4 structure, the `RestaurantBook` (originally `AddressBook`) class serves as the main database, holding information of all records in the system. However, the database system required is more complicated than the one in AB4- there are four different kinds of records that need to be stored. The main operations are still largely CRUD (create, read, update, delete) in nature which are very similarly done. However, there are some differences between the types of records:
@@ -396,13 +398,18 @@ We created the interface `Item` to represent a record. A `UniqueItemList` was us
 
 === The `editMember` command
 
-When a `Member` details (`Name`, `Phone`, or `Email`) is changed, the `Booking` object must reflect the change. This requires an internal modification to the `Booking` list.
+When a `Member` details (`Name`, `Phone`, or `Email`) is changed, the `Booking` object must reflect the change. This requires an internal modification to the `Booking` objects in some way.
 
 ==== Current implementation
 
-When `RestaurantBook#setMember()` is called, the bookings are replaced with a new set of bookings, in a way such that any `Booking` containing the modified member will be replaced with another `Booking` object that correctly reflects the modified customer.
+When `RestaurantBook#setMember()` is called, the bookings are replaced with a new set of bookings. If an existing booking contains the modified member, the member will be replaced with a new `Booking` object that containing the updated member.
 
-(Insert sequence diagram)
+==== Proposed implementation
+
+Each member is assigned an ID. Along with this, maintain a master list of ID to `Member` mappings. The `Booking` class only keep tracks of the `Member` s id, calling the `MasterMemberList` to obtain the `Member` object when necessary. The following (simplified) class diagram demonstrates the associations between `Booking`, `MasterMemberList` and `Member`:
+
+.A class diagram showing the proposed implementation of managing the `Booking` and `Member` dependencies. This diagram is heavily simplified as unrelated methods and attributes are not shown.
+image::editmemberclassdiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -414,11 +421,11 @@ When `RestaurantBook#setMember()` is called, the bookings are replaced with a ne
 ** Pros: This eases the load on the `RestaurantBook` class and does not require special treatment. It is also more efficient as no additional work is done.
 ** Cons: The current `undo` and `redo` commands rely on the immutabilty of the `Member` class to work correctly. Doing so may require a huge change in implementation of `undo` and `redo` commands. Also, allowing mutable variables can potentially be a source of other bugs.
 
-* **Alternative 3:** Assign each `Member` an ID and store the mapping from ID to `Member`. Instead of storing the full details of the `Member`, the `Booking` object simply stores the `ID` of the member that made the booking. When an update occurs, we simply need to update the ID to `Member` map.
-** Pros: Provides both lookup efficiency as well as immutability of the `Member` objects.
-** Cons: Uses additional data structure to store the mappings, potentially making the code more difficult to maintain.
+* **Alternative 3 (proposed) :** Assign each `Member` an ID and store the mapping from ID to `Member`. Instead of storing the full details of the `Member`, the `Booking` object simply stores the `ID` of the member that made the booking. When an update occurs, we simply need to update the ID to `Member` map.
+** Pros: The `RestaurantBook#setMember()` method does not depend on the `Booking` class, reducing coupling and dependency. The execution of the `editMember` command only changes `Member` objects without changing `Booking` objects.
+** Cons: Uses additional data structure to store the mappings and requires significantly more code changes.
 
-* Decision: Alternative 1 was adopted as we felt that it was the simplest way to implement the feature. The additional efficiency gained may not even be significant, considering that in simple GUI apps like this, updating the UI is often the part of the program that uses the most resources. Optimizing the backend operations may not actually lead to a significant performance improvement.
+* Decision: Alternative 1 was adopted as we felt that it was the simplest way to implement the feature, requiring minimal code changes to the existing codebase. However, we feel that alternative 3 is a better implementation but did not adopt it due to time constraints.
 // end::editcmd[]
 
 === Delete Feature
