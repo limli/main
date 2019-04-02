@@ -234,6 +234,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::addfeature[]
+
 === Add Feature
 
 The add feature allows the user to add items to the `RestaurantBook`.
@@ -249,10 +251,6 @@ The `AddMemberCommand` class adds the member to the `RestaurantBook` by utilisin
 The state of the `RestaurantBook` is then saved via the `Model#commitRestaurantBook` method exposed by the `Model` interface, which saves the `RestaurantBook` using the `VersionedRestaurantBook#commit` method.
 
 For the `AddBooking` command, the list of bookings is sorted after the new booking is added to ensure that bookings are ordered by time.
-
-The following sequence diagram demonstrates how the add feature works.
-
-<insert sequence diagram>
 
 ==== Design Considerations
 
@@ -275,6 +273,8 @@ The following sequence diagram demonstrates how the add feature works.
 * Decision: Alternative 1 was selected for the following reasons:
 ** A greater variety of add commands is more intuitive than a single complex command.
 ** Separating the add commands allows for greater versatility in customising the various add commands.
+
+// end::addfeature[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -505,6 +505,78 @@ In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngre
 * Decision: Alternative 1 was adopted as it is an easier implementation and it makes it more convenient for the user to delete a record. It is intuitive that if a deleteMember or deleteIngredient command is called and these objects cease to exist in the restaurant book, the corresponding Booking or Recipe containing these objects should also cease to exist. To deal with the possibility that the member or ingredient is accidentally deleted, and all referenced bookings and recipes is unintentionally deleted, an additional field in the delete command can be added as a confirmation that these records should be deleted.
 
 // end::delete[]
+
+// tag::shifts[]
+
+=== Shifts feature
+
+The shifts feature allows users to maintain shift rosters for staff members, as well as
+
+==== Current Implementation
+
+The shifts feature comprises of two main commands: the `addshift` command and the `deleteshift` command.
+The `addshift` command allows shifts to be added to the shift roster of a staff member, and the `deleteshift` command allows shifts to be deleted from the shift roster of a staff member.
+The shifts feature is supported by two models, the `Shift` model and the `ShiftRoster` model. The `Shift` model represents a single shift that takes place during a single interval of time, while the `ShiftRoster` model stores an immutable, sorted list of shifts for a single staff member.
+The following seqeuence diagram shows how the `addshift` command works.
+
+image::AddShiftSequenceDiagram.png[width="700"]
+
+==== Design Considerations
+
+===== Aspect: Implementation of the shift roster
+
+* **Alternative 1 (current choice):** Store a weekly shift roster for each staff member, which stores a list of sorted shifts.
+** Pros:
+*** Enables the possibility of storing shifts for staff members who work multiple shifts.
+** Cons:
+*** Must ensure that there are no clashes between any two shifts in a single shift roster.
+
+* **Alternative 2:** Each staff member can only have one shift over a single interval of time.
+** Pros:
+*** Easy to implement.
+** Cons:
+*** Impossible to represent all the shifts for staff members that work for more than one shift.
+
+** Decision: Alternative 1 was adopted as it provides greater versatility, and it is likely for a single staff member to work different shifts on multiple days in a week.
+
+===== Aspect: Implementation of the time range of shifts
+
+* **Alternative 1 (current choice):** Represent weekly shifts by storing the start day and time as well as the end day and time in a date range, where the start day and end day are different.
+** Pros:
+*** Enables to possibility of storing shifts across multiple days.
+*** Greater certainty as to exactly when a shift starts and ends.
+*** Allows validation checks by ensuring that shifts are of positive duration.
+** Cons:
+*** Tedious to check if two shifts clash in the shift roster.
+
+* **Alternative 2:** Represent weekly shifts by storing only the start day, start time and end time. If the end time is before the start time, then it is assumed that the shift ends on the next day.
+** Pros:
+*** Easy to implement.
+*** Easy to check if two shifts clash in the shift roster.
+** Cons:
+*** Impossible to provide validation checks as there are no invalid shifts.
+*** Implicit assumption that the shift ends on the following day if the end time is earlier than the start time may be confusing for users.
+
+** Decision: Alternative 1 was adopted as it allows shifts to be more flexible, and provides greater certainty for the time intervals of the shifts.
+
+===== Aspect: Implementation of the `deleteShift` command
+
+* **Alternative 1 (current choice):** Requiring the user to specify the exact start day and time as well as the end day and time of the shift to be deleted.
+** Pros:
+*** Provides greater certainty for the shift that is to be deleted as shifts are not indexed.
+*** Requiring the user to key in the exact shift to be deleted acts as a form of confirmation for the deletion.
+** Cons:
+*** Causes the command to be long winded and hard to type.
+
+* ** Alternative 2:** Requiring the user to specify the index of the shift to be deleted.
+** Pros:
+*** Reduces the number of parameters in the `deleteShift` command, thus making the command easier to type.
+** Cons:
+*** As the shifts are not indexed, the user may delete the incorrect shift by mistake.
+
+* Decision: Alternative 1 was adopted as it is more reliable and provides certainty for which shift is to be deleted.
+
+// end::shifts[]
 
 // tag::stats[]
 === The `statsdays` command

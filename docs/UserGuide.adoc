@@ -474,6 +474,8 @@ Deletes the booking with index 3.
 
 // end::booking[]
 
+// tag::staff[]
+
 === Staff Management
 
 ==== Add Staff: `addStaff`
@@ -553,6 +555,8 @@ Example:
 * `deleteshift 1 sd/TUESDAY ts/08:00 ed/TUESDAY te/10:30`
 
 Deletes the shift from 8am to 10.30am every Tuesday from the roster of the staff member with index 1 shown in the most recent listing.
+
+// end::staff[]
 
 // tag::stats[]
 === Statistics
