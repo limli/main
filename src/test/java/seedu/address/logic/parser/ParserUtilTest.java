@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
 import seedu.address.model.ingredient.IngredientName;
@@ -23,9 +22,9 @@ import seedu.address.model.ingredient.IngredientQuantity;
 import seedu.address.model.ingredient.IngredientUnit;
 import seedu.address.model.ingredient.IngredientWarningAmount;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.member.LoyaltyPoints;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.member.LoyaltyPoints;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {

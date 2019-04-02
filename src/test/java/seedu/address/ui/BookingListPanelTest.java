@@ -19,10 +19,10 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.member.LoyaltyPoints;
-import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.member.LoyaltyPoints;
+import seedu.address.model.person.member.Member;
 import seedu.address.testutil.TypicalBookings;
 
 public class BookingListPanelTest extends GuiUnitTest {

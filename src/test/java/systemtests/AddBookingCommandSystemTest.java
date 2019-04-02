@@ -27,8 +27,8 @@ import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
 import seedu.address.model.booking.Capacity;
-import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.member.Member;
 import seedu.address.testutil.BookingUtil;
 
 public class AddBookingCommandSystemTest extends RestaurantBookSystemTest {

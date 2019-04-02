@@ -2,10 +2,10 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.member.LoyaltyPoints;
-import seedu.address.model.person.member.Member;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.member.LoyaltyPoints;
+import seedu.address.model.person.member.Member;
 
 /**
  * A utility class to help with building EditMemberDescriptor objects.
