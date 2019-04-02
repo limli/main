@@ -28,7 +28,7 @@ REstaurant Manager (REM) is a desktop application that turns your restaurant int
 ** Project management:
 
 *** Managed the release for https://github.com/cs2103-ay1819S2-w11-2/main/releases/tag/v1.2[v1.2].
-*** Wrote tests to improve coverage (Pull requests https://github.com/cs2103-ay1819S2-w11-2/main/pull/52[#52], https://github.com/cs2103-ay1819S2-w11-2/main/pull/58[#58], https://github.com/cs2103-ay1819S2-w11-2/main/pull/88[#88], https://github.com/cs2103-ay1819S2-w11-2/main/pull/99[#99], https://github.com/cs2103-ay1819S2-w11-2/main/pull/131[#131], https://github.com/cs2103-ay1819S2-w11-2/main/pull/135[#135],
+*** Wrote tests to improve coverage (Pull requests https://github.com/cs2103-ay1819S2-w11-2/main/pull/52[#52], https://github.com/cs2103-ay1819S2-w11-2/main/pull/58[#58], https://github.com/cs2103-ay1819S2-w11-2/main/pull/88[#88], https://github.com/cs2103-ay1819S2-w11-2/main/pull/99[#99], https://github.com/cs2103-ay1819S2-w11-2/main/pull/131[#131], https://github.com/cs2103-ay1819S2-w11-2/main/pull/135[#135]
 
 == Contributions to the User Guide
 
