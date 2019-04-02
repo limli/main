@@ -17,6 +17,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.UniqueItemList;
 import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.exceptions.ItemNotFoundException;
+import seedu.address.model.person.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
 public class UniqueMemberListTest {

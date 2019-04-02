@@ -499,13 +499,14 @@ In other words, when RestaurantBook#deleteMember() or RestaurantBook#deleteIngre
 
 // end::delete[]
 
-=== The `stats` command
+// tag::stats[]
+=== The `statsdays` command
 
-When the `stats` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
+When the `statsdays` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
 
 ==== Current implementation
 
-When the user enters the `stats` command, `RestaurantBookParser` calls the `Statistics` class. The Statistics class fetches the relevant data for user display (ie what are the axes, values, and legends of the bar chart). It would then call the `StatsWindow` class which handles the UI. The bar chart will appear in a new window and does not affect the current window.
+When the user enters the `statsdays` command, `RestaurantBookParser` calls the `Statistics` class. The Statistics class fetches the relevant data for user display (ie what are the axes, values, and legends of the bar chart). It would then call the `StatsWindow` class which handles the UI. The bar chart will appear in a new window and does not affect the current window.
 
 ==== Design Considerations
 
@@ -533,6 +534,9 @@ When the user enters the `stats` command, `RestaurantBookParser` calls the `Stat
 
 * Decision: Alternative 1 was adopted as it is an easier implementation. Implementing the `stats` window as a static window that will not change would not affect the other parts of the app, and there is no need to hide and show the current screen. Moreover, the user might want to view the statistics together with the database, which is only possible with multiple windows.
 
+// end::stats[]
+
+// tag::panelui[]
 === The panel UI for `Member`, `Staff`, `Booking`, and `Ingredient`
 
 The restaurant book displays the entire database in the form of "cards", which is the same as AB4. Each item has its own panel.
@@ -566,6 +570,8 @@ The panel is formatted in the `ItemListPanel.fxml` file, and each item has its o
 ** Cons: Need to duplicate common elements that all the item panels share.
 
 * Decision: Alternative 1 was adopted. Currently, the only difference between the panels is the header (implemented via a `label`) which contains the name of the item type. This only affects a single label, which is easy to edit via code. Hence, sharing the fxml file reduces the code duplication. If the display of the panels were to be modified in the future, say to add more padding or to change the size, only one fxml file needs to be modified.
+// end::panelui[]
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -835,6 +841,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 
 [appendix]
+
+// tag::usecases[]
 == Use Cases
 
 (For all use cases below, the *System* is the `RestaurantBook` and the *Actor* is the `user`, unless specified otherwise)
@@ -894,11 +902,11 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Find member
+=== Use case: List members
 
 *MSS*
 
-1.  User requests to find members and gives a list of words
+1.  User requests to list members and gives a list of words
 2.  RestaurantBook shows a list of members whose name contains any of the words given
 +
 Use case ends.
@@ -909,7 +917,7 @@ Use case ends.
 * 1a. The list of words given is empty
 +
 [none]
-** 3a1. RestaurantBook shows an error message.
+** 3a1. RestaurantBook lists all members instead.
 +
 Use case resumes at step 1.
 
@@ -1022,6 +1030,7 @@ Use case ends.
 Use case resumes at step 2.
 
 _{More to be added}_
+// end::usecases[]
 
 [appendix]
 == Non Functional Requirements
@@ -1033,7 +1042,6 @@ _{More to be added}_
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Should be able to retain and recover restaurant records in the event of a program crash or forced shut-down.
 .  Should still work even without internet access.
-
 
 [appendix]
 == Glossary

@@ -2,7 +2,7 @@ package guitests.guihandles;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * Provides a handle to a member card in the member list panel.

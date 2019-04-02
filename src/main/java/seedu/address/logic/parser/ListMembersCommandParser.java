@@ -10,7 +10,7 @@ import java.util.List;
 
 import seedu.address.logic.commands.ListMembersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameAndLoyaltyPointsPredicate;
+import seedu.address.model.person.member.NameAndLoyaltyPointsPredicate;
 
 /**
  * Parses input arguments and creates a new ListMembersCommand object

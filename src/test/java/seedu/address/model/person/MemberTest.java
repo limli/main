@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.person.member.Member;
 import seedu.address.testutil.MemberBuilder;
 
 public class MemberTest {

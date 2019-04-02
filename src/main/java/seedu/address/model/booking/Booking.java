@@ -3,7 +3,7 @@ package seedu.address.model.booking;
 import java.time.LocalDateTime;
 
 import seedu.address.model.Item;
-import seedu.address.model.person.Member;
+import seedu.address.model.person.member.Member;
 
 /**
  * A class to represent restaurant bookings.
