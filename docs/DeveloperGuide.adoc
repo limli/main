@@ -252,10 +252,6 @@ The state of the `RestaurantBook` is then saved via the `Model#commitRestaurantB
 
 For the `AddBooking` command, the list of bookings is sorted after the new booking is added to ensure that bookings are ordered by time.
 
-The following sequence diagram demonstrates how the add feature works.
-
-<insert sequence diagram>
-
 ==== Design Considerations
 
 **Aspect: Implementation of the four add commands**
@@ -514,6 +510,9 @@ The shifts feature allows users to maintain shift rosters for staff members, as 
 The shifts feature comprises of two main commands: the `addshift` command and the `deleteshift` command.
 The `addshift` command allows shifts to be added to the shift roster of a staff member, and the `deleteshift` command allows shifts to be deleted from the shift roster of a staff member.
 The shifts feature is supported by two models, the `Shift` model and the `ShiftRoster` model. The `Shift` model represents a single shift that takes place during a single interval of time, while the `ShiftRoster` model stores an immutable, sorted list of shifts for a single staff member.
+The following seqeuence diagram shows how the `addshift` command works.
+
+image::AddShiftSequenceDiagram.png[width="700"]
 
 ==== Design Considerations
 
