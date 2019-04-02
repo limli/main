@@ -234,6 +234,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::addfeature[]
+
 === Add Feature
 
 The add feature allows the user to add items to the `RestaurantBook`.
@@ -275,6 +277,8 @@ The following sequence diagram demonstrates how the add feature works.
 * Decision: Alternative 1 was selected for the following reasons:
 ** A greater variety of add commands is more intuitive than a single complex command.
 ** Separating the add commands allows for greater versatility in customising the various add commands.
+
+// end::addfeature[]
 
 // tag::undoredo[]
 === Undo/Redo feature

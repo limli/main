@@ -45,6 +45,5 @@ include::../UserGuide.adoc[tag=staff]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=model]
-include::../DeveloperGuide.adoc[tag=ds]
-include::../DeveloperGuide.adoc[tag=editcmd]
+include::../DeveloperGuide.adoc[tag=addfeature]
+include::../DeveloperGuide.adoc[tag=shifts]
