@@ -2,6 +2,7 @@ package seedu.address.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOYALTY_POINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -23,11 +24,13 @@ public class AddMemberCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL\n"
+            + PREFIX_EMAIL + "EMAIL "
+            + "[" + PREFIX_LOYALTY_POINTS + "LOYALTY_POINTS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com ";
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_LOYALTY_POINTS + "12 ";
 
     public static final String MESSAGE_SUCCESS = "New member added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the restaurant book";

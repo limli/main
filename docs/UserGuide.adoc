@@ -166,7 +166,7 @@ Deletes the 2nd member in the restaurant book.
 
 Deletes the 1st member in the results of the listMembers command.
 
-==== Edit Booking: `editMember`
+==== Edit Member: `editMember`
 Edits an existing member in the restaurant book.
 
 Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
