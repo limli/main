@@ -1,0 +1,50 @@
+= Wang Zhi Jian - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: REstaurant Manager
+
+---
+
+== Overview
+
+REstaurant Manager (REM) is a desktop application that turns your restaurant into a smart restaurant. It is meant for restaurant owners to manage their member base, staff, bookings and food inventory.
+
+== Summary of contributions
+
+* Code contributed: (insert link)
+
+* *Major enhancement*: added *staff feature*
+** What it does: allows the user to manage the staff working in a restaurant. Users can also manage the shift roster of the staff working in a restaurant, and to know which staff members are active in the restaurant at the current time.
+** Justification: A restaurant needs to know the number and type of staff working in the restaurant, as well as when each staff member is active, so that it knows if there is sufficient staff to serve customers at any time, and also make manpower and hiring decisions.
+** Highlights: This feature required handling of time ranges for the implementation of the weekly staff shift rosters, which was tricky to implement as care must be taken to handle overnight shifts and shifts across days. It also required an immutable shift roster, which required significant changes to the code.
+** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+
+* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Other contributions*:
+
+** Project management:
+
+*** Managed the release for https://github.com/cs2103-ay1819S2-w11-2/main/releases/tag/v1.2[v1.2].
+*** Wrote tests to improve coverage (Pull requests https://github.com/cs2103-ay1819S2-w11-2/main/pull/52[#52], https://github.com/cs2103-ay1819S2-w11-2/main/pull/58[#58], https://github.com/cs2103-ay1819S2-w11-2/main/pull/88[#88], https://github.com/cs2103-ay1819S2-w11-2/main/pull/99[#99], https://github.com/cs2103-ay1819S2-w11-2/main/pull/131[#131], https://github.com/cs2103-ay1819S2-w11-2/main/pull/135[#135],
+
+== Contributions to the User Guide
+
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+include::../UserGuide.adoc[tag=booking]
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+include::../DeveloperGuide.adoc[tag=model]
+include::../DeveloperGuide.adoc[tag=ds]
+include::../DeveloperGuide.adoc[tag=editcmd]

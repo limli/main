@@ -22,7 +22,7 @@ Working on: booking management feature
 
 === Wang Zhi Jian
 image::zj-cs2103.png[width="150", align="left"]
-{empty}[http://github.com/zj-cs2103[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/zj-cs2103[github]] [<<wangzhijian#, portfolio>>]
 
 Role: Testing +
 Responsibilities: Integration, in charge of Logic component +
@@ -42,7 +42,7 @@ Working on: customer management feature, statistics feature
 
 === Ren Ying
 image::hiyingnn.png[width="150", align="left"]
-{empty}[http://github.com/hiyingnn[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/hiyingnn[github]] [<<renying#, portfolio>>]
 
 Role: Documentation +
 Responsibilities: In charge of Storage component +
