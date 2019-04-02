@@ -69,6 +69,15 @@ public class ShiftRoster {
         return new ShiftRoster(newShiftRoster);
     }
 
+    /**
+     * Returns true if the specified shift exists in the roster.
+     *
+     * @param shift The shift to check.
+     */
+    public boolean containsShift(Shift shift) {
+        return shifts.contains(shift);
+    }
+
     public List<Shift> getShifts() {
         return shifts;
     }
@@ -94,7 +103,7 @@ public class ShiftRoster {
     public String toString() {
         String output = "";
         for (Shift shift : shifts) {
-            output += shift + "; ";
+            output += shift + "\n";
         }
         return output;
     }
