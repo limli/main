@@ -272,6 +272,11 @@ public class ModelManager implements Model {
         return versionedRestaurantBook.canUpdateCapacity(newCapacity);
     }
 
+    @Override
+    public int countBookings(Member member) {
+        return versionedRestaurantBook.countBookings(member);
+    }
+
     //=========== Filtered Member List Accessors =============================================================
 
     /**

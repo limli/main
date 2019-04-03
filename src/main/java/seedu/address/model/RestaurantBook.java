@@ -384,6 +384,14 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         }
     }
 
+    /**
+     * Counts the number of bookings associated with {@code member}
+     */
+    public int countBookings(Member member) {
+        Predicate<Booking> hasGivenMember = (bookingToCheck -> bookingToCheck.getCustomer().equals(member));
+        return (int) bookings.asUnmodifiableObservableList().stream().filter(hasGivenMember).count();
+    }
+
     public boolean canUpdateCapacity(Capacity newCapacity) {
         return newCapacity.canAccommodate(bookings.asUnmodifiableObservableList());
     }
