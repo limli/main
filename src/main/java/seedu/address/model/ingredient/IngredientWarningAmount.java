@@ -42,10 +42,14 @@ public class IngredientWarningAmount {
 
     @Override
     public boolean equals(Object other) {
-        boolean isitEquals = other == this // short circuit if same object
-            || (other instanceof IngredientWarningAmount// instanceof handles nulls
-            && ingredientWarningAmount == ((IngredientWarningAmount) other).getWarningAmount()); // state check
-        return isitEquals;
+        return other == this // short circuit if same object
+                || (other instanceof IngredientWarningAmount// instanceof handles nulls
+                && ingredientWarningAmount == ((IngredientWarningAmount) other).getWarningAmount()); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(ingredientWarningAmount).hashCode();
     }
 
     @Override

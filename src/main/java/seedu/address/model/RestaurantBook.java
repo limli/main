@@ -282,13 +282,9 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public void setIngredient(Ingredient target, Ingredient editedIngredient) {
         ingredients.setItem(target, editedIngredient);
         ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
-        Predicate<Recipe> recipeContainsTarget =
-            r -> r.getRecipeIngredientSet().getIngredientMap()
-                        .keySet().stream().anyMatch(ingred -> ingred.equals(target));
         Function<Recipe, Recipe>
-                updateRecipe = r -> r.editIngredientSet(target, editedIngredient);
-        setRecipes(recipeObservableList.stream().filter(recipeContainsTarget)
-                .map(updateRecipe).collect(Collectors.toList()));
+                updateRecipe = r -> (r.containsIngredient(target) ? r.editIngredientSet(target, editedIngredient) : r);
+        setRecipes(recipeObservableList.stream().map(updateRecipe).collect(Collectors.toList()));
         indicateModified();
     }
 

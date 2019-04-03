@@ -55,6 +55,11 @@ public class IngredientUnit {
     }
 
     @Override
+    public int hashCode() {
+        return ingredientUnit.hashCode();
+    }
+
+    @Override
     public String toString() {
         return ingredientUnit;
     }
