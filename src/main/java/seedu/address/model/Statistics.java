@@ -5,8 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -44,7 +44,7 @@ public class Statistics {
     }
 
     private int getDaysDifference(LocalDate start, LocalDate end) {
-        return Period.between(start, end).getDays();
+        return (int)ChronoUnit.DAYS.between(start, end);
     }
 
     /**
