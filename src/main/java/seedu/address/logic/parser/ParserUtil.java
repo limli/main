@@ -265,6 +265,9 @@ public class ParserUtil {
     public static LocalTime parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
+        if (time.length() != 5) {
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+        }
         try {
             return LocalTime.parse(trimmedTime);
         } catch (IllegalArgumentException e) {

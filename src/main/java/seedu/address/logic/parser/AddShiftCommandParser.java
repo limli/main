@@ -31,6 +31,11 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
                         PREFIX_START_TIME, PREFIX_END_TIME);
 
+        if (!argMultimap.arePrefixesPresent(PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
+                PREFIX_START_TIME, PREFIX_END_TIME) || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
+        }
+
         Index index;
 
         try {
