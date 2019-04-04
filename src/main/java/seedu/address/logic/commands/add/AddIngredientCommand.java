@@ -30,7 +30,7 @@ public class AddIngredientCommand extends Command {
             + PREFIX_INGREDIENT_NAME + "cheese "
             + PREFIX_INGREDIENT_UNIT + "pounds "
             + PREFIX_INGREDIENT_QUANTITY + "8 "
-            + PREFIX_INGREDIENT_WARNINGAMOUNT + "WARNING_AMOUNT";
+            + PREFIX_INGREDIENT_WARNINGAMOUNT + "3";
 
     public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
     public static final String MESSAGE_DUPLICATE = "This ingredient already exists in the book";

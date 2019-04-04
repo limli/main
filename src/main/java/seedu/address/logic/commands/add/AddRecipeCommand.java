@@ -27,6 +27,7 @@ public class AddRecipeCommand extends Command {
             + PREFIX_RECIPE_NAME + "RECIPE_NAME "
             + PREFIX_RECIPE_INGREDIENT_AND_QUANTITY + "INGREDIENT_INDEX&RESPECTIVE_QUANTITY\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_RECIPE_NAME + "cheese sandwich "
             + PREFIX_RECIPE_INGREDIENT_AND_QUANTITY + "1&4";
 
     public static final String MESSAGE_SUCCESS = "New recipe added: %1$s";
