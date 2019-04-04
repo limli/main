@@ -68,113 +68,113 @@ public class RestaurantBookParser {
         switch (commandWord) {
 
         case AddMemberCommand.COMMAND_WORD:
-        case AddMemberCommand.COMMAND_ALIAS:
+            //case AddMemberCommand.COMMAND_ALIAS:
             return new AddMemberCommandParser().parse(arguments);
 
         case AddBookingCommand.COMMAND_WORD:
-        case AddBookingCommand.COMMAND_ALIAS:
+            //case AddBookingCommand.COMMAND_ALIAS:
             return new AddBookingCommandParser().parse(arguments);
 
         case AddIngredientCommand.COMMAND_WORD:
-        case AddIngredientCommand.COMMAND_ALIAS:
+            //case AddIngredientCommand.COMMAND_ALIAS:
             return new AddIngredientCommandParser().parse(arguments);
 
         case AddRecipeCommand.COMMAND_WORD:
-        case AddRecipeCommand.COMMAND_ALIAS:
+            //case AddRecipeCommand.COMMAND_ALIAS:
             return new AddRecipeCommandParser().parse(arguments);
 
         case AddStaffCommand.COMMAND_WORD:
-        case AddStaffCommand.COMMAND_ALIAS:
+            //case AddStaffCommand.COMMAND_ALIAS:
             return new AddStaffCommandParser().parse(arguments);
 
         case AddShiftCommand.COMMAND_WORD:
-        case AddShiftCommand.COMMAND_ALIAS:
+            //case AddShiftCommand.COMMAND_ALIAS:
             return new AddShiftCommandParser().parse(arguments);
 
         case UpdateCapacityCommand.COMMAND_WORD:
             return new UpdateCapacityCommandParser().parse(arguments);
 
         case EditMemberCommand.COMMAND_WORD:
-        case EditMemberCommand.COMMAND_ALIAS:
+            // case EditMemberCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case EditBookingCommand.COMMAND_WORD:
-        case EditBookingCommand.COMMAND_ALIAS:
+            // case EditBookingCommand.COMMAND_ALIAS:
             return new EditBookingCommandParser().parse(arguments);
 
         case EditStaffCommand.COMMAND_WORD:
-        case EditStaffCommand.COMMAND_ALIAS:
+            // case EditStaffCommand.COMMAND_ALIAS:
             return new EditStaffCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS:
-            return new SelectCommandParser().parse(arguments);
+        // case SelectCommand.COMMAND_WORD:
+            // case SelectCommand.COMMAND_ALIAS:
+            // return new SelectCommandParser().parse(arguments);
 
         case DeleteMemberCommand.COMMAND_WORD:
-        case DeleteMemberCommand.COMMAND_ALIAS:
+            // case DeleteMemberCommand.COMMAND_ALIAS:
             return new DeleteMemberCommandParser().parse(arguments);
 
         case DeleteBookingCommand.COMMAND_WORD:
-        case DeleteBookingCommand.COMMAND_ALIAS:
+            // case DeleteBookingCommand.COMMAND_ALIAS:
             return new DeleteBookingCommandParser().parse(arguments);
 
         case DeleteIngredientCommand.COMMAND_WORD:
-        case DeleteIngredientCommand.COMMAND_ALIAS:
+            // case DeleteIngredientCommand.COMMAND_ALIAS:
             return new DeleteIngredientCommandParser().parse(arguments);
 
         case DeleteRecipeCommand.COMMAND_WORD:
-        case DeleteRecipeCommand.COMMAND_ALIAS:
+            // case DeleteRecipeCommand.COMMAND_ALIAS:
             return new DeleteRecipeCommandParser().parse(arguments);
 
         case DeleteStaffCommand.COMMAND_WORD:
-        case DeleteStaffCommand.COMMAND_ALIAS:
+            // case DeleteStaffCommand.COMMAND_ALIAS:
             return new DeleteStaffCommandParser().parse(arguments);
 
         case DeleteShiftCommand.COMMAND_WORD:
-        case DeleteShiftCommand.COMMAND_ALIAS:
+            // case DeleteShiftCommand.COMMAND_ALIAS:
             return new DeleteShiftCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-        case ClearCommand.COMMAND_ALIAS:
-            return new ClearCommand();
+        // case ClearCommand.COMMAND_WORD:
+            // case ClearCommand.COMMAND_ALIAS:
+            // return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS:
-            return new FindCommandParser().parse(arguments);
+        // case FindCommand.COMMAND_WORD:
+            // case FindCommand.COMMAND_ALIAS:
+            // return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS:
-            return new ListCommand();
+        // case ListCommand.COMMAND_WORD:
+            // case ListCommand.COMMAND_ALIAS:
+            // return new ListCommand();
 
         case ListMembersCommand.COMMAND_WORD:
             return new ListMembersCommandParser().parse(arguments);
 
-        case HistoryCommand.COMMAND_WORD:
-        case HistoryCommand.COMMAND_ALIAS:
-            return new HistoryCommand();
+        // case HistoryCommand.COMMAND_WORD:
+            // case HistoryCommand.COMMAND_ALIAS:
+            // return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
-        case ExitCommand.COMMAND_ALIAS:
+            // case ExitCommand.COMMAND_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-        case HelpCommand.COMMAND_ALIAS:
+            // case HelpCommand.COMMAND_ALIAS:
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
-        case UndoCommand.COMMAND_ALIAS:
+            // case UndoCommand.COMMAND_ALIAS:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
-        case RedoCommand.COMMAND_ALIAS:
+            // case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
 
         case RestockIngredientCommand.COMMAND_WORD:
-        case RestockIngredientCommand.COMMAND_ALIAS:
+            // case RestockIngredientCommand.COMMAND_ALIAS:
             return new RestockIngredientCommandParser().parse(arguments);
 
         case ConsumeIngredientCommand.COMMAND_WORD:
-        case ConsumeIngredientCommand.COMMAND_ALIAS:
+            // case ConsumeIngredientCommand.COMMAND_ALIAS:
             return new ConsumeIngredientCommandParser().parse(arguments);
 
         case ListIngredientsCommand.COMMAND_WORD:
