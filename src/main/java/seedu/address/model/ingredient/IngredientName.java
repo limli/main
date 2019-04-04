@@ -44,6 +44,10 @@ public class IngredientName {
                 && ingredientName.equals(((IngredientName) other).getName())); // state check
     }
 
+    @Override
+    public int hashCode() {
+        return ingredientName.hashCode();
+    }
 
     @Override
     public String toString() {

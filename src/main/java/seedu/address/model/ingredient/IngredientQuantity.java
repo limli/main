@@ -47,6 +47,11 @@ public class IngredientQuantity {
     }
 
     @Override
+    public int hashCode() {
+        return Integer.valueOf(ingredientQuantity).hashCode();
+    }
+
+    @Override
     public String toString() {
         return Integer.toString(ingredientQuantity);
     }

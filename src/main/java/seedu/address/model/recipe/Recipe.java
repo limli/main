@@ -2,6 +2,7 @@ package seedu.address.model.recipe;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Map;
 import java.util.Objects;
 
 import seedu.address.model.Item;
@@ -9,9 +10,9 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientQuantity;
 
 /**
- *  A class to represent a recipe.
- *  The recipe has a recipeName, as well as a set of ingredients in the recipe.
- *  The set of ingredients must not be empty.
+ * A class to represent a recipe.
+ * The recipe has a recipeName, as well as a set of ingredients in the recipe.
+ * The set of ingredients must not be empty.
  */
 
 public class Recipe implements Item {
@@ -31,12 +32,18 @@ public class Recipe implements Item {
 
     /**
      * Updates the set of ingredients due to a change in ingredients.
-     *
      */
     public Recipe editIngredientSet(Ingredient target, Ingredient editedIngredient) {
-        IngredientQuantity quantity = ingredientsInRecipe.getIngredientMap().remove(target);
-        ingredientsInRecipe.getIngredientMap().put(editedIngredient, quantity);
-        return new Recipe(recipeName, ingredientsInRecipe);
+        IngredientQuantity quantityInRecipe = ingredientsInRecipe.getIngredientMap().get(target);
+        Map<Ingredient, IngredientQuantity> ingredientSetToEdit = ingredientsInRecipe.getIngredientMap();
+        ingredientSetToEdit.remove(target);
+        ingredientSetToEdit.put(editedIngredient, quantityInRecipe);
+        RecipeIngredientSet newIngredientSetInRecipe = new RecipeIngredientSet(ingredientSetToEdit);
+        return new Recipe(recipeName, newIngredientSetInRecipe);
+    }
+
+    public boolean containsIngredient(Ingredient target) {
+        return ingredientsInRecipe.getIngredientMap().containsKey(target);
     }
 
 
@@ -82,7 +89,8 @@ public class Recipe implements Item {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Recipe: ")
-                .append(getRecipeName());
+                .append(getRecipeName())
+                .append(getRecipeIngredientSet());
         return builder.toString();
     }
 }
