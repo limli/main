@@ -22,7 +22,7 @@ public class AddRecipeCommand extends Command {
     public static final String COMMAND_WORD = "addrecipe";
     public static final String COMMAND_ALIAS = "ar";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds recipe to the book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds recipe to the book.\n"
             + "Parameters: "
             + PREFIX_RECIPE_NAME + "RECIPE_NAME "
             + PREFIX_RECIPE_INGREDIENT_AND_QUANTITY + "INGREDIENT_INDEX&RESPECTIVE_QUANTITY\n"

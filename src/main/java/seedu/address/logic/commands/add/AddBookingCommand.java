@@ -25,7 +25,7 @@ public class AddBookingCommand extends Command {
     public static final String COMMAND_WORD = "addbooking"; // make sure that this is in lower case
     public static final String COMMAND_ALIAS = "ab";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking to the restaurant."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a booking to the restaurant. \n"
             + "Parameters: "
             + PREFIX_CUSTOMER + "CUSTOMER "
             + PREFIX_START_TIME + "START_TIME "
