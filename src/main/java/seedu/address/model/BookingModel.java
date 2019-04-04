@@ -6,6 +6,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
+import seedu.address.model.person.member.Member;
 
 /**
  * The API that stores the booking side of the model.
@@ -86,7 +87,12 @@ public interface BookingModel {
     void setCapacity(Capacity newCapacity);
 
     /**
-     * Returns true if and only if changing the capacity to {@code Capacity} will not result in overbooking
+     * Returns true if and only if changing the capacity to {@code newCapacity} will not result in overbooking
      */
     boolean canUpdateCapacity(Capacity newCapacity);
+
+    /**
+     * Counts the number of bookings associated with {@code member}.
+     */
+    int countBookings(Member member);
 }
