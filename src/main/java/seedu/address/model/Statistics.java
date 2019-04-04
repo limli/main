@@ -44,7 +44,7 @@ public class Statistics {
     }
 
     private int getDaysDifference(LocalDate start, LocalDate end) {
-        return (int)ChronoUnit.DAYS.between(start, end);
+        return (int) ChronoUnit.DAYS.between(start, end);
     }
 
     /**
