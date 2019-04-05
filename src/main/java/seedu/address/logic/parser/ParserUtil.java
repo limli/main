@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -265,12 +266,9 @@ public class ParserUtil {
     public static LocalTime parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
-        if (time.length() != 5) {
-            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
-        }
         try {
             return LocalTime.parse(trimmedTime);
-        } catch (IllegalArgumentException e) {
+        } catch (DateTimeParseException e) {
             throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
         }
     }
