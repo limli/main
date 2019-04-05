@@ -32,7 +32,7 @@ public class DeleteShiftCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified shift from the staff identified by the index number used in the "
             + "displayed staff list.\n"
-            + "The shift to be deleted must exist in the specified staff's shift roster."
+            + "The shift to be deleted must exist in the specified staff's shift roster.\n"
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_START_DAY_OF_WEEK + "START_DAY_OF_WEEK "
