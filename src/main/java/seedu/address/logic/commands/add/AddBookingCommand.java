@@ -41,8 +41,8 @@ public class AddBookingCommand extends Command {
     public static final String MESSAGE_DUPLICATE = "Booking has already been made.";
     public static final String MESSAGE_FULL = "Restaurant is full. Suggested alternative time: %1$s";
 
-    public static final String MESSAGE_TOO_MANY_PERSONS = "The restaurant is unable to support a " +
-            "booking of %1$s persons as the current capacity is only %2$s.";
+    public static final String MESSAGE_TOO_MANY_PERSONS = "The restaurant is unable to support a "
+            + "booking of %1$s persons as the current capacity is only %2$s.";
 
     private final CustomerIndexedBooking customerIndexedBooking;
 
