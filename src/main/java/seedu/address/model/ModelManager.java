@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -270,6 +271,11 @@ public class ModelManager implements Model {
     @Override
     public boolean canUpdateCapacity(Capacity newCapacity) {
         return versionedRestaurantBook.canUpdateCapacity(newCapacity);
+    }
+
+    @Override
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
+        return versionedRestaurantBook.suggestNextAvailableTime(toAdd);
     }
 
     @Override

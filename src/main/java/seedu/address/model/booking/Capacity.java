@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Used to ensure that all bookings stays within the capacity of the restaurant.
@@ -80,6 +81,35 @@ public class Capacity {
             }
         }
         return true;
+    }
+
+    /**
+     * Suggests a possible time to accommodate the booking. {@code toAdd} cannot contain more members than the capacity.
+     * @pre toAdd.getNumMembers().getSize() > value
+     * @param toAdd The booking that the user wishes to add
+     * @param existingBookings The current list of bookings.
+     * @return The next available time that the capacity can accommodate
+     */
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd, List<Booking> existingBookings) {
+        if (toAdd.getNumMembers().getSize() > value) {
+            throw new IllegalArgumentException("This booking cannot be accepted.");
+        }
+        List<LocalDateTime> sortedEndingTimes =
+                existingBookings.stream().map(Booking::getEndTime).sorted().collect(Collectors.toList());
+        for (LocalDateTime endTime : sortedEndingTimes) {
+            if (endTime.isAfter(toAdd.getStartTime())) {
+                BookingWindow suggestedBookingWindow = new BookingWindow(endTime);
+                Booking suggestedBooking =
+                        new Booking(suggestedBookingWindow, toAdd.getCustomer(), toAdd.getNumMembers());
+                List<Booking> newBookingList = new ArrayList<>(existingBookings);
+                newBookingList.add(suggestedBooking);
+                if (canAccommodate(newBookingList)) {
+                    return endTime;
+                }
+            }
+        }
+        assert(false);
+        throw new IllegalArgumentException("This booking cannot be accepted.");
     }
 
     /**
