@@ -263,7 +263,7 @@ Adds new ingredient into inventory. Previously not existing in inventory before.
 Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
 
 ****
-• `INGREDIENT_NAME` and `INGREDIENT_UNIT` must contain only alphabets and spaces, and must contain at least 2 alphabets. (i.e, `in/c` is not accepted while `in/ch` is).
+• `INGREDIENT_NAME` and `INGREDIENT_UNIT` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `in/c` is not accepted while `in/ch` is).
 
 • All leading whitespaces for `INGREDIENT_NAME` and `INGREDIENT_UNIT` will be trimmed.
 
@@ -362,11 +362,11 @@ Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 ****
 • The index refers to the index number shown in the most recent listing of ingredients in the ingredients panel.
 
-•`RECIPE_NAME` must contain only alphabets and spaces, and must contain at least 2 alphabets. (i.e, `r/c` is not accepted while `r/ch` is).
+•`RECIPE_NAME` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `r/c` is not accepted while `r/ch` is).
 
 • All leading whitespaces for `RECIPE_NAME` will be trimmed.
 
-• `INGREDIENT_QUANTITY__IN_RECIPE` must be an integer between 1 and 2,147,483,647 inclusive.
+• `INGREDIENT_QUANTITY_IN_RECIPE` must be an integer between 1 and 2,147,483,647 inclusive.
 
 • There should be at least 1 ingredient `iq/INDEX&INGREDIENT_QUANTITY_IN_RECIPE` input.
 
