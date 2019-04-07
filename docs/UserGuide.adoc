@@ -263,7 +263,11 @@ Adds new ingredient into inventory. Previously not existing in inventory before.
 Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
 
 ****
-• If ingredient quantity or warning amount is not specified, they are respectively set to 0.
+• `INGREDIENT_NAME` and `INGREDIENT_UNIT` must contain only alphabets and spaces, and must contain at least 2 alphabets. (i.e, `in/c` is not accepted while `in/ch` is).
+
+• All leading whitespaces for `INGREDIENT_NAME` and `INGREDIENT_UNIT` will be trimmed.
+
+• If INGREDIENT_QUANTITY or INGREDIENT_WARNING_AMOUNT is not specified, they are respectively set to 0.
 
 • User inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
 falls below this stated amount, there is a need for restock of this ingredient.
@@ -316,7 +320,9 @@ Example:
 +
 `restockIngredient i/3 q/10`
 
-Increases the quantity of chickens by 10 in the inventory.
+Increases the quantity of chickens by 10 in the inventory. Assuming that the previous quantity for chicken was 20, the new quantity
+after `restockIngredient i/3 q/10` was called, will be 30.
+
 
 ==== Consume Ingredient: `consumeIngredient`
 
@@ -330,7 +336,8 @@ Example:
 +
 `consumeIngredient i/3 q/10`
 
-Decreases the quantity of chickens by 10 in the inventory.
+Decreases the quantity of chickens by 10 in the inventory. Assuming that the previous quantity for chicken was 20, the new quantity
+                                                          after `consumeIngredient i/3 q/10` was called, will be 10.
 
 
 ==== Add Recipe: `addRecipe`
