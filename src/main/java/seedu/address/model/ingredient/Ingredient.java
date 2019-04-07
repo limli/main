@@ -88,7 +88,7 @@ public class Ingredient implements Item {
                 .append(getIngredientQuantity())
                 .append(" Standard-Unit: ")
                 .append(getIngredientUnit())
-                .append("Warning amount: ")
+                .append(" Warning amount: ")
                 .append(getIngredientWarningAmount());
         return builder.toString();
     }
