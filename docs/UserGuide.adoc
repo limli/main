@@ -267,6 +267,8 @@ Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTI
 
 • All leading whitespaces for `INGREDIENT_NAME` and `INGREDIENT_UNIT` will be trimmed.
 
+• `INGREDIENT_QUANTITY` and `INGREDIENT_WARNING_AMOUNT` must be an integer between 0 and 2,147,483,647 inclusive.
+
 • If INGREDIENT_QUANTITY or INGREDIENT_WARNING_AMOUNT is not specified, they are respectively set to 0.
 
 • User inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
@@ -314,6 +316,10 @@ Previously existing in inventory before.
 
 Format: `restockIngredient i/INDEX q/INGREDIENT_QUANTITY`
 
+****
+• New ingredient quantity after `restockIngredient` command was called, must be an integer with value at most 2,147,483,647.
+****
+
 Example:
 
 * `listIngredients` (returns chicken as 3rd index)
@@ -329,6 +335,13 @@ after `restockIngredient i/3 q/10` was called, will be 30.
 Consume a particular amount of ingredient from inventory, based on specified `INDEX` via `listIngredients`.
 
 Format: `consumeIngredient i/INDEX q/INGREDIENT_QUANTITY`
+
+****
+• Ingredient quantity to be consumed must be at most the ingredient quantity present in the inventory.
+New ingredient quantity after `consumeIngredient` command was called, must be non-negative.
+
+****
+
 
 Example:
 
@@ -348,6 +361,12 @@ Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 
 ****
 • The index refers to the index number shown in the most recent listing of ingredients in the ingredients panel.
+
+•`RECIPE_NAME` must contain only alphabets and spaces, and must contain at least 2 alphabets. (i.e, `r/c` is not accepted while `r/ch` is).
+
+• All leading whitespaces for `RECIPE_NAME` will be trimmed.
+
+• `INGREDIENT_QUANTITY__IN_RECIPE` must be an integer between 1 and 2,147,483,647 inclusive.
 
 • There should be at least 1 ingredient `iq/INDEX&INGREDIENT_QUANTITY_IN_RECIPE` input.
 
