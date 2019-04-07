@@ -17,12 +17,12 @@ import seedu.address.model.ingredient.IngredientQuantity;
 public class RecipeIngredientSet {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Each ingredient and its respective quantity in a recipe should be in the form:"
+            "Each ingredient and its respective quantity in a recipe should be in the form: "
             + "INGREDIENT_INDEX&INGREDIENT_QUANTITY\n"
-            + "Ingredient index should be a non-zero unsigned integer,"
-            + "representing the corresponding ingredient in the ingredient list\n"
-            + IngredientQuantity.MESSAGE_CONSTRAINTS + "\n"
-            + "INGREDIENT_INDEX and INGREDIENT_QUANTITY should be separated by the symbol '&'";
+            + "Ingredient index should be a non-zero unsigned integer, "
+            + "representing the corresponding ingredient in the ingredient list.\n"
+            + "Ingredient quantity should be a non-zero unsigned integer. \n"
+            + "INGREDIENT_INDEX and INGREDIENT_QUANTITY should be separated by the symbol '&'.";
 
     private Map<Ingredient, IngredientQuantity> ingredientMap;
 

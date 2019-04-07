@@ -32,6 +32,8 @@ import seedu.address.model.recipe.RecipeName;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_QUANTITY_IN_RECIPE =
+            "Ingredient quantity in recipe should be a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -191,6 +193,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String quantity} into an {@code IngredientQuantity}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+
+    public static IngredientQuantity parseIngredientQuantityInRecipe(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedIngredientQuantity = quantity.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(quantity)) {
+            throw new ParseException(MESSAGE_INVALID_QUANTITY_IN_RECIPE);
+        }
+        return new IngredientQuantity(Integer.parseInt(trimmedIngredientQuantity));
+    }
+
+    /**
      * Parses a {@code Collection<String> pairs} into an {@code Set<Pair<Index, IngredientQuantity>>}.
      * Each string is split by the '&'.
      * If '&' symbol not present, or there are more than 1 '&' symbols, ParseException is thrown.
@@ -208,11 +224,10 @@ public class ParserUtil {
                     throw new ParseException(RecipeIngredientSet.MESSAGE_CONSTRAINTS);
                 }
                 Index index = parseIndex(ingredValues[0]);
-                IngredientQuantity qty = parseIngredientQuantity(ingredValues[1]);
+                IngredientQuantity qty = parseIngredientQuantityInRecipe(ingredValues[1]);
                 ingredientSet.put(index, qty);
             } catch (ParseException e) {
-                //Parsing index or ingredientQuantity throws parseException
-                throw new ParseException(RecipeIngredientSet.MESSAGE_CONSTRAINTS);
+                throw e;
             }
         }
         return ingredientSet;
