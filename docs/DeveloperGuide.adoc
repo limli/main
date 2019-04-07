@@ -450,7 +450,7 @@ All calculations involving the restaurant capacity is done in the `Capacity` cla
 In this document, we will focus on the implementation of `suggestNextAvailableTime`:
 
 .  The program first check that the input satisfies the preconditions of the method which are required for the method to return a meaningful answer. These are pre-conditions:
-.. The number of persons of the booking cannot exceed the capacity value (if my restaurant can only seat 20 people, I will never be able to make space for a booking of 30). 
+.. The number of persons of the booking cannot exceed the capacity value (if my restaurant can only seat 20 people, I will never be able to make space for a booking of 30).
 .. `existingBookings` must fit within the capacity (if this condition is violated, it is impossible to add a new booking in a way that fits within capacity).
 .  The program then checks if the current booking can be accepted. If yes, the start time of the booking is returned and no further computations needs to be done.
 .  As the final answer must correspond to a customer leaving (the best time for a customer to arrive is when another customer leaves), the set of all end times among the existing bookings are generated and sorted in chronological order. This is the list of all the potential answers.
@@ -1207,8 +1207,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
-
-_{ more test cases ... }_
 
 === Deleting a member
 
