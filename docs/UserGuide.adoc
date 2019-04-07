@@ -435,7 +435,7 @@ Creates a new booking.
 Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
 
 ****
-• All bookings will last for 1 hour.
+• All bookings will last for 1 hour, although the end time is not shown in the UI.
 
 • Customer INDEX refers to the index of the customer as displayed by the list.
 

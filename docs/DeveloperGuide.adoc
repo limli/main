@@ -1208,19 +1208,25 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-=== Deleting a member
+=== Add and delete bookings
+. Add and delete bookings
+.. Prerequisites: List all members using the `listMembers` command. List of members is non-empty.
+.. Test case: `addbooking c/1 n/7 ts/2019-04-07T12:00`
+   Expected: A new booking is added. The name, phone number, booking time as well as number of persons is shown in the Booking column.
+.. Test case: `deletebooking 1`
+   Expected: The booking corresponding to the first index is deleted.
 
-. Deleting a member while all members are listed
-
-.. Prerequisites: List all members using the `listMembers` command. Multiple members in the list.
-.. Test case: `deleteMember 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `deleteMember 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `deleteMember`, `deleteMember x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
-
-_{ more test cases ... }_
+=== Capacity tests for booking feature
+. Test that the capacity constraint is enforced
+.. Prerequeisites: At least 2 members listed using the `listMembers` command. Booking column should be empty (if not, delete the bookings as per previous section). The commands below are to be executed in sequence.
+.. Test case: `updateCapacity 10`
+   Expected: The capacity is successfully updated to 10 with a suitable message shown.
+.. Test case: `addbooking c/1 n/7 ts/2019-04-07T12:00`
+   Expected: The booking is successfully added into the system.
+.. Test case: `addbooking c/2 n/7 ts/2019-04-07T11:30`
+   Expected: The system rejects the booking and instead suggests an alternative timeslot of 2019-04-07T13:00. (Explanation: if this booking is accepted, there will be 7+7=14 customers in the restaurant at 2019-04-07T12:00. This exceeds the capacity of 10 and thus REM rejects the booking. For more details, refer to `addbooking` command in the User Guide.)
+.. Test case: `addbooking c/2 n/7 ts/2019-04-07T10:30`
+   Expected: The booking is successfully added into the system. (Explanation: REM assumes that bookings last for 1 hour. Since this member is expected to leave by 2019-04-07T11:30, the restaurant will be empty at 2019-04-07T12:00. This set of bookings does not cause the capacity of 10 to be exceeded. For more details, refer to `addbooking` command in the User Guide.)
 
 === Saving data
 
