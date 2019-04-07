@@ -11,7 +11,7 @@ import seedu.address.commons.util.StringUtil;
 public class IngredientQuantity {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Ingredient's quantity should be non-negative integer.";
+            "Ingredient's quantity should be non-negative integer, between 0 and 2,147,483,647 inclusive.";
 
     // Identity fields
     private int ingredientQuantity;
