@@ -440,6 +440,12 @@ Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
 • Customer INDEX refers to the index of the customer as displayed by the list.
 
 • Bookings are a privileged feature restricted only to members. REM does not allow non-members to make bookings.
+
+• If the booking is rejected due to capacity constraints, a message will appear suggesting an alternative timeslot. This timeslot is the earliest timeslot after the input date and time that can be accepted. Note that this does not automatically add the booking into REM- a separate `addBooking` command needs to be entered to accept the newly suggested timeslot.
+
+.When the restaurant is full, a message indicating the next available timeslot will be shown. Note that this is only an example and this message will not appear unless the relevant data is loaded.
+image::altbookingtime.png[width="800"]
+
 ****
 
 Example:
