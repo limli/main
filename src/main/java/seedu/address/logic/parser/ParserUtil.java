@@ -33,7 +33,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_QUANTITY_IN_RECIPE =
-            "Ingredient quantity in recipe should be a non-zero unsigned integer.";
+            "Ingredient quantity in recipe should be a non-zero unsigned integer, between 1 and "
+            + Integer.toString(Integer.MAX_VALUE)
+            + " inclusive.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
