@@ -23,11 +23,11 @@ public class RecipeNameTest {
     }
 
     @Test
-    public void testIsValidIngredientName() {
+    public void testIsValidRecipeName() {
         // null recipeName
         Assert.assertThrows(NullPointerException.class, () -> RecipeName.isValidRecipeName(null));
 
-        // invalid ingredientName
+        // invalid recipeName
         assertFalse(RecipeName.isValidRecipeName("")); // empty string
         assertFalse(RecipeName.isValidRecipeName("t")); // one character string
         assertFalse(RecipeName.isValidRecipeName(" ")); // spaces only
