@@ -62,6 +62,7 @@ public class Capacity {
 
     /**
      * Checks if the capacity is sufficient to hold the bookings.
+     * Guarantees that the list {@code bookings} does not change.
      */
     public boolean canAccommodate(List<Booking> bookings) {
         List<Event> events = new ArrayList<>();
@@ -84,30 +85,58 @@ public class Capacity {
     }
 
     /**
+     * Checks if adding the booking {@code} toAdd will result in exceeding the capacity.
+     * Guarantees that the list {@code existingBookings} does not change. In particular, the booking will not be added
+     * regardless of whether the method returns true or false.
+     */
+    public boolean canAddBooking(Booking toAdd, List<Booking> existingBookings) {
+        // make a copy so that the input list is not modified
+        List<Booking> copyExistingBookings = new ArrayList<>(existingBookings);
+        copyExistingBookings.add(toAdd);
+        return canAccommodate(copyExistingBookings);
+    }
+
+    /**
      * Suggests a possible time to accommodate the booking. {@code toAdd} cannot contain more members than the capacity.
-     * @pre toAdd.getNumMembers().getSize() > value
+     * Pre-condition 1: toAdd.getNumMembers().getSize() > value. In other words, the number of persons cannot exceed
+     * the capacity value.
+     * Pre-condition 2: {@code existingBookings} must fit within the capacity (as described by {@code canAccommodate})
      * @param toAdd The booking that the user wishes to add
      * @param existingBookings The current list of bookings.
-     * @return The next available time that the capacity can accommodate
+     * @return The next available time that the restaurant can accommodate the booking, subjected to the constraint
+     * that the returned time must occur after {@code toAdd}. In other words, suggestion always shifts the booking
+     * later and never earlier.
      */
     public LocalDateTime suggestNextAvailableTime(Booking toAdd, List<Booking> existingBookings) {
+        if (!canAccommodate(existingBookings)) {
+            throw new IllegalArgumentException("The current booking list does not fit in the capacity.");
+        }
+
         if (toAdd.getNumMembers().getSize() > value) {
             throw new IllegalArgumentException("This booking cannot be accepted.");
         }
-        List<LocalDateTime> sortedEndingTimes =
+
+        assert(canAccommodate(existingBookings));
+        if (canAddBooking(toAdd, existingBookings)) {
+            return toAdd.getStartTime();
+        }
+
+        // We only need to check the timings which correspond to end time of another booking
+        // The best time for a customer to arrive is when another customer leaves
+        List<LocalDateTime> possibleTimings =
                 existingBookings.stream().map(Booking::getEndTime).sorted().collect(Collectors.toList());
-        for (LocalDateTime endTime : sortedEndingTimes) {
+        for (LocalDateTime endTime : possibleTimings) {
             if (endTime.isAfter(toAdd.getStartTime())) {
                 BookingWindow suggestedBookingWindow = new BookingWindow(endTime);
                 Booking suggestedBooking =
                         new Booking(suggestedBookingWindow, toAdd.getCustomer(), toAdd.getNumMembers());
-                List<Booking> newBookingList = new ArrayList<>(existingBookings);
-                newBookingList.add(suggestedBooking);
-                if (canAccommodate(newBookingList)) {
+                if (canAddBooking(suggestedBooking, existingBookings)) {
                     return endTime;
                 }
             }
         }
+        // as the pre-conditions are checked, it is impossible to loop through all the possible timings without
+        // returning an answer
         assert(false);
         throw new IllegalArgumentException("This booking cannot be accepted.");
     }

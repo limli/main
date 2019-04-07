@@ -392,7 +392,9 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     /**
      * Suggests a possible time to accommodate the booking.
      * @param toAdd The booking that the user wishes to add
-     * @return The next available time that the restaurant can accommodate
+     * @return The next available time that the restaurant can accommodate the booking, subjected to the constraint
+     * that the returned time must occur after {@code toAdd}. In other words, suggestion always shifts the booking
+     * later and never earlier.
      */
     public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
         return capacity.suggestNextAvailableTime(toAdd, bookings.asUnmodifiableObservableList());
