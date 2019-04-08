@@ -66,7 +66,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
     ** e.g. `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER`.
 * Words in UPPER_CASE are the parameters to be supplied by the user.
 * Items in square brackets are optional.
-    ** e.g. `notifySMS [l/LOYALTY_POINTS_MINIMUM]`
+    ** e.g. `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
 * Items with `...` after them can be used multiple times including zero times
     ** e.g. `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 * Parameters can be in any order
@@ -82,6 +82,16 @@ Format: `help`
 Exit the program.
 
 Format: `exit`
+
+==== Clear: `clear`
+Removes all data from REM.
+
+Format: `clear`
+
+==== History: `history`
+Lists commands entered, displayed from most recent to earliest.
+
+Format: `history`
 
 // tag::member[]
 === Member Management
@@ -369,7 +379,7 @@ Example:
 
 Delete recipe at index 3.
 
-==== Recipe Summary `recipeSummary`
+==== Recipe Summary `recipeSummary` `[coming in v2.0]`
 Displays the number of dishes that can be made for each recipe, calculated based on the current inventory
 and the quantity required in each recipe.
 
@@ -645,6 +655,16 @@ Format: `ratingStats`
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Restaurant Book folder.
 
 == Command Summary
+
+=== General
+
+* *help* `help`
+
+* *exit* `exit`
+
+* *clear* `clear`
+
+* *history* `history`
 
 === Member Management
 
