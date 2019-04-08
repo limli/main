@@ -581,7 +581,7 @@ image::AddShiftSequenceDiagram.png[width="700"]
 // tag::stats[]
 === The `statstime` command
 
-When the `statsdtime` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
+When the `statstime` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
 
 ==== Current implementation
 
