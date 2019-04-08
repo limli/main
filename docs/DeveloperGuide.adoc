@@ -590,7 +590,7 @@ When the user enters the `statstime` command, the command will be parsed, and th
 .StatsTime Sequence Diagram
 image::StatsTimeSequenceDiagram.png[width="1000"]
 
-The _Sequence Diagram_ given above shows how the components interact with each other for the scenario where the user issues the command `statstime 10`.
+The _Sequence Diagram_ given above shows how the components interact with each other for the scenario where the user issues the command `statstime 100`.
 
 ==== Design Considerations
 
