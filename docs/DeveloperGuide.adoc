@@ -579,13 +579,18 @@ image::AddShiftSequenceDiagram.png[width="700"]
 // end::shifts[]
 
 // tag::stats[]
-=== The `statsdays` command
+=== The `statstime` command
 
-When the `statsdays` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
+When the `statsdtime` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
 
 ==== Current implementation
 
-When the user enters the `statsdays` command, `RestaurantBookParser` calls the `Statistics` class. The Statistics class fetches the relevant data for user display (ie what are the axes, values, and legends of the bar chart). It would then call the `StatsWindow` class which handles the UI. The bar chart will appear in a new window and does not affect the current window.
+When the user enters the `statstime` command, the command will be parsed, and the `Statistics` class would be called. The Statistics class fetches the relevant data for user display (ie what are the axes, values, and legends of the bar chart). It would then call the `StatsWindow` class which handles the UI. The bar chart will appear in a new window and does not affect the current window.
+
+.StatsTime Sequence Diagram
+image::StatsTimeSequenceDiagram.png[width="1000"]
+
+The _Sequence Diagram_ given above shows how the components interact with each other for the scenario where the user issues the command `statstime 10`.
 
 ==== Design Considerations
 
