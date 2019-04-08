@@ -44,6 +44,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 .  Copy the file to the folder you want to use as the home folder for your Restaurant Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+.The GUI of REM
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -387,8 +388,9 @@ Example:
 . `addingredient in/cheese u/slices q/20`
   `addingredient in/fries u/packets q/10`
   • Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
-  .Successfully adding 2 ingredients into restaurant book
-  image::addRecipe-addIngredientCommand.png[width=1000]
+
+.Successfully adding 2 ingredients into restaurant book
+image::addRecipe-addIngredientCommand.png[width=1000]
 
 
 . `addrecipe r/cheese fries iq/1&1 iq/2&1`
@@ -396,8 +398,9 @@ Example:
     packet of fries is needed.
     • There are 20 slices of cheese for 20 servings of cheese fries, but only 10 packets of fries for 10 servings of cheese fries.
     Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
-      .Successfully adding 1 recipe, displaying the number of servings possible.
-      image::addRecipe-succesful.png[width=1000]
+
+.Successfully adding 1 recipe, displaying the number of servings possible.
+image::addRecipe-successful.png[width=1000]
 
 
 ==== Delete Recipe: `deleteRecipe`
