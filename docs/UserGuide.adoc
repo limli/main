@@ -270,9 +270,9 @@ Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTI
 
 • `INGREDIENT_QUANTITY` and `INGREDIENT_WARNING_AMOUNT` must be an integer between 0 and 2,147,483,647 inclusive.
 
-• If INGREDIENT_QUANTITY or INGREDIENT_WARNING_AMOUNT is not specified, they are respectively set to 0.
+• If `INGREDIENT_QUANTITY` or `INGREDIENT_WARNING_AMOUNT` is not specified, they are respectively set to 0.
 
-• User inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
+• If user inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
 falls below this stated amount, there is a need for restock of this ingredient.
 Calling `listIngredients w/` will display all ingredients that fall below their corresponding warning values.
 ****
@@ -363,7 +363,7 @@ Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 ****
 • The index refers to the index number shown in the most recent listing of ingredients in the ingredients panel.
 
-•`RECIPE_NAME` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `r/c` is not accepted while `r/ch` is).
+• `RECIPE_NAME` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `r/c` is not accepted while `r/ch` is).
 
 • All leading whitespaces for `RECIPE_NAME` will be trimmed.
 
@@ -385,22 +385,41 @@ Example:
 
 (Assuming that the restaurant book is empty.)
 
-. `addingredient in/cheese u/slices q/20`
-  `addingredient in/fries u/packets q/10`
-  • Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
+.first `addingredient in/cheese u/slices q/20`
+   `addingredient in/fries u/packets q/10`
+   * Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
 
+.Successfully adding 2 ingredients into restaurant book
+image::addRecipe-addIngredientCommand.png[width=300]
+
+.    `addrecipe r/cheese fries iq/1&1 iq/2&1`
+     • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
+     packet of fries is needed.
+     • There are 20 slices of cheese for 20 servings of cheese fries, but only 10 packets of fries for 10 servings of cheese fries.
+     Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
++
 .Successfully adding 2 ingredients into restaurant book
 image::addRecipe-addIngredientCommand.png[width=1000]
 
-
-. `addrecipe r/cheese fries iq/1&1 iq/2&1`
+.  `addrecipe r/cheese fries iq/1&1 iq/2&1`
     • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
     packet of fries is needed.
     • There are 20 slices of cheese for 20 servings of cheese fries, but only 10 packets of fries for 10 servings of cheese fries.
     Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
-
++
 .Successfully adding 1 recipe, displaying the number of servings possible.
 image::addRecipe-successful.png[width=1000]
+
+.  `restockingredient i/2 q/10`
+    • Restocks fries by 10 packets, and change in ingredient quantity is reflected in ingredient's panel.
+    • Now, there are 20 slices of cheese for 20 servings of cheese fries, and 20 packets of fries for 20 servings of cheese fries.
+    Overall, there can be 20 servings of cheese fries prepared. Upon success, the recipe panel should look like this, with the reflected
+    change in number of servings of cheese fries:
++
+.Successfully restocking 1 ingredient, displays the new number of servings possible.
+image::addRecipe-restockIngredient.png[width=1000]
+
+
 
 
 ==== Delete Recipe: `deleteRecipe`
