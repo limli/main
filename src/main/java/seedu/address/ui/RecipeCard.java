@@ -21,6 +21,8 @@ public class RecipeCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on RestaurantBook level 4</a>
      */
 
+    private static final String NUMBER_OF_SERVINGS = "Number of servings possible: ";
+
     public final Recipe recipe;
 
     @FXML
@@ -31,6 +33,8 @@ public class RecipeCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label ingredients;
+    @FXML
+    private Label numberOfServings;
 
     public RecipeCard(Recipe recipe, int displayedIndex) {
         super(FXML);
@@ -38,6 +42,8 @@ public class RecipeCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(recipe.getRecipeName().getName());
         ingredients.setText(recipe.getRecipeIngredientSet().toString());
+        numberOfServings.setText(NUMBER_OF_SERVINGS
+                + recipe.getRecipeIngredientSet().getNumberOfServings());
     }
 
     @Override
