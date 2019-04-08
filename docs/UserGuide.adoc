@@ -366,23 +366,39 @@ Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 
 • All leading whitespaces for `RECIPE_NAME` will be trimmed.
 
-• `INGREDIENT_QUANTITY_IN_RECIPE` must be an integer between 1 and 2,147,483,647 inclusive.
+• `INGREDIENT_QUANTITY_IN_RECIPE` must be an integer between 1 and 2,147,483,647 inclusive, and refers to the quantity of
+ingredient required in 1 serving of the recipe.
 
 • There should be at least 1 ingredient `iq/INDEX&INGREDIENT_QUANTITY_IN_RECIPE` input.
 
 • Each ingredient input should have the format `iq/INDEX&NGREDIENT_QUANTITY_IN_RECIPE`
 where ingredient index and quantity of ingredient in recipe is separated by &.
 Both the ingredient index and quantity must be an whole number.
+
+• Upon adding a new recipe, the number of servings of this recipe, according to the current ingredient quantity in inventory, is calculated
+and displayed on the recipe panel. Upon  executing `restockIngredient` or `consumeIngredient`, the number of servings will be
+automatically adjusted and displayed.
 ****
 
 Example:
 
-* `listIngredients`
-(list: chicken - 10 full chickens [indexed 4], rice - 10 bowls [indexed 9])
-+
-`addRecipe r/Chicken Rice iq/4&1 iq/9&3`
+(Assuming that the restaurant book is empty.)
 
-Adds a new recipe, chicken rice, which requires 1 full chicken and 3 bowls of rice.
+. `addingredient in/cheese u/slices q/20`
+  `addingredient in/fries u/packets q/10`
+  • Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
+  .Successfully adding 2 ingredients into restaurant book
+  image::addRecipe-addIngredientCommand.png[width=1000]
+
+
+. `addrecipe r/cheese fries iq/1&1 iq/2&1`
+    • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
+    packet of fries is needed.
+    • There are 20 slices of cheese for 20 servings of cheese fries, but only 10 packets of fries for 10 servings of cheese fries.
+    Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
+      .Successfully adding 1 recipe, displaying the number of servings possible.
+      image::addRecipe-succesful.png[width=1000]
+
 
 ==== Delete Recipe: `deleteRecipe`
 
@@ -401,7 +417,7 @@ Example:
 Delete recipe at index 3.
 
 ==== Recipe Summary `recipeSummary` `[coming in v2.0]`
-Displays the number of dishes that can be made for each recipe, calculated based on the current inventory
+Displays the number of servings that can be made for each recipe, calculated based on the current inventory
 and the quantity required in each recipe.
 
 Format: `recipeSummary`
