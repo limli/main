@@ -383,14 +383,7 @@ automatically adjusted and displayed.
 
 Example:
 
-(Assuming that the restaurant book is empty.)
-
-.first `addingredient in/cheese u/slices q/20`
-   `addingredient in/fries u/packets q/10`
-   * Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
-
-.Successfully adding 2 ingredients into restaurant book
-image::addRecipe-addIngredientCommand.png[width=300]
+(Assuming that at this point, the restaurant book is empty.)
 
 .    `addrecipe r/cheese fries iq/1&1 iq/2&1`
      • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
