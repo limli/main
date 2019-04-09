@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -349,6 +350,18 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         ObservableList<Recipe> recipeObservableList = recipes.asUnmodifiableObservableList();
         setRecipes(recipeObservableList.stream().filter(isValidRecipe).collect(Collectors.toList()));
         indicateModified();
+    }
+
+    /**
+     * Gets the set of recipe names associated to the ingredient
+     */
+    public Set<String> getRecipesAssociated(Ingredient ingredient) {
+        Predicate<Recipe> hasGivenIngredient = (recipe -> recipe.getRecipeIngredientSet()
+                .getIngredientMap().containsKey(ingredient));
+        Set<String> recipesAssociatedSet =
+                recipes.asUnmodifiableObservableList().stream().filter(hasGivenIngredient)
+                        .map(recipe -> recipe.getRecipeName().getName()).collect(Collectors.toSet());
+        return recipesAssociatedSet;
     }
 
     /**

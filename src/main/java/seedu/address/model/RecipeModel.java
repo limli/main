@@ -1,9 +1,11 @@
 package seedu.address.model;
 
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.recipe.Recipe;
 
 /**
@@ -69,4 +71,9 @@ public interface RecipeModel {
      * Sets the selected recipe in the filtered recipe list.
      */
     void setSelectedRecipe(Recipe recipe);
+
+    /**
+     * Gets the set of recipe names associated to the ingredient
+     */
+    Set<String> getRecipesAssociated(Ingredient ingredient);
 }

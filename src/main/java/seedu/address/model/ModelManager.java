@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -175,6 +176,13 @@ public class ModelManager implements Model {
         requireNonNull(target);
         versionedRestaurantBook.removeIngredient(target);
     }
+
+    @Override
+    public Set<String> getRecipesAssociated(Ingredient ingredient) {
+        return versionedRestaurantBook.getRecipesAssociated(ingredient);
+    }
+
+
 
     @Override
     public void deleteRecipe(Recipe target) {
