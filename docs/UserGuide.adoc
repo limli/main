@@ -72,11 +72,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
     ** e.g. `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 * Parameters can be in any order
 ====
-*Date and Time Format*
-
-* All parameters labelled as DATE_TIME should follow the yyyy-MM-ddTHH:mm format, (e.g. `2019-02-23T13:00` means 23 Feb 2019, 1300 hrs). yyyy-MM-ddTHH:mm:SS format is also accepted.
-* For the exact specification of what date and time formats are allowed, please refer to the `LocalDateTime` class in Java.
-* Time without dates are also accepted. In that situation, `HH:mm` (e.g. `13:00`) format should be used and the date is automatically chosen to be the current date at the point of command execution.
 
 === General
 
@@ -88,6 +83,16 @@ Format: `help`
 Exit the program.
 
 Format: `exit`
+
+==== Clear: `clear`
+Removes all data from REM.
+
+Format: `clear`
+
+==== History: `history`
+Lists commands entered, displayed from most recent to earliest.
+
+Format: `history`
 
 // tag::member[]
 === Member Management
@@ -439,6 +444,14 @@ Format: `recipeSummary`
 // tag::booking[]
 === Booking Management
 
+The booking section models booking made by members.
+
+* A booking consists of a member, a start time and an integer representing the number of persons coming to the restaurant.
+* In this section, `TIME` parameters follow the yyyy-MM-ddTHH:mm (e.g. `2019-02-23T13:00` means 23 Feb 2019, 1300 hrs) or HH:mm (e.g. `12:00`) format. If the HH:mm format is used, the date is automatically chosen to be the current date at the point of command execution.
+* For the exact specification of what date and time formats are allowed, please refer to the `LocalDateTime` and `LocalTime` class in Java.
+* In order to ensure that the restaurant does not get overbooked, REM allows you to adjust the restaurant capacity. This capacity indicates the maximum number of customers that can be present in the restaurant at any given time. REM assumes that customers stay in the restaurant for 1 hour before leaving, although the end time is not displayed on screen.
+* REM does not allow non-members to make bookings and every booking must correspond to a single member. If this member is deleted, all bookings made by the member will also be deleted.
+
 ==== List Booking: `listBookings` [Coming in v2.0]
 
 View the current lists of bookings within a certain time frame
@@ -455,31 +468,28 @@ Example:
 
 ==== Update Restaurant Capacity: `updateCapacity`
 
-Update the capacity of the restaurant.
+Want to ensure that your restaurant does not get overbooked? Make sure to update the capacity of the restaurant accordingly.
 
 Format: `updateCapacity NUMBER`
 
-
 ****
 • The default capacity of the restaurant is 200.
-• If the capacity is full, the restaurant will not accept new bookings (refer to <<Create New Booking: `addBooking`, addBooking command >>). If this command causes the number of bookings to exceed the capacity, the `updateCapacity` command will not be executed and an error will be displayed.
+• If the capacity is full, the restaurant will not accept new bookings (refer to <<Create New Booking: `addBooking`, addBooking command >>).
 ****
 
 Example:
 
 * `updateCapacity 50`
 
-This updates the restaurants to cater for a capacity of 50 customers.
+This updates the restaurants to cater for a capacity of 50 customers. If any operation results in having more than 50 customers at any point in time, REM will show an error message indicating that the restaurant is full (unless the `updateCapacity` command is used again).
 
 ==== Add New Booking: `addBooking`
 
 Creates a new booking.
 
-Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/START_TIME`
+Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
 
 ****
-• If the restaurant is full (as determined by the `updateCapacity` command), a message will appear telling the user that the restaurant is fully booked.
-
 • All bookings will last for 1 hour.
 
 • Customer INDEX refers to the index of the customer as displayed by the list.
@@ -496,7 +506,7 @@ Adds a booking for the first customer on the current list, on 23 Feb, at 1430 hr
 ==== Edit Booking: `editBooking`
 Edits a booking by changing either the time, number of persons of both.
 
-Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PEOPLE]`
+Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
 
 ****
 • Edits the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing. REM will not execute this operation if this causes capacity to be exceeded.
@@ -700,6 +710,16 @@ Format: `ratingStats`
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Restaurant Book folder.
 
 == Command Summary
+
+=== General
+
+* *help* `help`
+
+* *exit* `exit`
+
+* *clear* `clear`
+
+* *history* `history`
 
 === Member Management
 

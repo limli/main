@@ -29,11 +29,11 @@ public class EditBookingCommand extends Command {
     public static final String COMMAND_ALIAS = "eb";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the booking identified "
-            + "by the index number used in the displayed booking list. "
+            + "by the index number used in the displayed booking list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_START_TIME + "START_TIME] "
-            + "[" + PREFIX_NUMBER_PERSONS + "NUMBER_OF_PERSONS] "
+            + "[" + PREFIX_NUMBER_PERSONS + "NUMBER_OF_PERSONS]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_START_TIME + "2019-03-17T11:00 "
             + PREFIX_NUMBER_PERSONS + "2"; // TODO: change this message

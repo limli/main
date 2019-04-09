@@ -25,6 +25,7 @@ public class DeleteMemberCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Deleted Member: %1$s";
+    public static final String MESSAGE_BOOKINGS_DELETED = "%1$s booking(s) made by the member was deleted.";
 
     private final Index targetIndex;
 
@@ -42,9 +43,16 @@ public class DeleteMemberCommand extends Command {
         }
 
         Member memberToDelete = lastShownList.get(targetIndex.getZeroBased());
+        int bookingsDeleted = model.countBookings(memberToDelete);
         model.deleteMember(memberToDelete);
         model.commitRestaurantBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete));
+        if (bookingsDeleted == 0) {
+            return new CommandResult(String.format(MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete));
+        } else {
+            String displayMessage = String.format(MESSAGE_DELETE_MEMBER_SUCCESS, memberToDelete) + "\n"
+                    + String.format(MESSAGE_BOOKINGS_DELETED, bookingsDeleted);
+            return new CommandResult(displayMessage);
+        }
     }
 
     @Override

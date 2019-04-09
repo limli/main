@@ -19,12 +19,12 @@ public class ListIngredientsCommand extends Command {
     public static final String COMMAND_WORD = "listingredients";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all ingredients whose names contain any of "
-            + "the specified keywords (case-insensitive) and has quantity less than warning amount"
-            + ", and displays them as a list with index numbers. "
-            + "If fields are not specified, then all ingredients will be listed. "
+            + "the specified keywords (case-insensitive) and has quantity less than warning amount.\n"
+            + "The ingredients found are then displayed as a list with index numbers.\n"
+            + "If fields are not specified, then all ingredients will be listed.\n"
             + "Parameters: ["
             + PREFIX_INGREDIENT_NAME
-            + "INGREDINENT_NAME] [" + PREFIX_INGREDIENT_WARNINGAMOUNT + "]"
+            + "INGREDINENT_NAME] [" + PREFIX_INGREDIENT_WARNINGAMOUNT + "]\n"
             + "Example: " + COMMAND_WORD
             + " " + PREFIX_INGREDIENT_NAME + "tomato"
             + " " + PREFIX_INGREDIENT_WARNINGAMOUNT + " ";

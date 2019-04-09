@@ -25,11 +25,11 @@ public class RestockIngredientCommand extends Command {
     public static final String COMMAND_ALIAS = "ri";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Restocks the quantity of the ingredient identified "
-            + "by the index number used in the displayed ingredient list. "
+            + "by the index number used in the displayed ingredient list.\n"
             + "Input value will be added to existing value.\n"
             + "Parameters: "
             + PREFIX_INDEX + "INDEX "
-            + PREFIX_INGREDIENT_QUANTITY + "QUANTITY "
+            + PREFIX_INGREDIENT_QUANTITY + "QUANTITY\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
             + PREFIX_INGREDIENT_QUANTITY + "10 ";
