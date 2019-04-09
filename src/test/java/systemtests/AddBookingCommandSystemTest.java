@@ -88,7 +88,8 @@ public class AddBookingCommandSystemTest extends RestaurantBookSystemTest {
 
             // Restaurant is has 10 persons, capacity of 13 and should not accept booking of 4
             commandString = BookingUtil.getAddBookingCommand(startTimeString1400, Index.fromOneBased(2), 4);
-            assertCommandFailure(commandString, model, commandHistory, MESSAGE_FULL);
+            String expectedMessage = String.format(MESSAGE_FULL, "2019-02-23T15:00");
+            assertCommandFailure(commandString, model, commandHistory, expectedMessage);
 
             // But the restaurant should be able to accept a booking of 3
             commandString = BookingUtil.getAddBookingCommand(startTimeString1400, Index.fromOneBased(2), 3);

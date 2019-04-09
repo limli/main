@@ -367,7 +367,7 @@ Following the AB4 structure, the `RestaurantBook` (originally `AddressBook`) cla
 
 ==== Current implementation
 
-We created the interface `Item` to represent a record. A `UniqueItemList` was used to handle the bulk of the CRUD logic, much like the way the `UniquePersonList` in the original AB4 was used to handle the CRUD logic. As the `Staff` and `Member` class store common attributes (`Name`, `Phone`, `Email`), an abstract class `Person` was used to capture this. The relation between the types of `Item` is also captured in the class diagram of Figure 8. However, in the `Model` interface, the methods are kept separate (using methods like `addMember`, `addBooking` instead of having a more generic `addItem` method).
+We created the interface `Item` to represent a record. A `UniqueItemList` was used to handle the bulk of the CRUD logic, much like the way the `UniquePersonList` in the original AB4 was used to handle the CRUD logic. As the `Staff` and `Member` class store common attributes (`Name`, `Phone`, `Email`), an abstract class `Person` was used to capture this. However, in the `Model` interface, the methods are kept separate (using methods like `addMember`, `addBooking` instead of having a more generic `addItem` method).
 
 ==== Design Considerations
 
@@ -411,6 +411,11 @@ Each member is assigned an ID. Along with this, maintain a master list of ID to 
 .A class diagram showing the proposed implementation of managing the `Booking` and `Member` dependencies. This diagram is heavily simplified as unrelated methods and attributes are not shown.
 image::editmemberclassdiagram.png[width="800"]
 
+This proposed implementation simplifies the execution of the `editMember` command. The interactions between the various components of the proposed sequence diagram can be represented as follows:
+
+.A sequence diagram showing the proposed implementation of the `editMember` command. For simplicity, we do not show the `Logic` component and we only focus on the `Model` component.
+image::editmembersequencediagram.png[width="800"]
+
 ==== Design Considerations
 
 * **Alternative 1 (current choice):** Manually perform a corresponding change to the `Booking` list whenever the personal details of a member changes.
@@ -428,6 +433,36 @@ image::editmemberclassdiagram.png[width="800"]
 * Decision: Alternative 1 was adopted as we felt that it was the simplest way to implement the feature, requiring minimal code changes to the existing codebase. However, we feel that alternative 3 is a better implementation but did not adopt it due to time constraints.
 // end::editcmd[]
 
+// tag::suggestbooking[]
+
+=== Suggesting alternative booking timeslots
+
+REM does not allow additional bookings to be added into the system if this causes the capacity to be exceeded. Instead of displaying a message saying that the restaurant is full, we want to suggest an alternative timing to the user instead. In order to achieve this, REM calculates the earliest timeslot after the input date and time that can be accepted.
+
+==== Current implementation
+All calculations involving the restaurant capacity is done in the `Capacity` class. In particular, the following related methods are implemented:
+
+* `Capacity#canAccomodate(List<Booking> bookings)` -- Checks if the capacity is sufficient to hold the bookings.
+* `Capacity#canAddBooking(Booking toAdd, List<Booking> existingBookings)` -- Checks if the booking list stays within capacity after adding the booking. Guarantees immutability of `existingBookings`.
+* `Capacity#suggestNextAvailableTime(Booking toAdd, List<Booking> existingBookings)` -- The next available time that the restaurant can accommodate the booking, subjected to the constraint that the returned time must occur after `toAdd`. In other words, suggestion always shifts the booking later and never earlier.
+
+
+In this document, we will focus on the implementation of `suggestNextAvailableTime`:
+
+.  The program first check that the input satisfies the preconditions of the method which are required for the method to return a meaningful answer. These are pre-conditions:
+.. The number of persons of the booking cannot exceed the capacity value (if my restaurant can only seat 20 people, I will never be able to make space for a booking of 30).
+.. `existingBookings` must fit within the capacity (if this condition is violated, it is impossible to add a new booking in a way that fits within capacity).
+.  The program then checks if the current booking can be accepted. If yes, the start time of the booking is returned and no further computations needs to be done.
+.  As the final answer must correspond to a customer leaving (the best time for a customer to arrive is when another customer leaves), the set of all end times among the existing bookings are generated and sorted in chronological order. This is the list of all the potential answers.
+.  For each possible answer, these two conditions are checked:
+.. The returned time must be later than the start time of the incoming booking.
+.. The incoming booking `toAdd` must fit within the capacity (as determined by `canAddBooking` method) after the time is modified accordingly.
+. If both conditions pass, the end time of the booking is successfully returned. The pre-conditions in Step 1 ensures that at least one of the end times is valid. Since the list is sorted, only the earliest one will be returned (i.e. it is impossible to run through the loop without returning an answer).
+The current implementation can be described by the following activity diagram:
+
+image::suggesttimeslot.png[width='800']
+
+// end::suggestbooking[]
 // tag::delete[]
 === Delete Feature
 
@@ -1178,21 +1213,25 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Add and delete bookings
+. Add and delete bookings
+.. Prerequisites: List all members using the `listMembers` command. List of members is non-empty.
+.. Test case: `addbooking c/1 n/7 ts/2019-04-07T12:00`
+   Expected: A new booking is added. The name, phone number, booking time as well as number of persons is shown in the Booking column.
+.. Test case: `deletebooking 1`
+   Expected: The booking corresponding to the first index is deleted.
 
-=== Deleting a member
-
-. Deleting a member while all members are listed
-
-.. Prerequisites: List all members using the `listMembers` command. Multiple members in the list.
-.. Test case: `deleteMember 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `deleteMember 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `deleteMember`, `deleteMember x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
-
-_{ more test cases ... }_
+=== Capacity tests for booking feature
+. Test that the capacity constraint is enforced
+.. Prerequeisites: At least 2 members listed using the `listMembers` command. Booking column should be empty (if not, delete the bookings as per previous section). The commands below are to be executed in sequence.
+.. Test case: `updateCapacity 10`
+   Expected: The capacity is successfully updated to 10 with a suitable message shown.
+.. Test case: `addbooking c/1 n/7 ts/2019-04-07T12:00`
+   Expected: The booking is successfully added into the system.
+.. Test case: `addbooking c/2 n/7 ts/2019-04-07T11:30`
+   Expected: The system rejects the booking and instead suggests an alternative timeslot of 2019-04-07T13:00. (Explanation: if this booking is accepted, there will be 7+7=14 customers in the restaurant at 2019-04-07T12:00. This exceeds the capacity of 10 and thus REM rejects the booking. For more details, refer to `addbooking` command in the User Guide.)
+.. Test case: `addbooking c/2 n/7 ts/2019-04-07T10:30`
+   Expected: The booking is successfully added into the system. (Explanation: REM assumes that bookings last for 1 hour. Since this member is expected to leave by 2019-04-07T11:30, the restaurant will be empty at 2019-04-07T12:00. This set of bookings does not cause the capacity of 10 to be exceeded. For more details, refer to `addbooking` command in the User Guide.)
 
 === Saving data
 
