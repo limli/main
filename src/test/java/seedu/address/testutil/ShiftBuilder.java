@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.person.staff.Shift;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+
+import seedu.address.model.person.staff.Shift;
 
 /**
  * A utility class to help with building Shift objects.
