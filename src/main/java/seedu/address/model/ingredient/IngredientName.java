@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class IngredientName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Ingredient's name should only contain alphabets and spaces, and it should not be blank.";
+            "Ingredient's name should only contain alphabets and spaces, with at least 2 characters of the alphabet. ";
 
     public static final String VALIDATION_REGEX_INGREDIENTNAME = "[a-zA-Z][a-zA-Z ]+";
 

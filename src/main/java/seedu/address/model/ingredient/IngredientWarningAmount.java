@@ -10,7 +10,9 @@ import seedu.address.commons.util.StringUtil;
 public class IngredientWarningAmount {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Ingredient's warning amount should be non-negative integer.";
+            "Ingredient's warning amount should be non-negative integer, between 0 and "
+            + Integer.toString(Integer.MAX_VALUE)
+                    + " inclusive.";
 
     // Identity fields
     private int ingredientWarningAmount;
