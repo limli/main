@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.BookingSize;
 
 /**
  * A command that adds a booking to the restaurant book.
@@ -37,7 +39,10 @@ public class AddBookingCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New booking added: %1$s";
     public static final String MESSAGE_DUPLICATE = "Booking has already been made.";
-    public static final String MESSAGE_FULL = "Restaurant is full. Please find another time slot.";
+    public static final String MESSAGE_FULL = "Restaurant is full. Suggested alternative time: %1$s";
+
+    public static final String MESSAGE_TOO_MANY_PERSONS = "The restaurant is unable to support a "
+            + "booking of %1$s persons as the current capacity is only %2$s.";
 
     private final CustomerIndexedBooking customerIndexedBooking;
 
@@ -50,15 +55,20 @@ public class AddBookingCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         Optional<Booking> toAddOptional = customerIndexedBooking.getBooking(model);
+        BookingSize bookingSize = customerIndexedBooking.getNumMembers();
         if (!toAddOptional.isPresent()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        } else if (bookingSize.getSize() > model.getCapacity().getValue()) {
+            throw new CommandException(String.format(MESSAGE_TOO_MANY_PERSONS,
+                    bookingSize.getSize(), model.getCapacity().getValue()));
         } else {
             Booking toAdd = toAddOptional.get();
             if (model.hasBooking(toAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE);
             }
             if (!model.canAccommodate(toAdd)) {
-                throw new CommandException(MESSAGE_FULL);
+                LocalDateTime suggestedTime = model.suggestNextAvailableTime(toAdd);
+                throw new CommandException(String.format(MESSAGE_FULL, suggestedTime));
             }
 
             model.addBooking(toAdd);

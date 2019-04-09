@@ -51,7 +51,7 @@ public class Shift implements Comparable<Shift> {
 
     @JsonCreator
     public Shift(@JsonProperty("startDayOfWeek") String startDayOfWeekString,
-                  @JsonProperty("startTime") String startTimeString,
+                 @JsonProperty("startTime") String startTimeString,
                  @JsonProperty("endDayOfWeek") String endDayOfWeekString,
                  @JsonProperty("endTime") String endTimeString) {
         try {
@@ -86,9 +86,9 @@ public class Shift implements Comparable<Shift> {
         } else if (thisStartDayOfWeek <= thisEndDayOfWeek && otherStartDayOfWeek > otherEndDayOfWeek) {
             return !((otherEndDayOfWeek < thisStartDayOfWeek && thisEndDayOfWeek < otherStartDayOfWeek)
                     || (otherEndDayOfWeek < thisStartDayOfWeek && thisEndDayOfWeek == otherStartDayOfWeek
-                        && (!this.endTime.isAfter(otherShift.startTime)))
+                    && (!this.endTime.isAfter(otherShift.startTime)))
                     || (otherEndDayOfWeek == thisStartDayOfWeek && thisEndDayOfWeek < otherStartDayOfWeek
-                        && (!otherShift.endTime.isAfter(this.startTime))));
+                    && (!otherShift.endTime.isAfter(this.startTime))));
         } else if (thisStartDayOfWeek > thisEndDayOfWeek && otherStartDayOfWeek <= otherEndDayOfWeek) {
             return !((thisEndDayOfWeek < otherStartDayOfWeek && otherEndDayOfWeek < thisStartDayOfWeek)
                     || (thisEndDayOfWeek < otherStartDayOfWeek && otherEndDayOfWeek == thisStartDayOfWeek
@@ -105,6 +105,22 @@ public class Shift implements Comparable<Shift> {
     public static boolean isValidShift(DayOfWeek startDayOfWeek, LocalTime startTime,
                                        DayOfWeek endDayOfWeek, LocalTime endTime) {
         return (!startDayOfWeek.equals(endDayOfWeek) || endTime.isAfter(startTime));
+    }
+
+    public DayOfWeek getStartDayOfWeek() {
+        return this.startDayOfWeek;
+    }
+
+    public DayOfWeek getEndDayOfWeek() {
+        return this.endDayOfWeek;
+    }
+
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return this.endTime;
     }
 
     @Override

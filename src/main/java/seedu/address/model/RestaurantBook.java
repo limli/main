@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -399,6 +400,17 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public int countBookings(Member member) {
         Predicate<Booking> hasGivenMember = (bookingToCheck -> bookingToCheck.getCustomer().equals(member));
         return (int) bookings.asUnmodifiableObservableList().stream().filter(hasGivenMember).count();
+    }
+
+    /**
+     * Suggests a possible time to accommodate the booking.
+     * @param toAdd The booking that the user wishes to add
+     * @return The next available time that the restaurant can accommodate the booking, subjected to the constraint
+     * that the returned time must occur after {@code toAdd}. In other words, suggestion always shifts the booking
+     * later and never earlier.
+     */
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
+        return capacity.suggestNextAvailableTime(toAdd, bookings.asUnmodifiableObservableList());
     }
 
     public boolean canUpdateCapacity(Capacity newCapacity) {

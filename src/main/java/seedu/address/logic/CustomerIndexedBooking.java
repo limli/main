@@ -52,4 +52,8 @@ public class CustomerIndexedBooking {
                 && memberIndex.equals(((CustomerIndexedBooking) other).memberIndex)
                 && numMembers.equals(((CustomerIndexedBooking) other).numMembers));
     }
+
+    public BookingSize getNumMembers() {
+        return numMembers;
+    }
 }

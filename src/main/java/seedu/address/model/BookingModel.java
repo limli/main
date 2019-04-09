@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -90,6 +91,15 @@ public interface BookingModel {
      * Returns true if and only if changing the capacity to {@code newCapacity} will not result in overbooking
      */
     boolean canUpdateCapacity(Capacity newCapacity);
+
+    /**
+     * Suggests a possible time to accommodate the booking.
+     * @param toAdd The booking that the user wishes to add
+     * @return The next available time that the restaurant can accommodate the booking, subjected to the constraint
+     * that the returned time must occur after {@code toAdd}. In other words, suggestion always shifts the booking
+     * later and never earlier.
+     */
+    LocalDateTime suggestNextAvailableTime(Booking toAdd);
 
     /**
      * Counts the number of bookings associated with {@code member}.
