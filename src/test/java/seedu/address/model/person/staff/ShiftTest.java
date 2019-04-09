@@ -9,12 +9,71 @@ import java.time.LocalTime;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import seedu.address.testutil.ShiftBuilder;
 
+import seedu.address.testutil.ShiftBuilder;
 
 public class ShiftTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void conflictsWith() {
+        Shift shift1 = new ShiftBuilder().withStartDayOfWeek("MONDAY").withStartTime("12:00")
+                .withEndDayOfWeek("MONDAY").withEndTime("14:00").build();
+        Shift shift2 = new ShiftBuilder().withStartDayOfWeek("TUESDAY").withStartTime("12:00")
+                .withEndDayOfWeek("TUESDAY").withEndTime("14:00").build();
+
+        assertFalse(shift1.conflictsWith(shift2));
+        assertFalse(shift2.conflictsWith(shift1));
+
+        shift1 = new ShiftBuilder().withStartDayOfWeek("MONDAY").withStartTime("12:00")
+                .withEndDayOfWeek("MONDAY").withEndTime("14:00").build();
+        shift2 = new ShiftBuilder().withStartDayOfWeek("MONDAY").withStartTime("13:59")
+                .withEndDayOfWeek("TUESDAY").withEndTime("15:00").build();
+
+        assertTrue(shift1.conflictsWith(shift2));
+        assertTrue(shift2.conflictsWith(shift1));
+
+        shift1 = new ShiftBuilder().withStartDayOfWeek("MONDAY").withStartTime("12:00")
+                .withEndDayOfWeek("MONDAY").withEndTime("14:00").build();
+        shift2 = new ShiftBuilder().withStartDayOfWeek("MONDAY").withStartTime("14:00")
+                .withEndDayOfWeek("MONDAY").withEndTime("16:00").build();
+
+        assertFalse(shift1.conflictsWith(shift2));
+        assertFalse(shift2.conflictsWith(shift1));
+
+        shift1 = new ShiftBuilder().withStartDayOfWeek("MONDAY").withStartTime("12:00")
+                .withEndDayOfWeek("MONDAY").withEndTime("14:00").build();
+        shift2 = new ShiftBuilder().withStartDayOfWeek("SUNDAY").withStartTime("12:00")
+                .withEndDayOfWeek("MONDAY").withEndTime("12:00").build();
+
+        assertFalse(shift1.conflictsWith(shift2));
+        assertFalse(shift2.conflictsWith(shift1));
+
+        shift1 = new ShiftBuilder().withStartDayOfWeek("SUNDAY").withStartTime("00:00")
+                .withEndDayOfWeek("SATURDAY").withEndTime("23:58").build();
+        shift2 = new ShiftBuilder().withStartDayOfWeek("SATURDAY").withStartTime("23:58")
+                .withEndDayOfWeek("SATURDAY").withEndTime("23:59").build();
+
+        assertFalse(shift1.conflictsWith(shift2));
+        assertFalse(shift2.conflictsWith(shift1));
+
+        shift1 = new ShiftBuilder().withStartDayOfWeek("SUNDAY").withStartTime("00:00")
+                .withEndDayOfWeek("SATURDAY").withEndTime("23:59").build();
+        shift2 = new ShiftBuilder().withStartDayOfWeek("SATURDAY").withStartTime("23:59")
+                .withEndDayOfWeek("SUNDAY").withEndTime("00:00").build();
+
+        assertTrue(shift1.conflictsWith(shift2));
+        assertTrue(shift2.conflictsWith(shift1));
+
+        shift1 = new ShiftBuilder().withStartDayOfWeek("FRIDAY").withStartTime("12:00")
+                .withEndDayOfWeek("WEDNESDAY").withEndTime("14:00").build();
+        shift2 = new ShiftBuilder().withStartDayOfWeek("WEDNESDAY").withStartTime("13:59")
+                .withEndDayOfWeek("THURSDAY").withEndTime("15:00").build();
+
+        assertTrue(shift1.conflictsWith(shift2));
+        assertTrue(shift2.conflictsWith(shift1));
+    }
 
     @Test
     public void isValidShift() {
