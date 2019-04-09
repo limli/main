@@ -38,8 +38,8 @@ public class EditStaffCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL]\n"
-            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "97654321 "
             + PREFIX_APPOINTMENT + "Head Chef";

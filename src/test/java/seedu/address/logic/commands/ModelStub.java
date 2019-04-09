@@ -335,4 +335,9 @@ public class ModelStub implements Model {
     public boolean canUpdateCapacity(Capacity newCapacity) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public int countBookings(Member member) {
+        throw new AssertionError("This method should not be called.");
+    }
 }

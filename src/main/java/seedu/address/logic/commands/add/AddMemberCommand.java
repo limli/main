@@ -20,7 +20,7 @@ public class AddMemberCommand extends Command {
     public static final String COMMAND_WORD = "addmember"; // make sure that this is in lower case
     public static final String COMMAND_ALIAS = "am";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the restaurant book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a member to the restaurant book.\n"
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
