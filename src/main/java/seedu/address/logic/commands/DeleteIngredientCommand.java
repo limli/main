@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -25,6 +26,7 @@ public class DeleteIngredientCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_INGREDIENT_SUCCESS = "Deleted Ingredient: %1$s";
+    public static final String MESSAGE_DELETED_RECIPES = "recipe(s): %1$s that use this ingredient is also deleted";
 
     private final Index targetIndex;
 
@@ -41,10 +43,20 @@ public class DeleteIngredientCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
         }
 
+
         Ingredient ingredientToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Set<String> recipesAssociated = model.getRecipesAssociated(ingredientToDelete);
         model.deleteIngredient(ingredientToDelete);
         model.commitRestaurantBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
+
+        if (recipesAssociated.isEmpty()) {
+            return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
+        } else {
+            String displayMessage = String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete) + "\n"
+                    + String.format(MESSAGE_DELETED_RECIPES, recipesAssociated.toString());
+            return new CommandResult(displayMessage);
+        }
+
     }
 
     @Override
