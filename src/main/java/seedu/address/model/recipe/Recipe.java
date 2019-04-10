@@ -90,6 +90,7 @@ public class Recipe implements Item {
         final StringBuilder builder = new StringBuilder();
         builder.append("Recipe: ")
                 .append(getRecipeName())
+                .append("\n")
                 .append(getRecipeIngredientSet());
         return builder.toString();
     }

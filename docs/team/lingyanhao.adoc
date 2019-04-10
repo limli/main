@@ -13,32 +13,35 @@ This portfolio serves to illustrate my contributions to the project REstaurant M
 
 As a developer, I was primarily in charged of the booking feature which involved the following:
 
-* Add and delete bookings from the system
-* Edit existing bookings
-* Ensure that the restaurant does not get overbooked
+* Add, delete and edit bookings from the system
+* Suggest alternative timings if user tries to add a booking when restaurant is fully booked
 
 As the overall team leader, I was responsible for setting clear goals and directions for the team and listening to teammates' feedback for suggestions. I also ensured that the tasks were done on time and complied with the module requirements.
 
-== Summary of contributions
+== Summary of Contributions
 
 * Code contributed: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=lingyanhao&sort=displayName&since=2019-02-10&until=2019-03-25&timeframe=day&reverse=false&repoSort=true[Code]]
 
 * *Major enhancement*: added *booking feature*
 ** What it does: allows the user to manage bookings. The system will reject new bookings and suggest better alternative timeslots if the restaurant is full.
-** Justification: When a restaurant needs to manage a large number of bookings, it can be difficult for owners to keep track of how many people are in the restaurant at each point in time. Having a system that rejects new bookings when the restaurant is full can help prevent overbooking.
-** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component.
+** Justification: When a restaurant needs to manage a large number of bookings, it can be difficult for owners to keep track of how many people are in the restaurant at each point in time. Having a system that rejects new bookings when the restaurant is full can help prevent overbooking. If the user tries to enter a booking when the restaurant is full, not only is the booking rejected, an alternative booking timeslot is also suggested.
+** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component from AB4.
 
 * *Other contributions*:
 
-** Project management:
+* Community:
+** PRs reviewed (with non-trivial review comments): [https://github.com/cs2103-ay1819S2-w11-2/main/pull/110], [https://github.com/cs2103-ay1819S2-w11-2/main/pull/138]
+** Reported bugs for other teams: [https://github.com/CS2103-AY1819S2-W14-3/main/issues/309], [https://github.com/CS2103-AY1819S2-W14-3/main/issues/308]
+
+* Project management:
+*** Managed release v1.1 on GitHub
 *** Setup organisation/team repo
-*** Setup Travis CI, Appveyor and Coveralls
+*** Setup Travis CI, Appveyor and Coveralls and Codacy
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_This section shows some samples of sections I contributed to the user guide. It shows my ability to write friendly documentation for end-users._
 |===
 
 include::../UserGuide.adoc[tag=booking]
@@ -46,9 +49,9 @@ include::../UserGuide.adoc[tag=booking]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_This section shows some sample of sections I contributed to the developer guide. It shows my ability to write technical documentation for potential developers who may wish to take over the software._
 |===
 
-include::../DeveloperGuide.adoc[tag=model]
 include::../DeveloperGuide.adoc[tag=ds]
 include::../DeveloperGuide.adoc[tag=editcmd]
+include::../DeveloperGuide.adoc[tag=suggestbooking]

@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -351,6 +353,18 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     }
 
     /**
+     * Gets the set of recipe names associated to the ingredient
+     */
+    public Set<String> getRecipesAssociated(Ingredient ingredient) {
+        Predicate<Recipe> hasGivenIngredient = (recipe -> recipe.getRecipeIngredientSet()
+                .getIngredientMap().containsKey(ingredient));
+        Set<String> recipesAssociatedSet =
+                recipes.asUnmodifiableObservableList().stream().filter(hasGivenIngredient)
+                        .map(recipe -> recipe.getRecipeName().getName()).collect(Collectors.toSet());
+        return recipesAssociatedSet;
+    }
+
+    /**
      * Removes {@code key} from this {@code RestaurantBook}.
      * {@code key} must exist in the restaurant book.
      */
@@ -386,6 +400,17 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public int countBookings(Member member) {
         Predicate<Booking> hasGivenMember = (bookingToCheck -> bookingToCheck.getCustomer().equals(member));
         return (int) bookings.asUnmodifiableObservableList().stream().filter(hasGivenMember).count();
+    }
+
+    /**
+     * Suggests a possible time to accommodate the booking.
+     * @param toAdd The booking that the user wishes to add
+     * @return The next available time that the restaurant can accommodate the booking, subjected to the constraint
+     * that the returned time must occur after {@code toAdd}. In other words, suggestion always shifts the booking
+     * later and never earlier.
+     */
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
+        return capacity.suggestNextAvailableTime(toAdd, bookings.asUnmodifiableObservableList());
     }
 
     public boolean canUpdateCapacity(Capacity newCapacity) {

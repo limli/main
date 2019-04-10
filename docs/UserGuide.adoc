@@ -44,6 +44,7 @@ Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 .  Copy the file to the folder you want to use as the home folder for your Restaurant Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+.The GUI of REM
 image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
@@ -268,9 +269,15 @@ Adds new ingredient into inventory. Previously not existing in inventory before.
 Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
 
 ****
-• If ingredient quantity or warning amount is not specified, they are respectively set to 0.
+• `INGREDIENT_NAME` and `INGREDIENT_UNIT` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `in/c` is not accepted while `in/ch` is).
 
-• User inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
+• All leading whitespaces for `INGREDIENT_NAME` and `INGREDIENT_UNIT` will be trimmed.
+
+• `INGREDIENT_QUANTITY` and `INGREDIENT_WARNING_AMOUNT` must be an integer between 0 and 2,147,483,647 inclusive.
+
+• If `INGREDIENT_QUANTITY` or `INGREDIENT_WARNING_AMOUNT` is not specified, they are respectively set to 0.
+
+• If user inputs the warning amount for the ingredient `w/INGREDIENT_WARNING_AMOUNT`, and when the quantity in inventory
 falls below this stated amount, there is a need for restock of this ingredient.
 Calling `listIngredients w/` will display all ingredients that fall below their corresponding warning values.
 ****
@@ -315,13 +322,19 @@ Previously existing in inventory before.
 
 Format: `restockIngredient i/INDEX q/INGREDIENT_QUANTITY`
 
+****
+• New ingredient quantity after `restockIngredient` command was called, must be an integer with value at most 2,147,483,647.
+****
+
 Example:
 
 * `listIngredients` (returns chicken as 3rd index)
 +
 `restockIngredient i/3 q/10`
 
-Increases the quantity of chickens by 10 in the inventory.
+Increases the quantity of chickens by 10 in the inventory. Assuming that the previous quantity for chicken was 20, the new quantity
+after `restockIngredient i/3 q/10` was called, will be 30.
+
 
 ==== Consume Ingredient: `consumeIngredient`
 
@@ -329,13 +342,21 @@ Consume a particular amount of ingredient from inventory, based on specified `IN
 
 Format: `consumeIngredient i/INDEX q/INGREDIENT_QUANTITY`
 
+****
+• Ingredient quantity to be consumed must be at most the ingredient quantity present in the inventory.
+New ingredient quantity after `consumeIngredient` command was called, must be non-negative.
+
+****
+
+
 Example:
 
 * `listIngredients` (returns chicken as 3rd index)
 +
 `consumeIngredient i/3 q/10`
 
-Decreases the quantity of chickens by 10 in the inventory.
+Decreases the quantity of chickens by 10 in the inventory. Assuming that the previous quantity for chicken was 20, the new quantity
+                                                          after `consumeIngredient i/3 q/10` was called, will be 10.
 
 
 ==== Add Recipe: `addRecipe`
@@ -347,21 +368,55 @@ Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 ****
 • The index refers to the index number shown in the most recent listing of ingredients in the ingredients panel.
 
+• `RECIPE_NAME` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `r/c` is not accepted while `r/ch` is).
+
+• All leading whitespaces for `RECIPE_NAME` will be trimmed.
+
+• `INGREDIENT_QUANTITY_IN_RECIPE` must be an integer between 1 and 2,147,483,647 inclusive, and refers to the quantity of
+ingredient required in 1 serving of the recipe.
+
 • There should be at least 1 ingredient `iq/INDEX&INGREDIENT_QUANTITY_IN_RECIPE` input.
 
 • Each ingredient input should have the format `iq/INDEX&NGREDIENT_QUANTITY_IN_RECIPE`
 where ingredient index and quantity of ingredient in recipe is separated by &.
 Both the ingredient index and quantity must be an whole number.
+
+• Upon adding a new recipe, the number of servings of this recipe, according to the current ingredient quantity in inventory, is calculated
+and displayed on the recipe panel. Upon  executing `restockIngredient` or `consumeIngredient`, the number of servings will be
+automatically adjusted and displayed.
 ****
 
 Example:
 
-* `listIngredients`
-(list: chicken - 10 full chickens [indexed 4], rice - 10 bowls [indexed 9])
-+
-`addRecipe r/Chicken Rice iq/4&1 iq/9&3`
+(Assuming that the restaurant book is empty.)
 
-Adds a new recipe, chicken rice, which requires 1 full chicken and 3 bowls of rice.
+.  `addingredient in/cheese u/slices q/20`
+   `addingredient in/fries u/packets q/10`
+   * Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
++
+.Successfully adding 2 ingredients into restaurant book
+image::addRecipe-addIngredientCommand.png[width=300]
+
+.  `addrecipe r/cheese fries iq/1&1 iq/2&1`
+    • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
+    packet of fries is needed.
+    • There are 20 slices of cheese sufficient for 20 servings of cheese fries, but only 10 packets of fries sufficient for 10 servings of cheese fries.
+    Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
++
+.Successfully adding 1 recipe, displaying the number of servings possible.
+image::addRecipe-successful.png[width=1000]
+
+.  `restockingredient i/2 q/10`
+    • Restocks fries by 10 packets, and change in ingredient quantity is reflected in ingredient's panel.
+    • Now, there are 20 slices of cheese sufficient for 20 servings of cheese fries, and 20 packets of fries sufficient for 20 servings of cheese fries.
+    Overall, there can be 20 servings of cheese fries prepared. Upon success, the recipe panel should look like this, with the reflected
+    change in number of servings of cheese fries:
++
+.Successfully restocking 1 ingredient, displays the new number of servings possible.
+image::addRecipe-restockIngredient.png[width=1000]
+
+
+
 
 ==== Delete Recipe: `deleteRecipe`
 
@@ -380,7 +435,7 @@ Example:
 Delete recipe at index 3.
 
 ==== Recipe Summary `recipeSummary` `[coming in v2.0]`
-Displays the number of dishes that can be made for each recipe, calculated based on the current inventory
+Displays the number of servings that can be made for each recipe, calculated based on the current inventory
 and the quantity required in each recipe.
 
 Format: `recipeSummary`
@@ -435,18 +490,32 @@ Creates a new booking.
 Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
 
 ****
-• All bookings will last for 1 hour.
+• All bookings will last for 1 hour, although the end time is not shown in the UI.
 
 • Customer INDEX refers to the index of the customer as displayed by the list.
 
 • Bookings are a privileged feature restricted only to members. REM does not allow non-members to make bookings.
+
+• If the booking is rejected due to capacity constraints, a message will appear suggesting an alternative timeslot. This timeslot is the earliest timeslot after the input date and time that can be accepted. Note that this does not automatically add the booking into REM- a separate `addBooking` command needs to be entered to accept the newly suggested timeslot.
 ****
 
-Example:
+Example (execute these commands in the order listed with no other commands inserted in between, starting with a list of at least 2 members and an initially empty list of bookings):
 
-* `addBooking c/1 n/5 ts/2019-02-23T14:30`
+* `updateCapacity 10` (updates the restaurant capacity to 10)
 
-Adds a booking for the first customer on the current list, on 23 Feb, at 1430 hrs
+* `addBooking c/1 n/7 ts/2019-04-07T12:00` (adds a booking for the first customer on the current list, on 7 Apr, at 1200 hrs)
+
+* `addbooking c/2 n/7 ts/2019-04-07T11:30` (adds a booking for the second customer on the current list, on 7 Apr, at 1200 hrs)
+
+This command will fail to execute. As bookings last for 1 hour, accepting this command will cause the restaurant to exceed the capacity of 10 customers at 2019-04-07T12:00 (in fact, 7+7=14 customers will be present if this command executes). Thus this booking is rejected.
+
+.A pictorial representation showing why the capacity will be exceeded
+image::capacityexplanation.png[width="800"]
+The user may also notice that an alternative booking time of 2019-04-07T13:00 is suggested by REM. The suggested booking time is the next available slot after the input time (in this case, 2019-04-07T11:30) that can hold the booking of 7 members. In this case, the restaurant is only free at 2019-04-07T13:00 after the previous group of 7 customers leave (recall that bookings last for 1 hour).
+
+The below screenshot shows what happens:
+
+image::altbookingtime.png[width="800"]
 
 ==== Edit Booking: `editBooking`
 Edits a booking by changing either the time, number of persons of both.
