@@ -50,4 +50,3 @@ include::../DeveloperGuide.adoc[tag=stats]
 
 include::../DeveloperGuide.adoc[tag=panelui]
 
-include::../DeveloperGuide.adoc[tag=usecases]
