@@ -650,6 +650,8 @@ Format: `statsdays DAYS`
 • `DAYS` is an integer from 1 to 10000, inclusive
 
 • The command considers all bookings from today's date to (todays's date - DAYS + 1)
+
+• More days might be considered if necessary to make DAYS a multiple of the number of bars
 ****
 
 Example:
