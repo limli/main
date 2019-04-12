@@ -19,7 +19,7 @@ public class ViewStatsTimeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the statistics of the bookings made"
             + " for the last many days specified by time.\n"
-            + "Parameters: DAYS (must be a positive integer)\n"
+            + "Parameters: DAYS (must be a positive integer between 1 and " + Statistics.getMaxDays() + " inclusive)\n"
             + "Example: " + COMMAND_WORD + " 30 ";
 
     private final int days;

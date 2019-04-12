@@ -7,7 +7,7 @@ package seedu.address.model.person.member;
 public class LoyaltyPoints {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Loyalty points should be a non-negative integer";
+            "Loyalty points should be an integer between 0 and " + Integer.MAX_VALUE + " inclusive.";
 
     /*
      * The first character of the appointment name must not be a whitespace,
