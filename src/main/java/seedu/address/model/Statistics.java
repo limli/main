@@ -129,6 +129,7 @@ public class Statistics {
             int value = getNumBookingsWithCondition(booking ->
                 h == booking.getStartTime().getHour()
                     && getDaysDifference(booking.getStartTime().toLocalDate(), today) < days
+                    && getDaysDifference(booking.getStartTime().toLocalDate(), today) >= 0
             );
             graphData.add(new Data<>(formatTime(hour), value));
         }
