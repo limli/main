@@ -616,7 +616,7 @@ image::AddShiftSequenceDiagram.png[width="700"]
 // tag::stats[]
 === The `statstime` command
 
-When the `statstime` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart, where each bar corresponds to the number of customers in a particular time of the day.
+When the `statstime` command is entered, the current statistics of the amount of bookings is to be displayed to the user in the form of a bar chart, where each bar corresponds to the number of customers in a particular time of the day.
 
 ==== Current implementation
 
@@ -655,7 +655,7 @@ The _Sequence Diagram_ given above shows how the components interact with each o
 
 === The `statsdays` command
 
-When the `statsdays` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart, where each bar corresponds to the number of customers between certain dates.
+When the `statsdays` command is entered, the current statistics of the amount of bookings is to be displayed to the user in the form of a bar chart, where each bar corresponds to the number of customers between certain dates.
 
 As the implementation of this command is very similar to <<The `statstime` command>>, it will not be covered.
 

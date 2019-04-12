@@ -651,7 +651,7 @@ Format: `statsdays DAYS`
 
 • The command considers all bookings from today's date to (todays's date - DAYS + 1)
 
-• More days might be considered if necessary to make DAYS a multiple of the number of bars
+• More days might be considered if necessary to make each bar represent the same number of days
 ****
 
 Example:
