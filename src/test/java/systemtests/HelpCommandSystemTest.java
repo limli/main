@@ -13,7 +13,7 @@ import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ListMembersCommand;
 import seedu.address.ui.StatusBarFooter;
 
 /**
@@ -55,7 +55,7 @@ public class HelpCommandSystemTest extends RestaurantBookSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        executeCommand(ListMembersCommand.COMMAND_WORD);
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.MESSAGE_SHOWING_HELP, getResultDisplay().getText());

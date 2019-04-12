@@ -116,15 +116,6 @@ public class FindCommandSystemTest extends RestaurantBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find while a member is selected -> selected card deselected */
-        showAllMembers();
-        selectMember(Index.fromOneBased(1));
-        assertFalse(getMemberListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
-        command = FindCommand.COMMAND_WORD + " Daniel";
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
-        assertCommandSuccess(command, expectedModel);
-        assertSelectedCardDeselected();
-
         /* Case: find member in empty address book -> 0 members found */
         deleteAllMembers();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;

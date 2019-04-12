@@ -12,7 +12,7 @@ import org.junit.Test;
 import guitests.GuiRobot;
 import guitests.guihandles.StatsWindowHandle;
 import seedu.address.logic.commands.DeleteMemberCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ListMembersCommand;
 import seedu.address.logic.commands.ViewStatsDaysCommand;
 import seedu.address.ui.StatusBarFooter;
 
@@ -34,10 +34,10 @@ public class ViewStatsDaysCommandSystemTest extends RestaurantBookSystemTest {
         //use accelerator
         getCommandBox().click();
         executeCommand(ViewStatsDaysCommand.COMMAND_WORD + " 30");
-        assertStatiWindowOpen();
+        assertStatsWindowOpen();
 
         // assert that while the stats window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        executeCommand(ListMembersCommand.COMMAND_WORD);
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(ViewStatsDaysCommand.MESSAGE_SHOWING_STATS, getResultDisplay().getText());
@@ -52,7 +52,7 @@ public class ViewStatsDaysCommandSystemTest extends RestaurantBookSystemTest {
     /**
      * Asserts that the stats window is open, and closes it after checking.
      */
-    private void assertStatiWindowOpen() {
+    private void assertStatsWindowOpen() {
         assertTrue(ERROR_MESSAGE, StatsWindowHandle.isWindowPresent());
         guiRobot.pauseForHuman();
 

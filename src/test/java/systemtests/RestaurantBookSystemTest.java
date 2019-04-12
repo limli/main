@@ -28,7 +28,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.Model;
 import seedu.address.model.RestaurantBook;
 import seedu.address.testutil.TypicalMembers;
@@ -136,14 +135,6 @@ public abstract class RestaurantBookSystemTest {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredMemberList().size()
                 < getModel().getRestaurantBook().getMemberList().size());
-    }
-
-    /**
-     * Selects the member at {@code index} of the displayed list.
-     */
-    protected void selectMember(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getMemberListPanel().getSelectedCardIndex());
     }
 
     /**

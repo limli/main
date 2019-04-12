@@ -78,12 +78,10 @@ public class DeleteMemberCommandSystemTest extends RestaurantBookSystemTest {
         showAllMembers();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
-        Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectMember(selectedIndex);
         command = DeleteMemberCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedMember = removeMember(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_MEMBER_SUCCESS, deletedMember);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
+        assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 
