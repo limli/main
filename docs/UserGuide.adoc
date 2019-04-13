@@ -49,28 +49,29 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-** Some example commands you can try:
+** After launching the application, below are some sample commands you can try:
 
 * *`listMembers`* : lists all members of the restaurant
 * **`addMember`**`addMember n/John Doe e/johnd@gmail.com p/81234567` : adds a member named `John Doe` to the restaurant.
 * **`deleteMember`**`3` : deletes the 3rd member shown in the current list of members
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  You can refer to <<Features>> for details of each command.
 
 [[Features]]
 == Features
 ====
 *Command Format*
 
-* Commands begin with the intended task, followed by a number of parameters preceded by a key (a unique alphabet and forward slash). The intended task (`addMember`) is non case-sensitive in the program and can be typed quickly as `addmember`, but is written in this manner for the user guide to be easily read.
-    ** e.g. `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER`.
-* Words in UPPER_CASE are the parameters to be supplied by the user.
-* Items in square brackets are optional.
-    ** e.g. `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
-* Items with `...` after them can be used multiple times including zero times
-    ** e.g. `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
-* Parameters can be in any order
+* Commands begin with the intended task, followed by a number of parameters preceded by a key (comprised of a one or more letters and forward slash, for example, `n/`). The intended task is non case-sensitive in the program and can be typed quickly as (for example, `addMember` can be typed as `addmember`), but is written in this manner in the user guide for greater readability.
+* Words in UPPER_CASE are the parameters to be supplied by the user. For example, `CUSTOMER_NAME`, `EMAIL` and `PHONE_NUMBER` in the command below are the parameters to be supplied by the user.
+    ** `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER`.
+* Parameters in square brackets are optional parameters and can be omitted. For example, `LOYALTY_POINTS` below is an optional parameter.
+    ** `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
+* Parameters with `...` after them can be used multiple times (including zero times) in the command. For example, `INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE` can be specified multiple times in the command below.
+    ** `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE ...`
+* Parameters can be supplied in any order. For example, the following way of writing the `addMember` command above is also valid.
+    ** `addMember p/PHONE_NUMBER n/CUSTOMER_NAME e/EMAIL`
 ====
 
 === General
