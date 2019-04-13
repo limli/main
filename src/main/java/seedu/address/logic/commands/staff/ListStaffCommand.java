@@ -21,12 +21,12 @@ public class ListStaffCommand extends Command {
     public static final String COMMAND_ALIAS = "ls";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all staff whose names contain any of "
-            + "the list of words (case-insensitive).\n."
+            + "the list of words (case-insensitive).\n"
             + "If appointment is specified, then only staff whose appointments contain any of "
             + "the list of words (case-insensitive) will be displayed.\n"
             + "If fields are not specified, then all staff will be listed.\n"
             + "Parameters: [" + PREFIX_NAME + "NAME_1 NAME_2...] "
-            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT_1 APPOINTMENT_2...]"
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT_1 APPOINTMENT_2...]\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie a/cook\n";
 
     private final StaffPredicate predicate;

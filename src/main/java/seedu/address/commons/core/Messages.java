@@ -16,5 +16,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_STAFF_DISPLAYED_INDEX = "The staff index provided is invalid";
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
     public static final String MESSAGE_INGREDIENTS_LISTED_OVERVIEW = "%1$d ingredients listed!";
-    public static final String MESSAGE_STAFF_LISTED_OVERVIEW = "%1$d members listed!";
+    public static final String MESSAGE_STAFF_LISTED_OVERVIEW = "%1$d staff listed!";
 }
