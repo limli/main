@@ -15,7 +15,6 @@ import java.time.DayOfWeek;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.staff.AddShiftCommand;
 import seedu.address.logic.commands.staff.DeleteShiftCommand;
 import seedu.address.model.person.staff.Shift;
 import seedu.address.testutil.ShiftBuilder;
