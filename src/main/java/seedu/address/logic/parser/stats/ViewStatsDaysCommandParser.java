@@ -1,22 +1,25 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.stats;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.ViewStatsTimeCommand;
+import seedu.address.logic.commands.stats.ViewStatsDaysCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Statistics;
 
 /**
- * Parses input arguments and creates a new ViewStatsTimeCommand object.
+ * Parses input arguments and creates a new ViewStatsDaysCommand object.
  */
-public class ViewStatsTimeCommandParser implements Parser<ViewStatsTimeCommand> {
+public class ViewStatsDaysCommandParser implements Parser<ViewStatsDaysCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewStatsDaysCommand
      * and returns an ViewStatsDaysCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public ViewStatsTimeCommand parse(String args) throws ParseException {
+    public ViewStatsDaysCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args);
 
@@ -25,12 +28,12 @@ public class ViewStatsTimeCommandParser implements Parser<ViewStatsTimeCommand> 
         try {
             days = Integer.parseInt(preamble);
         } catch (NumberFormatException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStatsTimeCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewStatsDaysCommand.MESSAGE_USAGE));
         }
 
         if (days > Statistics.getMaxDays() || days <= 0) {
-            throw new ParseException(ViewStatsTimeCommand.MESSAGE_SIZE_CONSTRAINTS);
+            throw new ParseException(ViewStatsDaysCommand.MESSAGE_SIZE_CONSTRAINTS);
         }
-        return new ViewStatsTimeCommand(days);
+        return new ViewStatsDaysCommand(days);
     }
 }

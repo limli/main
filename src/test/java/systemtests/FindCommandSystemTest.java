@@ -10,10 +10,10 @@ import static seedu.address.testutil.TypicalMembers.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.member.DeleteMemberCommand;
 import seedu.address.model.Model;
 
 public class FindCommandSystemTest extends RestaurantBookSystemTest {

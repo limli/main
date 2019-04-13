@@ -17,11 +17,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.booking.UpdateCapacityCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.DeleteMemberCommandParser;
-import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.booking.AddBookingCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.member.DeleteMemberCommandParser;
+import seedu.address.logic.parser.member.EditMemberCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
@@ -77,7 +77,7 @@ public class AddBookingCommandSystemTest extends RestaurantBookSystemTest {
             Member modifiedAlice = new Member(ALICE.getName(), new Phone("12345678"), ALICE.getEmail(),
                     ALICE.getLoyaltyPoints());
             String editCommandString = " 1 " + PREFIX_PHONE + modifiedAlice.getPhone().toString();
-            Command editCommand = new EditCommandParser().parse(editCommandString);
+            Command editCommand = new EditMemberCommandParser().parse(editCommandString);
             editCommand.execute(model, commandHistory);
             Booking modifiedAlice1400 = new Booking(startTime1400, modifiedAlice, new BookingSize(5));
             Booking modifiedAliceBooking = new Booking(startTime1430, modifiedAlice, new BookingSize(5));
