@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.add;
+package seedu.address.logic.commands.staff;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DAY_OF_WEEK;

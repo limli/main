@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.staff;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -11,7 +11,11 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.add.AddShiftCommand;
+import seedu.address.logic.commands.staff.AddShiftCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.staff.Shift;
 

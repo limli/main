@@ -13,11 +13,11 @@ import seedu.address.logic.commands.DeleteBookingCommand;
 import seedu.address.logic.commands.DeleteIngredientCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.DeleteRecipeCommand;
-import seedu.address.logic.commands.DeleteShiftCommand;
-import seedu.address.logic.commands.DeleteStaffCommand;
+import seedu.address.logic.commands.staff.DeleteShiftCommand;
+import seedu.address.logic.commands.staff.DeleteStaffCommand;
 import seedu.address.logic.commands.EditBookingCommand;
 import seedu.address.logic.commands.EditMemberCommand;
-import seedu.address.logic.commands.EditStaffCommand;
+import seedu.address.logic.commands.staff.EditStaffCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -36,9 +36,14 @@ import seedu.address.logic.commands.add.AddBookingCommand;
 import seedu.address.logic.commands.add.AddIngredientCommand;
 import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.logic.commands.add.AddRecipeCommand;
-import seedu.address.logic.commands.add.AddShiftCommand;
-import seedu.address.logic.commands.add.AddStaffCommand;
+import seedu.address.logic.commands.staff.AddShiftCommand;
+import seedu.address.logic.commands.staff.AddStaffCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.staff.AddShiftCommandParser;
+import seedu.address.logic.parser.staff.AddStaffCommandParser;
+import seedu.address.logic.parser.staff.DeleteShiftCommandParser;
+import seedu.address.logic.parser.staff.DeleteStaffCommandParser;
+import seedu.address.logic.parser.staff.EditStaffCommandParser;
 
 /**
  * Parses user input.
