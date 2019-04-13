@@ -1,9 +1,10 @@
 package seedu.address.model.person.staff;
 
-import seedu.address.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+
 
 /**
  * Tests that a {@code Staff}'s {@code Name} and {@code Appointment} matches any of the keywords given.
@@ -13,7 +14,7 @@ public class StaffPredicate implements Predicate<Staff> {
     private final List<String> nameKeywords;
     private final List<String> appointmentKeywords;
 
-    public StaffPredicate(List<String> nameKeywords, List<String> appointmentKeywords, Shift shift) {
+    public StaffPredicate(List<String> nameKeywords, List<String> appointmentKeywords) {
         this.nameKeywords = nameKeywords;
         this.appointmentKeywords = appointmentKeywords;
     }
