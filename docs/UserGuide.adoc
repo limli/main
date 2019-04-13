@@ -589,6 +589,15 @@ Lists all staff members whose names and appointments contain a certain list of g
 
 Format: `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]`
 
+****
+* Keywords should be separated by spaces.
+* All leading, trailing and extra spaces in the list of keywords for `NAME` and `APPOINTMENT` will be ignored.
+* Keywords are case-insensitive.
+* The list of keywords for `NAME` and `APPOINTMENT` must only contain alphanumeric characters.
+* Only staff members whose names contain the exact keywords and whose appointments contain the exact keywords will be displayed.
+* If no keywords are provided for `NAME` or `APPOINTMENT`, then the corresponding field will be ignored in the filtering.
+****
+
 Example:
 
 * `listStaff n/alice bob charlie a/cook`
@@ -820,6 +829,9 @@ e.g. `editBooking 3 ts/12:00 n/6`
 
 * *addStaff* `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT` +
 e.g. `addStaff n/John Doe p/91234567 e/john@example.com a/Waiter`
+
+* *listStaff* `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]` +
+e.g. `listStaff n/alice bob charlie a/cook`
 
 * *deleteStaff* `deleteStaff INDEX` +
 e.g. `deleteStaff 3`
