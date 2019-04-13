@@ -33,31 +33,33 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
     @Override
     public DeleteShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        try {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
-                            PREFIX_START_TIME, PREFIX_END_TIME);
 
-            if (!argMultimap.arePrefixesPresent(PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
-                    PREFIX_START_TIME, PREFIX_END_TIME) || argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteShiftCommand.MESSAGE_USAGE));
-            }
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
+                        PREFIX_START_TIME, PREFIX_END_TIME);
 
-            Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
-
-            DayOfWeek startDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY_OF_WEEK).get());
-            LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
-            DayOfWeek endDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_END_DAY_OF_WEEK).get());
-            LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
-            Shift shiftToDelete = ParserUtil.parseShift(startDayOfWeek, startTime, endDayOfWeek, endTime);
-
-            return new DeleteShiftCommand(index, shiftToDelete);
-
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteShiftCommand.MESSAGE_USAGE), pe);
+        if (!argMultimap.arePrefixesPresent(PREFIX_START_DAY_OF_WEEK, PREFIX_END_DAY_OF_WEEK,
+                PREFIX_START_TIME, PREFIX_END_TIME) || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteShiftCommand.MESSAGE_USAGE));
         }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteShiftCommand.MESSAGE_USAGE), pe);
+        }
+
+        DayOfWeek startDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_START_DAY_OF_WEEK).get());
+        LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        DayOfWeek endDayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_END_DAY_OF_WEEK).get());
+        LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        Shift shiftToDelete = ParserUtil.parseShift(startDayOfWeek, startTime, endDayOfWeek, endTime);
+
+        return new DeleteShiftCommand(index, shiftToDelete);
     }
 
 }

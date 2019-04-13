@@ -65,7 +65,7 @@ public class ShiftBuilder {
      * Sets the {@code endDayOfWeek} of the {@code Shift} that we are building.
      */
     public ShiftBuilder withEndDayOfWeek(DayOfWeek endDayOfWeek) {
-        this.startDayOfWeek = endDayOfWeek;
+        this.endDayOfWeek = endDayOfWeek;
         return this;
     }
 
