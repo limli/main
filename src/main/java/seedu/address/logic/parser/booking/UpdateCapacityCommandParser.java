@@ -1,8 +1,9 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.booking;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.UpdateCapacityCommand;
+import seedu.address.logic.commands.booking.UpdateCapacityCommand;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.booking.Capacity;
 

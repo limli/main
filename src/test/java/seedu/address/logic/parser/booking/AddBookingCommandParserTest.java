@@ -11,8 +11,7 @@ import static seedu.address.testutil.CustomerIndexedBookingBuilder.DEFAULT_START
 import org.junit.Test;
 
 import seedu.address.logic.CustomerIndexedBooking;
-import seedu.address.logic.commands.add.AddBookingCommand;
-import seedu.address.logic.parser.AddBookingCommandParser;
+import seedu.address.logic.commands.booking.AddBookingCommand;
 import seedu.address.testutil.CustomerIndexedBookingBuilder;
 
 public class AddBookingCommandParserTest {

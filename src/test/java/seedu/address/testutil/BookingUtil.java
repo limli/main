@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.add.AddBookingCommand;
+import seedu.address.logic.commands.booking.AddBookingCommand;
 
 /**
  * A utility class for Booking.

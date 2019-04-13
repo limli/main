@@ -7,6 +7,7 @@ import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.Capacity;
+import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.member.Member;
 
 /**
@@ -43,8 +44,12 @@ public interface BookingModel {
      * {@code target} must exist in the restaurant book.
      * The booking identity of {@code editedBooking}
      * must not be the same as another existing booking in the restaurant book.
+     * @throws DuplicateItemException if editing will result in a duplicate booking. In that case,
+     * no bookings will be modified. Note that we cannot simply use
+     * {@code !target.isSameItem(editedBooking) && hasPerson(editedBooking)} as that assumes transitivity
+     * of the isSameItem operator.
      */
-    void setBooking(Booking target, Booking editedBooking);
+    void setBooking(Booking target, Booking editedBooking) throws DuplicateItemException;
 
     /**
      * Determines if editing the booking will cause the restaurant to be overbooked
