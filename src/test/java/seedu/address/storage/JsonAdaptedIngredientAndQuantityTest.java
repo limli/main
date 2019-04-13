@@ -45,6 +45,15 @@ public class JsonAdaptedIngredientAndQuantityTest {
     }
 
     @Test
+    public void toModelType_validIngredientDetailsPair_returnsIngredientQuantityPair() throws Exception {
+        JsonAdaptedIngredientAndQuantity ingredient = new JsonAdaptedIngredientAndQuantity(new Pair<>(VALID_INGREDIENT,
+                        new IngredientQuantity(VALID_INGREDIENT_QUANTITY_IN_RECIPE)));
+
+        assertEquals(new Pair<>(VALID_INGREDIENT, new IngredientQuantity(VALID_INGREDIENT_QUANTITY_IN_RECIPE)),
+                ingredient.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidIngredientName_throwsIllegalValueException() {
         JsonAdaptedIngredientAndQuantity ingredient =
                 new JsonAdaptedIngredientAndQuantity(INVALID_INGREDIENT_NAME, VALID_INGREDIENT_QUANTITY_IN_RECIPE,

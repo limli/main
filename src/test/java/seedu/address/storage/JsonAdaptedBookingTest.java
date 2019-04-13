@@ -51,6 +51,12 @@ public class JsonAdaptedBookingTest {
     }
 
     @Test
+    public void toModelType_validBooking_returnsBooking() throws Exception {
+        JsonAdaptedBooking booking = new JsonAdaptedBooking(VALID_BOOKING);
+        assertEquals(VALID_BOOKING, booking.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidCustomerName_throwsIllegalValueException() {
         JsonAdaptedBooking booking =
                 new JsonAdaptedBooking(INVALID_CUSTOMER_NAME, VALID_CUSTOMER_PHONE, VALID_CUSTOMER_EMAIL,
