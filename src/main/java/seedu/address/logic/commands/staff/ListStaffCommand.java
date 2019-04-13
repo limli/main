@@ -18,6 +18,7 @@ import seedu.address.model.person.staff.StaffPredicate;
 public class ListStaffCommand extends Command {
 
     public static final String COMMAND_WORD = "liststaff";
+    public static final String COMMAND_ALIAS = "ls";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all staff whose names contain any of "
             + "the list of words (case-insensitive).\n."
