@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOYALTY_POINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import seedu.address.logic.commands.member.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.member.AddMemberCommand;
+import seedu.address.logic.commands.member.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.model.person.member.Member;
 
 /**
