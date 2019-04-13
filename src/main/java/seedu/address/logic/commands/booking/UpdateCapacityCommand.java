@@ -33,4 +33,11 @@ public class UpdateCapacityCommand extends Command {
         model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, capacity));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UpdateCapacityCommand // instanceof handles nulls
+                && capacity.equals(((UpdateCapacityCommand) other).capacity)); // state check
+    }
 }
