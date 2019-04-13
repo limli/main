@@ -26,8 +26,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditMemberCommand;
-import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.EditMemberCommand;
+import seedu.address.logic.commands.member.EditMemberCommand.EditMemberDescriptor;
+import seedu.address.logic.parser.member.EditMemberCommandParser;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -39,7 +40,7 @@ public class EditMemberCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMemberCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private EditMemberCommandParser parser = new EditMemberCommandParser();
 
     @Test
     public void parse_missingParts_failure() {

@@ -11,9 +11,9 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.StatsWindowHandle;
-import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.member.DeleteMemberCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.ViewStatsDaysCommand;
+import seedu.address.logic.commands.stats.ViewStatsDaysCommand;
 import seedu.address.ui.StatusBarFooter;
 
 /**

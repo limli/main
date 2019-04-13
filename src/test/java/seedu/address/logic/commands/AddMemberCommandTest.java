@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.add.AddMemberCommand;
+import seedu.address.logic.commands.member.AddMemberCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;

@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PERSON_VALID_PHONE_BO
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 public class EditMemberDescriptorTest {
