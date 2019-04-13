@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.person.exceptions.DuplicateItemException;
 
 /**
  * The API that stores the ingredient side of the model.
@@ -31,12 +32,16 @@ public interface IngredientModel {
     void addIngredient(Ingredient ingredient);
 
     /**
-     * Replaces the given member {@code target} with {@code editedMember}.
+     * Replaces the given ingredient {@code target} with {@code editedIngredient}.
      * {@code target} must exist in the restaurant book.
-     * The member identity of {@code editedMember}
-     * must not be the same as another existing member in the restaurant book.
+     * The ingredient identity of {@code editedIngredient}
+     * must not be the same as another existing ingredient in the restaurant book.
+     * @throws DuplicateItemException if editing will result in a duplicate ingredient. In that case,
+     * no ingredients will be modified. Note that we cannot simply use
+     * {@code !target.isSameItem(editedIngredient) && hasPerson(editedIngredient)} as that assumes transitivity
+     * of the isSameItem operator.
      */
-    void setIngredient(Ingredient target, Ingredient editedItem);
+    void setIngredient(Ingredient target, Ingredient editedIngredient) throws DuplicateItemException;
 
     /** Returns an unmodifiable view of the filtered ingredient list */
     ObservableList<Ingredient> getFilteredIngredientList();
@@ -48,7 +53,7 @@ public interface IngredientModel {
     void updateFilteredIngredientList(Predicate<Ingredient> predicate);
 
     /**
-     * Selected booking in the filtered ingredient list.
+     * Selected ingredient in the filtered ingredient list.
      * null if no ingredient is selected.
      */
     ReadOnlyProperty<Ingredient> selectedIngredientProperty();

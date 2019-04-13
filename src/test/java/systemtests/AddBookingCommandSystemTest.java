@@ -1,8 +1,8 @@
 package systemtests;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.add.AddBookingCommand.MESSAGE_DUPLICATE;
-import static seedu.address.logic.commands.add.AddBookingCommand.MESSAGE_FULL;
+import static seedu.address.logic.commands.booking.AddBookingCommand.MESSAGE_DUPLICATE;
+import static seedu.address.logic.commands.booking.AddBookingCommand.MESSAGE_FULL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BENSON;
@@ -15,12 +15,12 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.UpdateCapacityCommand;
+import seedu.address.logic.commands.booking.UpdateCapacityCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddBookingCommandParser;
 import seedu.address.logic.parser.DeleteMemberCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.booking.AddBookingCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;

@@ -16,8 +16,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 
-import seedu.address.logic.commands.EditBookingCommand;
-import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
+import seedu.address.logic.commands.booking.EditBookingCommand.EditBookingDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.RestaurantBook;
