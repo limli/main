@@ -30,6 +30,8 @@ As REM is targeted at _restaurant owners_, it aims to facilitate the management 
     ** Manage the reservations made by the general public
 * Staff management
     ** Manage the contact details of the staff, and facilitate their shift work allocation
+* Statistics
+    ** Collates bookings data into graphs
 * Overall
     ** Collation of feedback by customers, and general statistics of the performance of the restaurant
 
@@ -239,11 +241,11 @@ Shortcut: `em INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
 
 Example:
 
-*`editmember 1 p/91234567 e/johndoe@example.com`
+* `editmember 1 p/91234567 e/johndoe@example.com`
 
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 
-*`editmember 2 n/Betsy Crower`
+* `editmember 2 n/Betsy Crower`
 
 Edits the name of the 2nd person to be Betsy Crower.
 
@@ -852,6 +854,7 @@ Format: `ratingStats`
 
 === Member Management
 
+
 * *addMember*
 *** Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
 *** Shortcut: `am n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
@@ -871,6 +874,7 @@ Format: `ratingStats`
 *** Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
 *** Shortcut: `em INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
 *** e.g. `editmember 1 p/91234567 e/johndoe@example.com`
+
 
 
 === Inventory Management
@@ -977,4 +981,5 @@ e.g. `deleteStaff 3`
 *** Format: `statstime DAYS`
 *** Shortcut: `st DAYS`
 *** e.g. `statstime 30`
+
 
