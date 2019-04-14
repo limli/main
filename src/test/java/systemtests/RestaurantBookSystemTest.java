@@ -2,6 +2,7 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
@@ -28,9 +29,8 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ListIngredientsCommand;
-import seedu.address.logic.commands.ListMembersCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.ingredient.ListIngredientsCommand;
+import seedu.address.logic.commands.member.ListMembersCommand;
 import seedu.address.model.Model;
 import seedu.address.model.RestaurantBook;
 import seedu.address.testutil.TypicalMembers;
@@ -140,13 +140,6 @@ public abstract class RestaurantBookSystemTest {
                 < getModel().getRestaurantBook().getMemberList().size());
     }
 
-    /**
-     * Selects the member at {@code index} of the displayed list.
-     */
-    protected void selectMember(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getMemberListPanel().getSelectedCardIndex());
-    }
 
     /**
      * Deletes all members in the address book.
