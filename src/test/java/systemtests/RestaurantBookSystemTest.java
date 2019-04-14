@@ -2,6 +2,7 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.member.ListMembersCommand;
 import seedu.address.model.Model;
 import seedu.address.model.RestaurantBook;
 import seedu.address.testutil.TypicalMembers;
@@ -133,7 +135,7 @@ public abstract class RestaurantBookSystemTest {
      * Displays all members with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showMembersWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(ListMembersCommand.COMMAND_WORD + " " + PREFIX_NAME + keyword);
         assertTrue(getModel().getFilteredMemberList().size()
                 < getModel().getRestaurantBook().getMemberList().size());
     }
