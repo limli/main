@@ -18,7 +18,7 @@ import seedu.address.model.person.staff.Staff;
  */
 public class AddStaffCommand extends Command {
     public static final String COMMAND_WORD = "addstaff";
-    public static final String COMMAND_ALIAS = "sa";
+    public static final String COMMAND_ALIAS = "as";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a staff to the restaurant.\n"
             + "Parameters: "

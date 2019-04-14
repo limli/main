@@ -19,6 +19,8 @@ import seedu.address.model.ingredient.IngredientNameAndWarningAmountPredicate;
 public class ListIngredientsCommand extends Command {
 
     public static final String COMMAND_WORD = "listingredients";
+    public static final String COMMAND_ALIAS = "li";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all ingredients whose names contain any of "
             + "the specified keywords (case-insensitive) and has quantity less than warning amount.\n"

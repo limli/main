@@ -19,6 +19,8 @@ import seedu.address.model.person.member.NameAndLoyaltyPointsPredicate;
 public class ListMembersCommand extends Command {
 
     public static final String COMMAND_WORD = "listmembers";
+    public static final String COMMAND_ALIAS = "lm";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members whose names contain any of "
             + "the list of words (case-insensitive) and who has at least the specified amount of loyalty points.\n."
