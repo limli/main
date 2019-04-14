@@ -75,7 +75,6 @@ class JsonSerializableRestaurantBook {
         bookings.addAll(source.getBookingList().stream()
                 .map(JsonAdaptedBooking::new).collect(Collectors.toList()));
         intCapacity = source.getCapacity().getValue();
-
     }
 
     /**
@@ -118,19 +117,19 @@ class JsonSerializableRestaurantBook {
             restaurantBook.addStaff(staff);
         }
 
+        try {
+            Capacity capacity = new Capacity(intCapacity);
+            restaurantBook.setCapacity(capacity);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(Capacity.MESSAGE_CONSTRAINTS);
+        }
+
         for (JsonAdaptedBooking jsonAdaptedBooking : bookings) {
             Booking booking = jsonAdaptedBooking.toModelType();
             if (restaurantBook.hasBooking(booking)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_BOOKING);
             }
             restaurantBook.addBooking(booking);
-        }
-
-        try {
-            Capacity capacity = new Capacity(intCapacity);
-            restaurantBook.setCapacity(capacity);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(Capacity.MESSAGE_CONSTRAINTS);
         }
 
         return restaurantBook;

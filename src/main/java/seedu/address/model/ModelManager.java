@@ -273,6 +273,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setCapacity(Capacity newCapacity) {
+        logger.info("Capacity changed from " + getCapacity() + " to " + newCapacity);
         versionedRestaurantBook.setCapacity(newCapacity);
     }
 
