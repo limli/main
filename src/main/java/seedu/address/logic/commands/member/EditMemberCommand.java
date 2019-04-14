@@ -31,7 +31,7 @@ import seedu.address.model.person.member.Member;
 public class EditMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "editmember";
-    public static final String COMMAND_ALIAS = "e";
+    public static final String COMMAND_ALIAS = "em";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list.\n"

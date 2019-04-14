@@ -8,27 +8,26 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.ConsumeIngredientCommand;
-import seedu.address.logic.commands.DeleteIngredientCommand;
-import seedu.address.logic.commands.DeleteRecipeCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListIngredientsCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.RestockIngredientCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.add.AddIngredientCommand;
-import seedu.address.logic.commands.add.AddRecipeCommand;
 import seedu.address.logic.commands.booking.AddBookingCommand;
 import seedu.address.logic.commands.booking.DeleteBookingCommand;
 import seedu.address.logic.commands.booking.EditBookingCommand;
 import seedu.address.logic.commands.booking.UpdateCapacityCommand;
+import seedu.address.logic.commands.ingredient.AddIngredientCommand;
+import seedu.address.logic.commands.ingredient.ConsumeIngredientCommand;
+import seedu.address.logic.commands.ingredient.DeleteIngredientCommand;
+import seedu.address.logic.commands.ingredient.ListIngredientsCommand;
+import seedu.address.logic.commands.ingredient.RestockIngredientCommand;
 import seedu.address.logic.commands.member.AddMemberCommand;
 import seedu.address.logic.commands.member.DeleteMemberCommand;
 import seedu.address.logic.commands.member.EditMemberCommand;
 import seedu.address.logic.commands.member.ListMembersCommand;
+import seedu.address.logic.commands.recipe.AddRecipeCommand;
+import seedu.address.logic.commands.recipe.DeleteRecipeCommand;
 import seedu.address.logic.commands.staff.AddShiftCommand;
 import seedu.address.logic.commands.staff.AddStaffCommand;
 import seedu.address.logic.commands.staff.DeleteShiftCommand;
@@ -42,10 +41,17 @@ import seedu.address.logic.parser.booking.DeleteBookingCommandParser;
 import seedu.address.logic.parser.booking.EditBookingCommandParser;
 import seedu.address.logic.parser.booking.UpdateCapacityCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.ingredient.AddIngredientCommandParser;
+import seedu.address.logic.parser.ingredient.ConsumeIngredientCommandParser;
+import seedu.address.logic.parser.ingredient.DeleteIngredientCommandParser;
+import seedu.address.logic.parser.ingredient.ListIngredientsCommandParser;
+import seedu.address.logic.parser.ingredient.RestockIngredientCommandParser;
 import seedu.address.logic.parser.member.AddMemberCommandParser;
 import seedu.address.logic.parser.member.DeleteMemberCommandParser;
 import seedu.address.logic.parser.member.EditMemberCommandParser;
 import seedu.address.logic.parser.member.ListMembersCommandParser;
+import seedu.address.logic.parser.recipe.AddRecipeCommandParser;
+import seedu.address.logic.parser.recipe.DeleteRecipeCommandParser;
 import seedu.address.logic.parser.staff.AddShiftCommandParser;
 import seedu.address.logic.parser.staff.AddStaffCommandParser;
 import seedu.address.logic.parser.staff.DeleteShiftCommandParser;
@@ -107,6 +113,7 @@ public class RestaurantBookParser {
             return new AddShiftCommandParser().parse(arguments);
 
         case UpdateCapacityCommand.COMMAND_WORD:
+        case UpdateCapacityCommand.COMMAND_ALIAS:
             return new UpdateCapacityCommandParser().parse(arguments);
 
         case EditMemberCommand.COMMAND_WORD:
@@ -149,11 +156,9 @@ public class RestaurantBookParser {
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS:
-            return new ListCommand();
 
         case ListMembersCommand.COMMAND_WORD:
+        case ListMembersCommand.COMMAND_ALIAS:
             return new ListMembersCommandParser().parse(arguments);
 
         case ListStaffCommand.COMMAND_WORD:
@@ -189,12 +194,15 @@ public class RestaurantBookParser {
             return new ConsumeIngredientCommandParser().parse(arguments);
 
         case ListIngredientsCommand.COMMAND_WORD:
+        case ListIngredientsCommand.COMMAND_ALIAS:
             return new ListIngredientsCommandParser().parse(arguments);
 
         case ViewStatsDaysCommand.COMMAND_WORD:
+        case ViewStatsDaysCommand.COMMAND_ALIAS:
             return new ViewStatsDaysCommandParser().parse(arguments);
 
         case ViewStatsTimeCommand.COMMAND_WORD:
+        case ViewStatsTimeCommand.COMMAND_ALIAS:
             return new ViewStatsTimeCommandParser().parse(arguments);
 
         default:

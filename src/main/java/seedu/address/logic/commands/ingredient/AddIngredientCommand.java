@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.add;
+package seedu.address.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
@@ -18,7 +18,7 @@ import seedu.address.model.ingredient.Ingredient;
  */
 public class AddIngredientCommand extends Command {
     public static final String COMMAND_WORD = "addingredient";
-    public static final String COMMAND_ALIAS = "ia";
+    public static final String COMMAND_ALIAS = "ai";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the book.\n"
             + "Parameters: "

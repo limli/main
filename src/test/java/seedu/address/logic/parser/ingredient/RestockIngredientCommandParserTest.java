@@ -11,8 +11,7 @@ import static seedu.address.testutil.TypicalIngredients.TYPICAL_CONSUME_AMOUNT;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.RestockIngredientCommand;
-import seedu.address.logic.parser.RestockIngredientCommandParser;
+import seedu.address.logic.commands.ingredient.RestockIngredientCommand;
 import seedu.address.model.ingredient.IngredientQuantity;
 
 

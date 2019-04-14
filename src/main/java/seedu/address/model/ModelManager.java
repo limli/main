@@ -261,12 +261,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setRecipe(Recipe target, Recipe editedRecipe) {
-        requireAllNonNull(target, editedRecipe);
-        versionedRestaurantBook.setRecipe(target, editedRecipe);
-    }
-
-    @Override
     public Capacity getCapacity() {
         return versionedRestaurantBook.getCapacity();
     }
@@ -415,11 +409,6 @@ public class ModelManager implements Model {
     @Override
     public Ingredient getSelectedIngredient() {
         return selectedIngredient.getValue();
-    }
-
-    @Override
-    public Recipe getSelectedRecipe() {
-        return selectedRecipe.getValue();
     }
 
     @Override

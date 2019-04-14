@@ -37,9 +37,15 @@ public class TypicalIngredients {
             new IngredientBuilder().withIngredientName("juice")
             .withIngredientQuantity(5).withIngredientUnit("bottles")
             .withIngredientWarningAmount(1).build();
+    public static final Ingredient TOMATO_KETCHUP =
+            new IngredientBuilder().withIngredientName("tomato ketchup")
+                    .withIngredientQuantity(0).withIngredientUnit("bottles")
+                    .withIngredientWarningAmount(0).build();
 
     public static final int TYPICAL_RESTOCK_AMOUNT = 1;
     public static final int TYPICAL_CONSUME_AMOUNT = 1;
+    public static final String KEYWORD_MATCHING_TOMATO = "tomato"; // A keyword that matches MEIER
+
 
 
     private TypicalIngredients() {} // prevents instantiation

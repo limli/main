@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.recipe;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECIPE_INGREDIENT_AND_QUANTITY;
@@ -8,7 +8,11 @@ import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.IngredientIndexedRecipe;
-import seedu.address.logic.commands.add.AddRecipeCommand;
+import seedu.address.logic.commands.recipe.AddRecipeCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ingredient.IngredientQuantity;
 import seedu.address.model.recipe.RecipeName;

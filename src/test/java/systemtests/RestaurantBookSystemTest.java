@@ -2,6 +2,8 @@ package systemtests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -27,7 +29,7 @@ import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.TestApp;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ingredient.ListIngredientsCommand;
 import seedu.address.logic.commands.member.ListMembersCommand;
 import seedu.address.model.Model;
 import seedu.address.model.RestaurantBook;
@@ -124,7 +126,7 @@ public abstract class RestaurantBookSystemTest {
      * Displays all members in the address book.
      */
     protected void showAllMembers() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(ListMembersCommand.COMMAND_WORD);
         assertEquals(getModel().getRestaurantBook().getMemberList().size(),
                 getModel().getFilteredMemberList().size());
     }
@@ -145,6 +147,25 @@ public abstract class RestaurantBookSystemTest {
     protected void deleteAllMembers() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getRestaurantBook().getMemberList().size());
+    }
+
+    /**
+     * Displays all ingredients with any parts of their names matching {@code keyword} (case-insensitive).
+     */
+    protected void showIngredientsWithName(String keyword) {
+        executeCommand(ListIngredientsCommand.COMMAND_WORD + " " + PREFIX_INGREDIENT_NAME + keyword);
+        System.out.println(getModel().getFilteredIngredientList());
+        System.out.println(getModel().getRestaurantBook().getIngredientList().size());
+        assertTrue(getModel().getFilteredIngredientList().size()
+                < getModel().getRestaurantBook().getIngredientList().size());
+    }
+
+    /**
+     * Deletes all ingredients in the address book.
+     */
+    protected void deleteAllIngredients() {
+        executeCommand(ClearCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getRestaurantBook().getIngredientList().size());
     }
 
     /**

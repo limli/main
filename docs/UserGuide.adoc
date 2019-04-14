@@ -96,6 +96,52 @@ Removes all data from REM.
 
 Format: `clear`
 
+
+==== Undoing previous command : `undo`
+
+Restores the restaurant book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the restaurant book's content (`add`, `delete`, `edit` and `clear`).
+====
+
+Examples:
+
+* `deleteMember 1` +
+`undo` (reverses the `deleteMember 1` command) +
+
+
+
+* `deleteMember 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `deleteMember 1` command) +
+
+==== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `deleteMember 1` +
+`undo` (reverses the `deleteMember 1` command) +
+`redo` (reapplies the `deleteMember 1` command) +
+
+* `deleteMember 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `deleteMember 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `deleteMember 1` command) +
+`redo` (reapplies the `deleteMember 1` command) +
+`redo` (reapplies the `clear` command) +
+
+
 ==== History: `history`
 
 Lists commands entered, displayed from most recent to earliest.
@@ -109,7 +155,8 @@ Format: `history`
 
 Adds a customer who signs up for membership.
 
-Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
+Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]` +
+Shortcut: `am n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
 
 ****
 • If loyalty points is not specified, it will be taken to be 0.
@@ -117,12 +164,13 @@ Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
 
 Example:
 
-* `addMember n/John Doe e/johnd@gmail.com p/81234567`
+* `addMember n/John Doe e/johnd@gmail.com p/81234567 l/20`
 
 ==== List Members: `listMembers`
 Lists all members whose names contain any of the list of words (case-insensitive) and who has at least the specified amount of loyalty points.
 
-Format: `listMembers [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]`
+Format: `listMembers [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]` +
+Shortcut: `lm [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]`
 
 ****
 • If loyalty points is not specified, it will be taken to be 0.
@@ -160,7 +208,8 @@ Lists all members.
 
 Deletes the specified member from the management system. Note that this action also deletes all bookings made by the member.
 
-Format: `deleteMember INDEX`
+Format: `deleteMember INDEX` +
+Shortcut: `dm INDEX`
 
 ****
 • Deletes the member at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
@@ -183,7 +232,8 @@ Deletes the 1st member in the results of the listMembers command.
 ==== Edit Member: `editMember`
 Edits an existing member in the restaurant book.
 
-Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
+Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]` +
+Shortcut: `em INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
 
 ****
 • Edits the member at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
@@ -243,7 +293,8 @@ Example:
 List all ingredients in the inventory that has ingredient name containing any of the key words inputted,
 and has ingredient quantity falling below the ingredient warning amount.
 
-Format: `listIngredients [in/INGREDIENT_NAME] [w/]`
+Format: `listIngredients [in/INGREDIENT_NAME] [w/]` +
+Shortcut: `li [in/INGREDIENT_NAME] [w/]`
 
 ****
 • If `in/INGREDIENT_NAME` is present, all ingredients with name containing any of the key words inputted will be listed.
@@ -274,7 +325,8 @@ ingredient warning amount will be listed.
 
 Adds new ingredient into inventory. Previously not existing in inventory before.
 
-Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
+Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]` +
+Shortcut: `ai in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
 
 ****
 • `INGREDIENT_NAME` and `INGREDIENT_UNIT` must contain only alphabets and spaces, and must contain at least 2 characters of the alphabet. (i.e, `in/c` is not accepted while `in/ch` is).
@@ -307,9 +359,10 @@ Adds 10 packets of chicken wing into inventory and when quantity in inventory fa
 
 ==== Delete Ingredient: `deleteIngredient`
 
-Deletes the specified ingredient from the restaurant book. Note that this action also deletes all recipes that contain this ingredient.
+Deletes the specified ingredient from the restaurant book. Note that this action also deletes all recipes that contain this ingredient, and all affected recipes will be shown upon deletion.
 
-Format: `deleteIngredient INDEX`
+Format: `deleteIngredient INDEX` +
+Shortcut: `di INDEX`
 
 ****
 • The index refers to the index number shown in the most recent listing.
@@ -328,7 +381,8 @@ Delete chicken from inventory
 Restock an ingredient in inventory, by a particular amount, based on specified `INDEX` via `listIngredients`.
 Previously existing in inventory before.
 
-Format: `restockIngredient i/INDEX q/INGREDIENT_QUANTITY`
+Format: `restockIngredient i/INDEX q/INGREDIENT_QUANTITY` +
+Shortcut: `ri i/INDEX q/INGREDIENT_QUANTITY`
 
 ****
 • New ingredient quantity after `restockIngredient` command was called, must be an integer with value at most 2,147,483,647.
@@ -348,7 +402,8 @@ after `restockIngredient i/3 q/10` was called, will be 30.
 
 Consume a particular amount of ingredient from inventory, based on specified `INDEX` via `listIngredients`.
 
-Format: `consumeIngredient i/INDEX q/INGREDIENT_QUANTITY`
+Format: `consumeIngredient i/INDEX q/INGREDIENT_QUANTITY` +
+Shortcut: `ci i/INDEX q/INGREDIENT_QUANTITY`
 
 ****
 • Ingredient quantity to be consumed must be at most the ingredient quantity present in the inventory.
@@ -371,7 +426,8 @@ Decreases the quantity of chickens by 10 in the inventory. Assuming that the pre
 
 Add recipe of dish served at the restaurant.
 
-Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
+Format: `addRecipe r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...` +
+Shortcut: `ar r/RECIPE_NAME iq/INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
 
 ****
 • The index refers to the index number shown in the most recent listing of ingredients in the ingredients panel.
@@ -398,15 +454,15 @@ Example:
 
 (Assuming that the restaurant book is empty.)
 
-.  `addingredient in/cheese u/slices q/20`
-   `addingredient in/fries u/packets q/10`
-   * Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
+.  `addIngredient in/cheese u/slices q/20` +
+   `addIngredient in/fries u/packets q/10`
+   * These commands add cheese and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
 +
 .Successfully adding 2 ingredients into restaurant book
-image::addRecipe-addIngredientCommand.png[width=300]
+image::addRecipe-addIngredientCommand.png[width=1000]
 
-.  `addrecipe r/cheese fries iq/1&1 iq/2&1`
-    • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
+.  `addRecipe r/cheese fries iq/1&1 iq/2&1`
+    • This command adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
     packet of fries is needed.
     • There are 20 slices of cheese sufficient for 20 servings of cheese fries, but only 10 packets of fries sufficient for 10 servings of cheese fries.
     Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
@@ -414,8 +470,8 @@ image::addRecipe-addIngredientCommand.png[width=300]
 .Successfully adding 1 recipe, displaying the number of servings possible.
 image::addRecipe-successful.png[width=1000]
 
-.  `restockingredient i/2 q/10`
-    • Restocks fries by 10 packets, and change in ingredient quantity is reflected in ingredient's panel.
+.  `restockIngredient i/2 q/10`
+    • Restocks fries by 10 packets, and change in ingredient quantity of fries is reflected in ingredient's panel.
     • Now, there are 20 slices of cheese sufficient for 20 servings of cheese fries, and 20 packets of fries sufficient for 20 servings of cheese fries.
     Overall, there can be 20 servings of cheese fries prepared. Upon success, the recipe panel should look like this, with the reflected
     change in number of servings of cheese fries:
@@ -430,7 +486,8 @@ image::addRecipe-restockIngredient.png[width=1000]
 
 Delete a recipe based on specified INDEX via `listRecipes`.
 
-Format: `deleteRecipe INDEX`
+Format: `deleteRecipe INDEX` +
+Shortcut:  `dr INDEX`
 
 ****
 • Deletes the recipe at the specified `INDEX`. The index refers to the index number shown in the most recent listing of recipe.
@@ -464,7 +521,8 @@ The booking section models booking made by members.
 
 View the current lists of bookings within a certain time frame
 
-Format: `listBookings [ts/TIME_START] [te/TIME_END]`
+Format: `listBookings [ts/TIME_START] [te/TIME_END]` +
+Shortcut: `em INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
 
 ****
 • The start and end times are optional arguments. If not specified, the list of all bookings (i.e. including future and past bookings) made so far will be displayed.
@@ -478,7 +536,8 @@ Example:
 
 Want to ensure that your restaurant does not get overbooked? Make sure to update the capacity of the restaurant accordingly.
 
-Format: `updateCapacity NUMBER`
+Format: `updateCapacity NUMBER` +
+Shortcut: `uc NUMBER`
 
 ****
 • The default capacity of the restaurant is 200.
@@ -495,7 +554,8 @@ This updates the restaurants to cater for a capacity of 50 customers. If any ope
 
 Creates a new booking.
 
-Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
+Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START` +
+Shortcut: `ab c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
 
 ****
 • All bookings will last for 1 hour, although the end time is not shown in the UI.
@@ -528,7 +588,8 @@ image::altbookingtime.png[width="800"]
 ==== Edit Booking: `editBooking`
 Edits a booking by changing either the time, number of persons of both.
 
-Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
+Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]` +
+Shortcut: `eb INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
 
 ****
 • Edits the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing. REM will not execute this operation if this causes capacity to be exceeded.
@@ -547,7 +608,8 @@ Edits the booking at index 4, changing the booking time to 30 March 2019, 12:00.
 ==== Delete Booking: `deleteBooking`
 Deletes a booking.
 
-Format: `deleteBooking INDEX`
+Format: `deleteBooking INDEX` +
+Shortcut: `db INDEX`
 
 ****
 • Deletes the booking at the specified `INDEX`. The index refers to the index number shown in the most recent listing.
@@ -570,7 +632,8 @@ Deletes the booking with index 3.
 Add a new staff member to the list of all staff.
 The name of the new staff member must not be identical to the name of any existing staff member.
 
-Format: `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
+Format: `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT` +
+Shortcut: `as n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
 
 ****
 * `NAME` must only contain alphanumeric characters and spaces.
@@ -589,7 +652,8 @@ Adds a new staff with name John Doe, phone number 91234567, email john@example.c
 
 Lists all staff members whose names and appointments contain a certain list of given keywords.
 
-Format: `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]`
+Format: `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]` +
+Shortcut: `ls [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]`
 
 ****
 * Keywords should be separated by spaces.
@@ -610,7 +674,8 @@ Displays all staff members who are cooks, and whose names contain the words 'ali
 
 Deletes the staff member with the specified index from the system.
 
-Format: `deleteStaff INDEX`
+Format: `deleteStaff INDEX` +
+Shortcut: `ds INDEX`
 
 ****
 * `INDEX` must be a valid index number in the most recent listing.
@@ -626,7 +691,8 @@ Deletes the staff at index 3 shown in the most recent listing.
 
 Edits the staff member with the specified index.
 
-Format: `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
+Format: `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]` +
+Shortcut: `es INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
 
 ****
 * `INDEX` must be a valid index number in the most recent listing.
@@ -644,7 +710,8 @@ Edits the staff at index 1 shown in the most recent listing, by changing the pho
 Adds a shift to the shift roster of an existing staff member in the restaurant with the specified index.
 The new shift added must start and end on different days of the week, must have a positive duration, and must not clash with any existing shift.
 
-Format: `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+Format: `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME` +
+Shortcut: `ash INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
 
 ****
 * `START_DAY_OF_WEEK` and `END_DAY_OF_WEEK` must be one of `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
@@ -662,7 +729,8 @@ Adds a shift from 12pm to 2pm every Monday to the roster of the staff member wit
 Deletes a shift from the shift roster of an existing staff member in the restaurant with the specified index.
 The shift to be deleted must exist in the specified staff member's shift roster.
 
-Format: `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+Format: `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME` +
+Shortcut: `dsh INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
 
 ****
 * The requirements for the fields `START_DAY_OF_WEEK`, `START_TIME`, `END_DAY_OF_WEEK`, `END_TIME` are identical to that of the addShift command.
@@ -683,7 +751,8 @@ Deletes the shift from 8am to 10.30am every Tuesday from the roster of the staff
 
 Displays the number of customers in bookings over the past few days in a bar graph.
 
-Format: `statsdays DAYS`
+Format: `statsdays DAYS` +
+Shortcut: `sd DAYS`
 
 ****
 • `DAYS` is an integer from 1 to 10000, inclusive
@@ -701,7 +770,8 @@ Example:
 
 Displays the number of customers in bookings over the past few days in a bar graph, grouped by hour of the day.
 
-Format: `statstime DAYS`
+Format: `statstime DAYS` +
+Shortcut: `st DAYS`
 
 ****
 • `DAYS` is an integer from 1 to 10000, inclusive
@@ -776,82 +846,141 @@ Format: `ratingStats`
 
 * *history* `history`
 
+* *undo* `undo`
+
+* *redo* `redo`
+
+
+
 === Member Management
 
-* *addMember* `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]` +
-e.g. `addMember n/John Doe e/johnd@gmail.com p/81234567`
 
-* *listMembers* `listMembers [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]` +
-e.g. `listMembers n/bob`, `listMembers l/20`
+* *addMember*
+*** Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
+*** Shortcut: `am n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
+*** e.g. ``addMember n/John Doe e/johnd@gmail.com p/81234567 l/20`
 
-* *deleteMember* `deleteMember INDEX` +
-e.g. `deleteMember 2`
+* *listMembers*
+*** Format: `listMembers [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]`
+*** Shortcut: `lm [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]`
+*** e.g. `listMembers n/Betsy Tim l/6`
+
+* *deleteMember*
+*** Format: `deleteMember INDEX`
+*** Shortcut: `dm INDEX`
+*** e.g. `deleteMember 2`
+
+* *editMember*
+*** Format: `editMember INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
+*** Shortcut: `em INDEX [n/NAME] [p/PHONE] [e/EMAIL] [l/LOYALTY_POINTS]`
+*** e.g. `editmember 1 p/91234567 e/johndoe@example.com`
+
+
 
 === Inventory Management
 
-* *listIngredients* `listIngredients [in/INGREDIENT_NAME] [w/]` +
-e.g. `listIngredients in/tomato w/`
+* *listIngredients*
+*** Format: `listIngredients [in/INGREDIENT_NAME] [w/]` +
+*** Shortcut: `li [in/INGREDIENT_NAME] [w/]`
+*** e.g. `listIngredients in/tomato w/`
 
-* *addIngredient* `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]` +
-e.g. `addIngredient in/chicken u/full chickens q/100 w/10`
+* *addIngredient*
+*** Format: `addIngredient in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
+*** Shortcut: `ai in/INGREDIENT_NAME u/INGREDIENT_UNIT [q/INGREDIENT_QUANTITY] [w/INGREDIENT_WARNING_AMOUNT]`
+*** e.g. `addIngredient in/chicken u/full chickens q/100 w/10`
 
-* *restockIngredient* `restockIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY` +
-e.g. `restockIngredient i/3 q/10`
+* *restockIngredient*
+*** Format: `restockIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY`
+*** Shortcut: `ri i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY`
+*** e.g. `restockIngredient i/3 q/10`
 
-* *consumeIngredient* `consumeIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY` +
-e.g. `consumeIngredient i/3 q/10`
+* *consumeIngredient*
+*** Format: `consumeIngredient i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY`
+*** Shortcut: `ci i/INGREDIENT_INDEX q/INGREDIENT_QUANTITY`
+*** e.g. `consumeIngredient i/3 q/10`
 
-* *deleteIngredient* `delete INDEX` +
-e.g. `deleteIngredient 3`
+* *deleteIngredient*
+*** Format: `deleteIngredient INDEX`
+*** Shortcut: `di INDEX`
+*** e.g. `deleteIngredient 3`
 
-* *addRecipe*  `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE ...` +
-e.g. `addRecipe r/Chicken Rice iq/4&1 iq/9&3`
+* *addRecipe*
+*** Format: `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE ...`
+*** Shortcut: `ar r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE ...`
+*** e.g. `addRecipe r/Chicken Rice iq/4&1 iq/9&3`
 
-* *deleteRecipe* `delete INDEX` +
-e.g. `deleteRecipe 3`
+* *deleteRecipe*
+*** Format: `deleteRecipe INDEX`
+*** Shortcut: `dr INDEX`
+*** e.g. `deleteRecipe 3`
 
-* *recipeSummary* `recipeSummary` +
-e.g. `recipeSummary`
 
 === Booking Management
 
-* *updateCapacity* `updateCapacity NUMBER` +
-e.g. `updateCapacity 50`
+* *updateCapacity*
+*** Format: `updateCapacity NUMBER`
+*** Shortcut: `uc NUMBER`
+*** e.g. `updateCapacity 50`
 
-* *addBooking* `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START` +
-e.g. `addBooking c/1 n/7 ts/2019-04-07T12:00`
 
-* *deleteBooking* `deleteBooking INDEX` +
-e.g. `deleteBooking 3`
+* *addBooking*
+*** Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START`
+*** Shortcut: `ab c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START`
+*** e.g. `addBooking c/1 n/7 ts/2019-04-07T12:00`
 
-* *editBooking* `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]` +
-e.g. `editBooking 3 ts/12:00 n/6`
+* *deleteBooking*
+*** Format: `deleteBooking INDEX`
+*** Shortcut: `db INDEX`
+*** e.g. `deleteBooking 3`
+
+* *editBooking*
+*** Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
+*** Shortcut: `eb INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
+*** e.g. `editBooking 3 ts/12:00 n/6`
 
 === Staff Management
 
-* *addStaff* `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT` +
-e.g. `addStaff n/John Doe p/91234567 e/john@example.com a/Waiter`
+* *addStaff*
+*** Format: `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
+*** Shortcut: `as n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
+*** e.g. `addStaff n/John Doe p/91234567 e/john@example.com a/Waiter`
 
-* *listStaff* `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]` +
-e.g. `listStaff n/alice bob charlie a/cook`
+* *listStaff*
+*** Format: `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]`
+*** Shortcut: `ls [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]`
+*** e.g. `listStaff n/alice bob charlie a/cook`
 
-* *deleteStaff* `deleteStaff INDEX` +
+* *deleteStaff*
+*** Format: `deleteStaff INDEX`
+*** Shortcut: `ds INDEX`
 e.g. `deleteStaff 3`
 
-* *editStaff* `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]` +
-e.g. `addshift 1 sd/MONDAY ts/12:00 ed/MONDAY te/14:00`
+* *editStaff*
+*** Format: `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
+*** Shortcut: `es INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
+*** e.g. `editStaff 1 p/98765432 a/Manager`
 
-* *addShift* `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME` +
-e.g. `setShift 1 1200 1530`
+* *addShift*
+*** Format: `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+*** Shortcut: `ash INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+*** e.g. `addshift 1 sd/MONDAY ts/12:00 ed/MONDAY te/14:00`
 
-* *deleteShift* `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME` +
-e.g. `deleteshift 1 sd/TUESDAY ts/08:00 ed/TUESDAY te/10:30`
+* *deleteShift*
+*** Format: `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+*** Shortcut: `dsh INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
+*** e.g. `deleteshift 1 sd/TUESDAY ts/08:00 ed/TUESDAY te/10:30`
+
 
 === Statistics
 
-* *statsdays* `statsdays DAYS` +
-e.g. `statsdays 30`
+* *statsdays*
+*** Format: `statsdays DAYS`
+*** Shortcut: `sd DAYS`
+*** e.g. `statsdays 30`
 
-* *statstime* `statstime DAYS` +
-e.g. `statstime 30`
+* *statstime*
+*** Format: `statstime DAYS`
+*** Shortcut: `st DAYS`
+*** e.g. `statstime 30`
+
 

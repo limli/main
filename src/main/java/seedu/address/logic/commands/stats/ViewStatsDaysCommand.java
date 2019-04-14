@@ -13,6 +13,8 @@ import seedu.address.ui.StatsWindow;
 public class ViewStatsDaysCommand extends Command {
 
     public static final String COMMAND_WORD = "statsdays";
+    public static final String COMMAND_ALIAS = "sd";
+
     public static final String MESSAGE_SHOWING_STATS = "Opened stats window.";
     public static final String MESSAGE_SIZE_CONSTRAINTS = "Days should be an integer between 1 and "
             + Statistics.getMaxDays() + " inclusive.";

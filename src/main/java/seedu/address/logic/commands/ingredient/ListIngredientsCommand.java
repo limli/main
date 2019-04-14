@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.ingredient;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_WARNINGAMOU
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ingredient.IngredientNameAndWarningAmountPredicate;
 
@@ -17,6 +19,8 @@ import seedu.address.model.ingredient.IngredientNameAndWarningAmountPredicate;
 public class ListIngredientsCommand extends Command {
 
     public static final String COMMAND_WORD = "listingredients";
+    public static final String COMMAND_ALIAS = "li";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all ingredients whose names contain any of "
             + "the specified keywords (case-insensitive) and has quantity less than warning amount.\n"

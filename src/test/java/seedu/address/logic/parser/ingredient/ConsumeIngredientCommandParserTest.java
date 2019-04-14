@@ -10,8 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INGREDIENT;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ConsumeIngredientCommand;
-import seedu.address.logic.parser.ConsumeIngredientCommandParser;
+import seedu.address.logic.commands.ingredient.ConsumeIngredientCommand;
 import seedu.address.model.ingredient.IngredientQuantity;
 
 public class ConsumeIngredientCommandParserTest {

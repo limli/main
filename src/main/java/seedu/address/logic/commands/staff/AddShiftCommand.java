@@ -27,7 +27,7 @@ import seedu.address.model.person.staff.Staff;
  */
 public class AddShiftCommand extends Command {
     public static final String COMMAND_WORD = "addshift";
-    public static final String COMMAND_ALIAS = "as";
+    public static final String COMMAND_ALIAS = "ash";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift for a staff member identified "
             + "by the index number used in the displayed staff list.\n"

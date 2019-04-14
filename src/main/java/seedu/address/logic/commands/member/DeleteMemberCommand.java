@@ -19,7 +19,7 @@ import seedu.address.model.person.member.Member;
 public class DeleteMemberCommand extends Command {
 
     public static final String COMMAND_WORD = "deletemember";
-    public static final String COMMAND_ALIAS = "d";
+    public static final String COMMAND_ALIAS = "dm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the member identified by the index number used in the displayed member list.\n"
