@@ -1,17 +1,14 @@
 package systemtests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.StatsWindowHandle;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.member.DeleteMemberCommand;
 import seedu.address.logic.commands.stats.ViewStatsDaysCommand;
 import seedu.address.ui.StatusBarFooter;
