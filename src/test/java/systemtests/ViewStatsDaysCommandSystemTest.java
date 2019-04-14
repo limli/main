@@ -36,13 +36,6 @@ public class ViewStatsDaysCommandSystemTest extends RestaurantBookSystemTest {
         executeCommand(ViewStatsDaysCommand.COMMAND_WORD + " 30");
         assertStatiWindowOpen();
 
-        // assert that while the stats window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        assertNotEquals(ViewStatsDaysCommand.MESSAGE_SHOWING_STATS, getResultDisplay().getText());
-        assertListMatching(getMemberListPanel(), getModel().getFilteredMemberList());
-
         // assert that the status bar too is updated correctly while the stats window is open
         // note: the select command tested above does not update the status bar
         executeCommand(DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());

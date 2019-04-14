@@ -54,13 +54,6 @@ public class HelpCommandSystemTest extends RestaurantBookSystemTest {
         executeCommand(HelpCommand.COMMAND_WORD);
         getMainWindowHandle().focus();
 
-        // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals("", getCommandBox().getInput());
-        assertCommandBoxShowsDefaultStyle();
-        assertNotEquals(HelpCommand.MESSAGE_SHOWING_HELP, getResultDisplay().getText());
-        assertListMatching(getMemberListPanel(), getModel().getFilteredMemberList());
-
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
         executeCommand(DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());

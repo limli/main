@@ -124,18 +124,14 @@ public class EditMemberCommandSystemTest extends RestaurantBookSystemTest {
 
         /* --------------------- Performing edit operation while a member card is selected -------------------------- */
 
-        /* Case: selects first card in the member list, edit a member -> edited, card selection remains unchanged but
-         * browser url changes
-         */
         showAllMembers();
         index = INDEX_FIRST;
-        selectMember(index);
         command = EditMemberCommand.COMMAND_WORD + " " + index.getOneBased()
                 + PERSON_NAME_DESC_AMY + PERSON_PHONE_DESC_AMY
                 + PERSON_EMAIL_DESC_AMY + " " + MEMBER_LOYALTY_POINTS_DESC_AMY;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new member's name
-        assertCommandSuccess(command, index, AMY, index);
+        assertCommandSuccess(command, index, AMY);
 
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */
 

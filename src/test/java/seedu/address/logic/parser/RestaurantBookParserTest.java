@@ -132,16 +132,6 @@ public class RestaurantBookParserTest {
     }
 
     @Test
-    public void parseCommand_select() throws Exception {
-        SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST), command);
-        command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new SelectCommand(INDEX_FIRST), command);
-    }
-
-    @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
         assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
         assertTrue(parser.parseCommand("redo 1") instanceof RedoCommand);

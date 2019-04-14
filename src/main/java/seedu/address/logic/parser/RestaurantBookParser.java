@@ -123,10 +123,6 @@ public class RestaurantBookParser {
         case EditStaffCommand.COMMAND_ALIAS:
             return new EditStaffCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS:
-            return new SelectCommandParser().parse(arguments);
-
         case DeleteMemberCommand.COMMAND_WORD:
         case DeleteMemberCommand.COMMAND_ALIAS:
             return new DeleteMemberCommandParser().parse(arguments);

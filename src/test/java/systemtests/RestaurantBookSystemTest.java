@@ -138,13 +138,6 @@ public abstract class RestaurantBookSystemTest {
                 < getModel().getRestaurantBook().getMemberList().size());
     }
 
-    /**
-     * Selects the member at {@code index} of the displayed list.
-     */
-    protected void selectMember(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getMemberListPanel().getSelectedCardIndex());
-    }
 
     /**
      * Deletes all members in the address book.
