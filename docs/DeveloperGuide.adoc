@@ -458,8 +458,10 @@ In this document, we will focus on the implementation of `suggestNextAvailableTi
 .. The returned time must be later than the start time of the incoming booking.
 .. The incoming booking `toAdd` must fit within the capacity (as determined by `canAddBooking` method) after the time is modified accordingly.
 . If both conditions pass, the end time of the booking is successfully returned. The pre-conditions in Step 1 ensures that at least one of the end times is valid. Since the list is sorted, only the earliest one will be returned (i.e. it is impossible to run through the loop without returning an answer).
+
 The current implementation can be described by the following activity diagram:
 
+.An activity diagram that shows the implementation of the `suggestNextAvailableTime` method.
 image::suggesttimeslot.png[width='800']
 
 // end::suggestbooking[]
