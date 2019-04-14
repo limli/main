@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -16,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.member.Member;
 import seedu.address.model.person.staff.Staff;
@@ -168,5 +170,10 @@ public class LogicManager implements Logic {
     @Override
     public void setSelectedStaff(Staff staff) {
         model.setSelectedStaff(staff);
+    }
+
+    @Override
+    public void setUpdateCapacityCallback(Consumer<Capacity> callback) {
+        model.setUpdateCapacityCallback(callback);
     }
 }

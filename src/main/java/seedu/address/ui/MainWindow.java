@@ -130,6 +130,8 @@ public class MainWindow extends UiPart<Stage> {
         bookingListPanel = new BookingListPanel(logic.getFilteredBookingList(), logic.selectedBookingProperty(),
                 logic::setSelectedBooking);
         bookingListPanelPlaceholder.getChildren().add(bookingListPanel.getRoot());
+        logic.setUpdateCapacityCallback(capacity -> bookingListPanel.setCapacity(capacity));
+        // bookingListPanel.setCapacity(logic.getCapacity());
 
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList(),
                 logic.selectedIngredientProperty(), logic::setSelectedIngredient);

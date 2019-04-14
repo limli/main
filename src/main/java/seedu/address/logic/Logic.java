@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.function.Consumer;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.Capacity;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.member.Member;
 import seedu.address.model.person.staff.Staff;
@@ -145,4 +147,6 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedStaff(Staff)
      */
     void setSelectedStaff(Staff staff);
+
+    void setUpdateCapacityCallback(Consumer<Capacity> callback);
 }
