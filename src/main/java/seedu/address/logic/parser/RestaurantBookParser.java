@@ -11,7 +11,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.booking.AddBookingCommand;
@@ -157,9 +156,6 @@ public class RestaurantBookParser {
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
-        case ListCommand.COMMAND_WORD:
-        case ListCommand.COMMAND_ALIAS:
-            return new ListCommand();
 
         case ListMembersCommand.COMMAND_WORD:
         case ListMembersCommand.COMMAND_ALIAS:
