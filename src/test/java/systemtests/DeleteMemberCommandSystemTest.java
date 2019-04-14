@@ -74,16 +74,14 @@ public class DeleteMemberCommandSystemTest extends RestaurantBookSystemTest {
 
         /* --------------------- Performing delete operation while a member card is selected ------------------------ */
 
-        /* Case: delete the selected member -> member list panel selects the member before the deleted member */
         showAllMembers();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectMember(selectedIndex);
         command = DeleteMemberCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedMember = removeMember(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_MEMBER_SUCCESS, deletedMember);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
+        assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 

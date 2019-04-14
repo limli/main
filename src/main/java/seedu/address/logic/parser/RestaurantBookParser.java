@@ -12,14 +12,12 @@ import seedu.address.logic.commands.ConsumeIngredientCommand;
 import seedu.address.logic.commands.DeleteIngredientCommand;
 import seedu.address.logic.commands.DeleteRecipeCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListIngredientsCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RestockIngredientCommand;
-import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.add.AddIngredientCommand;
 import seedu.address.logic.commands.add.AddRecipeCommand;
@@ -123,10 +121,6 @@ public class RestaurantBookParser {
         case EditStaffCommand.COMMAND_ALIAS:
             return new EditStaffCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-        case SelectCommand.COMMAND_ALIAS:
-            return new SelectCommandParser().parse(arguments);
-
         case DeleteMemberCommand.COMMAND_WORD:
         case DeleteMemberCommand.COMMAND_ALIAS:
             return new DeleteMemberCommandParser().parse(arguments);
@@ -154,10 +148,6 @@ public class RestaurantBookParser {
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_ALIAS:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:

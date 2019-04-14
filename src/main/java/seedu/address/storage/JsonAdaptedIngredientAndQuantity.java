@@ -70,6 +70,10 @@ class JsonAdaptedIngredientAndQuantity {
             throw new IllegalValueException(IngredientName.MESSAGE_CONSTRAINTS);
         }
 
+        if (ingredUnit == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    IngredientUnit.class.getSimpleName()));
+        }
         if (!IngredientUnit.isValidIngredientUnit(ingredUnit)) {
             throw new IllegalValueException(IngredientUnit.MESSAGE_CONSTRAINTS);
         }
