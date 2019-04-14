@@ -168,10 +168,6 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
-    @Override
-    public void setRecipe(Recipe target, Recipe editedRecipe) {
-        throw new AssertionError("This method should not be called.");
-    }
 
     @Override
     public ObservableList<Member> getFilteredMemberList() {
@@ -290,11 +286,6 @@ public class ModelStub implements Model {
 
     @Override
     public Ingredient getSelectedIngredient() {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public Recipe getSelectedRecipe() {
         throw new AssertionError("This method should not be called.");
     }
 
