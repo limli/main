@@ -49,47 +49,53 @@ image::Ui.png[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-** Some example commands you can try:
+** After launching the application, below are some sample commands you can try:
 
 * *`listMembers`* : lists all members of the restaurant
 * **`addMember`**`addMember n/John Doe e/johnd@gmail.com p/81234567` : adds a member named `John Doe` to the restaurant.
 * **`deleteMember`**`3` : deletes the 3rd member shown in the current list of members
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  You can refer to <<Features>> for details of each command.
 
 [[Features]]
 == Features
 ====
 *Command Format*
 
-* Commands begin with the intended task, followed by a number of parameters preceded by a key (a unique alphabet and forward slash). The intended task (`addMember`) is non case-sensitive in the program and can be typed quickly as `addmember`, but is written in this manner for the user guide to be easily read.
-    ** e.g. `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER`.
-* Words in UPPER_CASE are the parameters to be supplied by the user.
-* Items in square brackets are optional.
-    ** e.g. `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
-* Items with `...` after them can be used multiple times including zero times
-    ** e.g. `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY__IN_RECIPE ...`
-* Parameters can be in any order
+* Commands begin with the intended task, followed by a number of parameters preceded by a key (comprised of a one or more letters and forward slash, for example, `n/`). The intended task is non case-sensitive in the program and can be typed quickly as (for example, `addMember` can be typed as `addmember`), but is written in this manner in the user guide for greater readability.
+* Words in UPPER_CASE are the parameters to be supplied by the user. For example, `CUSTOMER_NAME`, `EMAIL` and `PHONE_NUMBER` in the command below are the parameters to be supplied by the user.
+    ** `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER`.
+* Parameters in square brackets are optional parameters and can be omitted. For example, `LOYALTY_POINTS` below is an optional parameter.
+    ** `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
+* Parameters with `...` after them can be used multiple times (including zero times) in the command. For example, `INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE` can be specified multiple times in the command below.
+    ** `addRecipe r/RECIPE_NAME iq/INGREDIENT_INDEX&INGREDIENT_QUANTITY_IN_RECIPE ...`
+* Parameters can be supplied in any order. For example, the following way of writing the `addMember` command above is also valid.
+    ** `addMember p/PHONE_NUMBER n/CUSTOMER_NAME e/EMAIL`
 ====
 
 === General
 
 ==== Viewing help : `help`
 
+Displays this user guide to the user.
+
 Format: `help`
 
 ==== Exit: `exit`
-Exit the program.
+
+Exits the program.
 
 Format: `exit`
 
 ==== Clear: `clear`
+
 Removes all data from REM.
 
 Format: `clear`
 
 ==== History: `history`
+
 Lists commands entered, displayed from most recent to earliest.
 
 Format: `history`
@@ -490,18 +496,32 @@ Creates a new booking.
 Format: `addBooking c/CUSTOMER_INDEX n/NUMBER OF PERSONS ts/TIME_START`
 
 ****
-• All bookings will last for 1 hour.
+• All bookings will last for 1 hour, although the end time is not shown in the UI.
 
 • Customer INDEX refers to the index of the customer as displayed by the list.
 
 • Bookings are a privileged feature restricted only to members. REM does not allow non-members to make bookings.
+
+• If the booking is rejected due to capacity constraints, a message will appear suggesting an alternative timeslot. This timeslot is the earliest timeslot after the input date and time that can be accepted. Note that this does not automatically add the booking into REM- a separate `addBooking` command needs to be entered to accept the newly suggested timeslot.
 ****
 
-Example:
+Example (execute these commands in the order listed with no other commands inserted in between, starting with a list of at least 2 members and an initially empty list of bookings):
 
-* `addBooking c/1 n/5 ts/2019-02-23T14:30`
+* `updateCapacity 10` (updates the restaurant capacity to 10)
 
-Adds a booking for the first customer on the current list, on 23 Feb, at 1430 hrs
+* `addBooking c/1 n/7 ts/2019-04-07T12:00` (adds a booking for the first customer on the current list, on 7 Apr, at 1200 hrs)
+
+* `addbooking c/2 n/7 ts/2019-04-07T11:30` (adds a booking for the second customer on the current list, on 7 Apr, at 1200 hrs)
+
+This command will fail to execute. As bookings last for 1 hour, accepting this command will cause the restaurant to exceed the capacity of 10 customers at 2019-04-07T12:00 (in fact, 7+7=14 customers will be present if this command executes). Thus this booking is rejected.
+
+.A pictorial representation showing why the capacity will be exceeded
+image::capacityexplanation.png[width="800"]
+The user may also notice that an alternative booking time of 2019-04-07T13:00 is suggested by REM. The suggested booking time is the next available slot after the input time (in this case, 2019-04-07T11:30) that can hold the booking of 7 members. In this case, the restaurant is only free at 2019-04-07T13:00 after the previous group of 7 customers leave (recall that bookings last for 1 hour).
+
+The below screenshot shows what happens:
+
+image::altbookingtime.png[width="800"]
 
 ==== Edit Booking: `editBooking`
 Edits a booking by changing either the time, number of persons of both.
@@ -550,10 +570,12 @@ The name of the new staff member must not be identical to the name of any existi
 
 Format: `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
 
+****
 * `NAME` must only contain alphanumeric characters and spaces.
 * `PHONE` must contain only digits, and should be at least 3 digits long
 * `EMAIL` must be a valid email address
 * `APPOINTMENT` must only contain alphanumeric characters and spaces.
+****
 
 Example:
 
@@ -561,13 +583,36 @@ Example:
 
 Adds a new staff with name John Doe, phone number 91234567, email john@example.com and appointment Waiter to the restaurant.
 
+==== List Staff: `listStaff`
+
+Lists all staff members whose names and appointments contain a certain list of given keywords.
+
+Format: `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]`
+
+****
+* Keywords should be separated by spaces.
+* All leading, trailing and extra spaces in the list of keywords for `NAME` and `APPOINTMENT` will be ignored.
+* Keywords are case-insensitive.
+* The list of keywords for `NAME` and `APPOINTMENT` must only contain alphanumeric characters.
+* Only staff members whose names contain the exact keywords and whose appointments contain the exact keywords will be displayed.
+* If no keywords are provided for `NAME` or `APPOINTMENT`, then the corresponding field will be ignored in the filtering.
+****
+
+Example:
+
+* `listStaff n/alice bob charlie a/cook`
+
+Displays all staff members who are cooks, and whose names contain the words 'alice', 'bob' and 'charlie'.
+
 ==== Delete Staff: `deleteStaff`
 
 Deletes the staff member with the specified index from the system.
 
 Format: `deleteStaff INDEX`
 
+****
 * `INDEX` must be a valid index number in the most recent listing.
+****
 
 Example
 
@@ -581,8 +626,10 @@ Edits the staff member with the specified index.
 
 Format: `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]`
 
+****
 * `INDEX` must be a valid index number in the most recent listing.
 * The requirements for the optional fields `NAME`, `PHONE`, `EMAIL`, `APPOINTMENT` are identical to that of the addStaff command.
+****
 
 Example
 
@@ -597,8 +644,10 @@ The new shift added must start and end on different days of the week, must have 
 
 Format: `addShift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
 
+****
 * `START_DAY_OF_WEEK` and `END_DAY_OF_WEEK` must be one of `MONDAY`, `TUESDAY`, `WEDNESDAY`, `THURSDAY`, `FRIDAY`, `SATURDAY`, `SUNDAY`.
 * `START_TIME` and `END_TIME` must be valid 24-hour time in `HH:MM` format.
+****
 
 Example:
 
@@ -613,7 +662,9 @@ The shift to be deleted must exist in the specified staff member's shift roster.
 
 Format: `deleteshift INDEX sd/START_DAY_OF_WEEK ts/START_TIME ed/END_DAY_OF_WEEK te/END_TIME`
 
+****
 * The requirements for the fields `START_DAY_OF_WEEK`, `START_TIME`, `END_DAY_OF_WEEK`, `END_TIME` are identical to that of the addShift command.
+****
 
 Example:
 
@@ -636,6 +687,8 @@ Format: `statsdays DAYS`
 • `DAYS` is an integer from 1 to 10000, inclusive
 
 • The command considers all bookings from today's date to (todays's date - DAYS + 1)
+
+• More days might be considered if necessary to make each bar represent the same number of days
 ****
 
 Example:
@@ -759,24 +812,26 @@ e.g. `deleteRecipe 3`
 e.g. `recipeSummary`
 
 === Booking Management
-* *listBookings* `listBookings [ts/TIME_START] [te/TIME_END]` +
-e.g. `listBooking ts/1200 te/1530`
 
 * *updateCapacity* `updateCapacity NUMBER` +
 e.g. `updateCapacity 50`
 
-* *addBooking* `addBooking [c/CUSTOMER_INDEX] n/NUMBER OF MEMBERS t/TIME [d/DATE]` +
-e.g. `addBooking 1 1300 25 Feb`
+* *addBooking* `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START +
+e.g. `addBooking c/1 n/7 ts/2019-04-07T12:00`
 
 * *deleteBooking* `deleteBooking INDEX` +
 e.g. `deleteBooking 3`
 
-* *bookingSummary* `bookingSummary`
+* *editBooking* `editStaff INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/APPOINTMENT]` +
+e.g. `editBooking 3 ts/12:00 n/6`
 
 === Staff Management
 
 * *addStaff* `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT` +
 e.g. `addStaff n/John Doe p/91234567 e/john@example.com a/Waiter`
+
+* *listStaff* `listStaff [n/NAME_1 NAME_2 ...] [a/APPOINTMENT_1 APPOINTMENT_2 ...]` +
+e.g. `listStaff n/alice bob charlie a/cook`
 
 * *deleteStaff* `deleteStaff INDEX` +
 e.g. `deleteStaff 3`

@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.member.Member;
 
 /**
@@ -35,8 +36,12 @@ public interface MemberModel {
      * {@code target} must exist in the restaurant book.
      * The member identity of {@code editedMember}
      * must not be the same as another existing member in the restaurant book.
+     * @throws DuplicateItemException if editing will result in a duplicate member. In that case,
+     * no members will be modified. Note that we cannot simply use
+     * {@code !target.isSameItem(editedMember) && hasPerson(editedMember)} as that assumes transitivity
+     * of the isSameItem operator.
      */
-    void setMember(Member target, Member editedItem);
+    void setMember(Member target, Member editedMember) throws DuplicateItemException;
 
     /** Returns an unmodifiable view of the filtered member list */
     ObservableList<Member> getFilteredMemberList();

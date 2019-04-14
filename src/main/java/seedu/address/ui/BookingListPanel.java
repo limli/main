@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import seedu.address.model.booking.Booking;
+import seedu.address.model.booking.Capacity;
 
 /**
  * Panel containing the list of members.
@@ -17,10 +18,14 @@ public class BookingListPanel extends ItemListPanel<Booking> {
     @FXML
     private Label title;
 
-    public BookingListPanel(ObservableList<Booking> memberList, ObservableValue<Booking> selectedMember,
-                            Consumer<Booking> onSelectedMemberChange) {
-        super(memberList, selectedMember, onSelectedMemberChange, listview -> new BookingListViewCell());
+    public BookingListPanel(ObservableList<Booking> bookingList, ObservableValue<Booking> selectedBooking,
+                            Consumer<Booking> onSelectedBookingChange) {
+        super(bookingList, selectedBooking, onSelectedBookingChange, listview -> new BookingListViewCell());
         title.setText("Booking");
+    }
+
+    public void setCapacity(Capacity capacity) {
+        title.setText("Booking\nCapacity: " + capacity.toString());
     }
 }
 

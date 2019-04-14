@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.exceptions.DuplicateItemException;
 import seedu.address.model.person.staff.Staff;
 
 /**
@@ -35,8 +36,12 @@ public interface StaffModel {
      * {@code target} must exist in the restaurant book.
      * The staff identity of {@code editedStaff}
      * must not be the same as another existing staff in the restaurant book.
+     * @throws DuplicateItemException if editing will result in a duplicate staff. In that case,
+     * no staffs will be modified. Note that we cannot simply use
+     * {@code !target.isSameItem(editedStaff) && hasPerson(editedStaff)} as that assumes transitivity
+     * of the isSameItem operator.
      */
-    void setStaff(Staff target, Staff editedItem);
+    void setStaff(Staff target, Staff editedStaff) throws DuplicateItemException;
 
     /** Returns an unmodifiable view of the filtered staff list */
     ObservableList<Staff> getFilteredStaffList();

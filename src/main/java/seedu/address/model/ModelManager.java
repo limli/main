@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -43,7 +45,6 @@ public class ModelManager implements Model {
 
     private final FilteredList<Recipe> filteredRecipes;
     private final SimpleObjectProperty<Recipe> selectedRecipe = new SimpleObjectProperty<>();
-
 
     private final FilteredList<Staff> filteredStaff;
     private final SimpleObjectProperty<Staff> selectedStaff = new SimpleObjectProperty<>();
@@ -272,12 +273,18 @@ public class ModelManager implements Model {
 
     @Override
     public void setCapacity(Capacity newCapacity) {
+        logger.info("Capacity changed from " + getCapacity() + " to " + newCapacity);
         versionedRestaurantBook.setCapacity(newCapacity);
     }
 
     @Override
     public boolean canUpdateCapacity(Capacity newCapacity) {
         return versionedRestaurantBook.canUpdateCapacity(newCapacity);
+    }
+
+    @Override
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
+        return versionedRestaurantBook.suggestNextAvailableTime(toAdd);
     }
 
     @Override
@@ -511,6 +518,11 @@ public class ModelManager implements Model {
                 && Objects.equals(selectedBooking.get(), other.selectedBooking.get())
                 && filteredStaff.equals(other.filteredStaff)
                 && Objects.equals(selectedStaff.get(), other.selectedStaff.get());
+    }
+
+    @Override
+    public void setUpdateCapacityCallback(Consumer<Capacity> callback) {
+        versionedRestaurantBook.setUpdateCapacityCallback(callback);
     }
 
 }

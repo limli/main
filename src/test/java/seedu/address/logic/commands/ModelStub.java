@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import javafx.beans.property.ReadOnlyProperty;
@@ -247,6 +249,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void setUpdateCapacityCallback(Consumer<Capacity> callback) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ReadOnlyProperty<Member> selectedMemberProperty() {
         throw new AssertionError("This method should not be called.");
     }
@@ -334,6 +341,11 @@ public class ModelStub implements Model {
 
     @Override
     public boolean canUpdateCapacity(Capacity newCapacity) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
         throw new AssertionError("This method should not be called.");
     }
 

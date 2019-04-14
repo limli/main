@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import seedu.address.logic.commands.add.AddStaffCommand;
+import seedu.address.logic.commands.staff.AddStaffCommand;
 import seedu.address.model.person.staff.Staff;
 
 

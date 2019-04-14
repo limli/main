@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -36,6 +38,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     private Capacity capacity = Capacity.getDefaultCapacity();
+    private Consumer<Capacity> callback;
 
      /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -388,6 +391,9 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
 
     public void setCapacity(Capacity newCapacity) {
         capacity = newCapacity;
+        if (callback != null) {
+            callback.accept(capacity);
+        }
         if (!newCapacity.canAccommodate(bookings.asUnmodifiableObservableList())) {
             throw new RestaurantOverbookedException();
         }
@@ -399,6 +405,17 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     public int countBookings(Member member) {
         Predicate<Booking> hasGivenMember = (bookingToCheck -> bookingToCheck.getCustomer().equals(member));
         return (int) bookings.asUnmodifiableObservableList().stream().filter(hasGivenMember).count();
+    }
+
+    /**
+     * Suggests a possible time to accommodate the booking.
+     * @param toAdd The booking that the user wishes to add
+     * @return The next available time that the restaurant can accommodate the booking, subjected to the constraint
+     * that the returned time must occur after {@code toAdd}. In other words, suggestion always shifts the booking
+     * later and never earlier.
+     */
+    public LocalDateTime suggestNextAvailableTime(Booking toAdd) {
+        return capacity.suggestNextAvailableTime(toAdd, bookings.asUnmodifiableObservableList());
     }
 
     public boolean canUpdateCapacity(Capacity newCapacity) {
@@ -470,5 +487,10 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     @Override
     public int hashCode() {
         return Objects.hash(members, bookings, ingredients, recipes, staff);
+    }
+
+    public void setUpdateCapacityCallback(Consumer<Capacity> callback) {
+        this.callback = callback;
+        callback.accept(capacity);
     }
 }

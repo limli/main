@@ -1,8 +1,8 @@
 package systemtests;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.add.AddBookingCommand.MESSAGE_DUPLICATE;
-import static seedu.address.logic.commands.add.AddBookingCommand.MESSAGE_FULL;
+import static seedu.address.logic.commands.booking.AddBookingCommand.MESSAGE_DUPLICATE;
+import static seedu.address.logic.commands.booking.AddBookingCommand.MESSAGE_FULL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.BENSON;
@@ -15,13 +15,13 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.UpdateCapacityCommand;
+import seedu.address.logic.commands.booking.UpdateCapacityCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddBookingCommandParser;
-import seedu.address.logic.parser.DeleteMemberCommandParser;
-import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.booking.AddBookingCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.member.DeleteMemberCommandParser;
+import seedu.address.logic.parser.member.EditMemberCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
@@ -77,7 +77,7 @@ public class AddBookingCommandSystemTest extends RestaurantBookSystemTest {
             Member modifiedAlice = new Member(ALICE.getName(), new Phone("12345678"), ALICE.getEmail(),
                     ALICE.getLoyaltyPoints());
             String editCommandString = " 1 " + PREFIX_PHONE + modifiedAlice.getPhone().toString();
-            Command editCommand = new EditCommandParser().parse(editCommandString);
+            Command editCommand = new EditMemberCommandParser().parse(editCommandString);
             editCommand.execute(model, commandHistory);
             Booking modifiedAlice1400 = new Booking(startTime1400, modifiedAlice, new BookingSize(5));
             Booking modifiedAliceBooking = new Booking(startTime1430, modifiedAlice, new BookingSize(5));
@@ -88,7 +88,8 @@ public class AddBookingCommandSystemTest extends RestaurantBookSystemTest {
 
             // Restaurant is has 10 persons, capacity of 13 and should not accept booking of 4
             commandString = BookingUtil.getAddBookingCommand(startTimeString1400, Index.fromOneBased(2), 4);
-            assertCommandFailure(commandString, model, commandHistory, MESSAGE_FULL);
+            String expectedMessage = String.format(MESSAGE_FULL, "2019-02-23T15:00");
+            assertCommandFailure(commandString, model, commandHistory, expectedMessage);
 
             // But the restaurant should be able to accept a booking of 3
             commandString = BookingUtil.getAddBookingCommand(startTimeString1400, Index.fromOneBased(2), 3);

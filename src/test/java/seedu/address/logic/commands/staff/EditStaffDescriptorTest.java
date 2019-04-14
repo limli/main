@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STAFF_DESC_BOB;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
+import seedu.address.logic.commands.staff.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.testutil.EditStaffDescriptorBuilder;
 
 public class EditStaffDescriptorTest {
