@@ -83,10 +83,12 @@ public class CommandTestUtil {
     //Related to ingredients
     public static final String INGREDIENT_VALID_NAME_CHEESE = "cheese";
     public static final String INGREDIENT_VALID_NAME_TOMATO = "tomato";
+    public static final String INGREDIENT_VALID_NAME_TOMATO_KETCHUP = "tomato ketchup";
     public static final String INGREDIENT_VALID_QUANTITY_CHEESE = "4";
     public static final String INGREDIENT_VALID_QUANTITY_TOMATO = "5";
     public static final String INGREDIENT_VALID_UNIT_CHEESE = "pounds";
     public static final String INGREDIENT_VALID_UNIT_TOMATO = "pieces";
+    public static final String INGREDIENT_VALID_UNIT_TOMATO_KETCHUP = "bottles";
     public static final String INGREDIENT_VALID_WARNINGAMT_CHEESE = "3";
     public static final String INGREDIENT_VALID_WARNINGAMT_TOMATO = "2";
 
@@ -107,6 +109,11 @@ public class CommandTestUtil {
             " " + PREFIX_INGREDIENT_UNIT + INGREDIENT_VALID_UNIT_TOMATO;
     public static final String INGREDIENT_WARNINGAMT_DESC_TOMATO =
             " " + PREFIX_INGREDIENT_WARNINGAMOUNT + INGREDIENT_VALID_WARNINGAMT_TOMATO;
+    public static final String INGREDIENT_NAME_DESC_TOMATO_KETCHUP =
+            " " + PREFIX_INGREDIENT_NAME + INGREDIENT_VALID_NAME_TOMATO_KETCHUP;
+    public static final String INGREDIENT_UNIT_DESC_TOMATO_KETCHUP =
+            " " + PREFIX_INGREDIENT_UNIT + INGREDIENT_VALID_UNIT_TOMATO_KETCHUP;
+
 
 
     public static final String INGREDIENT_INVALID_NAME_DESC = " " + PREFIX_INGREDIENT_NAME
