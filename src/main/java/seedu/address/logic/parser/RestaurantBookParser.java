@@ -114,6 +114,7 @@ public class RestaurantBookParser {
             return new AddShiftCommandParser().parse(arguments);
 
         case UpdateCapacityCommand.COMMAND_WORD:
+        case UpdateCapacityCommand.COMMAND_ALIAS:
             return new UpdateCapacityCommandParser().parse(arguments);
 
         case EditMemberCommand.COMMAND_WORD:
@@ -161,6 +162,7 @@ public class RestaurantBookParser {
             return new ListCommand();
 
         case ListMembersCommand.COMMAND_WORD:
+        case ListMembersCommand.COMMAND_ALIAS:
             return new ListMembersCommandParser().parse(arguments);
 
         case ListStaffCommand.COMMAND_WORD:
@@ -196,12 +198,15 @@ public class RestaurantBookParser {
             return new ConsumeIngredientCommandParser().parse(arguments);
 
         case ListIngredientsCommand.COMMAND_WORD:
+        case ListIngredientsCommand.COMMAND_ALIAS:
             return new ListIngredientsCommandParser().parse(arguments);
 
         case ViewStatsDaysCommand.COMMAND_WORD:
+        case ViewStatsDaysCommand.COMMAND_ALIAS:
             return new ViewStatsDaysCommandParser().parse(arguments);
 
         case ViewStatsTimeCommand.COMMAND_WORD:
+        case ViewStatsTimeCommand.COMMAND_ALIAS:
             return new ViewStatsTimeCommandParser().parse(arguments);
 
         default:
