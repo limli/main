@@ -36,14 +36,6 @@ public interface RecipeModel {
     void addRecipe(Recipe recipe);
 
     /**
-     * Replaces the given recipe {@code target} with {@code editedRecipe}.
-     * {@code target} must exist in the restaurant book.
-     * The recipe identity of {@code editedRecipe}
-     * must not be the same as another existing recipe in the restaurant book.
-     */
-    void setRecipe(Recipe target, Recipe editedItem);
-
-    /**
      * Returns an unmodifiable view of the filtered recipe list
      */
     ObservableList<Recipe> getFilteredRecipeList();
@@ -61,11 +53,6 @@ public interface RecipeModel {
      */
     ReadOnlyProperty<Recipe> selectedRecipeProperty();
 
-    /**
-     * Returns the selected recipe in the filtered recipe list.
-     * null if no recipe is selected.
-     */
-    Recipe getSelectedRecipe();
 
     /**
      * Sets the selected recipe in the filtered recipe list.
