@@ -518,7 +518,7 @@ Example (execute these commands in the order listed with no other commands inser
 This command will fail to execute. As bookings last for 1 hour, accepting this command will cause the restaurant to exceed the capacity of 10 customers at 2019-04-07T12:00 (in fact, 7+7=14 customers will be present if this command executes). Thus this booking is rejected.
 
 .A pictorial representation showing why the capacity will be exceeded
-image::capacityexplanation.png[width="800"]
+image::capacityexplanation.png[width="600"]
 The user may also notice that an alternative booking time of 2019-04-07T13:00 is suggested by REM. The suggested booking time is the next available slot after the input time (in this case, 2019-04-07T11:30) that can hold the booking of 7 members. In this case, the restaurant is only free at 2019-04-07T13:00 after the previous group of 7 customers leave (recall that bookings last for 1 hour).
 
 The below screenshot shows what happens:
