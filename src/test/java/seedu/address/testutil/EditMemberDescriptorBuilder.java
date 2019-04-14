@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.EditMemberCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.EditMemberCommand.EditMemberDescriptor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;

@@ -11,9 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditBookingCommand;
-import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
-import seedu.address.logic.parser.EditBookingCommandParser;
+import seedu.address.logic.commands.booking.EditBookingCommand;
+import seedu.address.logic.commands.booking.EditBookingCommand.EditBookingDescriptor;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;
 

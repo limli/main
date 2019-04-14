@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.time.LocalDateTime;
 
-import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
+import seedu.address.logic.commands.booking.EditBookingCommand.EditBookingDescriptor;
 import seedu.address.model.booking.Booking;
 import seedu.address.model.booking.BookingSize;
 import seedu.address.model.booking.BookingWindow;

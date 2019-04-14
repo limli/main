@@ -616,7 +616,7 @@ image::AddShiftSequenceDiagram.png[width="700"]
 // tag::stats[]
 === The `statstime` command
 
-When the `statstime` command is entered, the current statistis of the amount of bookings is to be displayed to the user in the form of a bar chart.
+When the `statstime` command is entered, the current statistics of the amount of bookings is to be displayed to the user in the form of a bar chart, where each bar corresponds to the number of customers in a particular time of the day.
 
 ==== Current implementation
 
@@ -652,6 +652,12 @@ The _Sequence Diagram_ given above shows how the components interact with each o
 ** Cons: Cannot view the statistics and the database concurrently.
 
 * Decision: Alternative 1 was adopted as it is an easier implementation. Implementing the `stats` window as a static window that will not change would not affect the other parts of the app, and there is no need to hide and show the current screen. Moreover, the user might want to view the statistics together with the database, which is only possible with multiple windows.
+
+=== The `statsdays` command
+
+When the `statsdays` command is entered, the current statistics of the amount of bookings is to be displayed to the user in the form of a bar chart, where each bar corresponds to the number of customers between certain dates.
+
+As the implementation of this command is very similar to <<The `statstime` command>>, it will not be covered.
 
 // end::stats[]
 
@@ -690,14 +696,6 @@ The panel is formatted in the `ItemListPanel.fxml` file, and each item has its o
 
 * Decision: Alternative 1 was adopted. Currently, the only difference between the panels is the header (implemented via a `label`) which contains the name of the item type. This only affects a single label, which is easy to edit via code. Hence, sharing the fxml file reduces the code duplication. If the display of the panels were to be modified in the future, say to add more padding or to change the size, only one fxml file needs to be modified.
 // end::panelui[]
-
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
@@ -1155,7 +1153,7 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 <<restaurant-records, restaurant records>> without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 200 <<restaurant-records, restaurant records>> without a noticeable sluggishness in performance for typical usage.
 .  Should be able to respond to every command in less than 3 seconds on any mainstream OS.
 .  System should be able to start up in less than 10 seconds on any mainstream OS.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
@@ -1173,23 +1171,6 @@ Windows, Linux, Unix, OS-X
 
 [[restaurant-records]] Restaurant Records::
 Information pertaining to ingredient and recipe inventory, staff, members and bookings of a restaurant
-
-[appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
 
 [appendix]
 == Instructions for Manual Testing

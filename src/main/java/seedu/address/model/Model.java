@@ -1,8 +1,10 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.function.Consumer;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.booking.Capacity;
 
 /**
  * The API of the Model component.
@@ -71,4 +73,5 @@ public interface Model extends MemberModel, BookingModel, IngredientModel, Recip
      */
     void commitRestaurantBook();
 
+    void setUpdateCapacityCallback(Consumer<Capacity> callback);
 }

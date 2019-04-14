@@ -1,13 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.ViewStatsDaysCommand.MESSAGE_SIZE_CONSTRAINTS;
+import static seedu.address.logic.commands.stats.ViewStatsDaysCommand.MESSAGE_SIZE_CONSTRAINTS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.ViewStatsDaysCommand;
+import seedu.address.logic.commands.stats.ViewStatsDaysCommand;
+import seedu.address.logic.parser.stats.ViewStatsDaysCommandParser;
 
 public class ViewStatsDaysCommandParserTest {
 

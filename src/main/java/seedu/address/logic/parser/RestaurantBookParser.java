@@ -9,36 +9,53 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ConsumeIngredientCommand;
-import seedu.address.logic.commands.DeleteBookingCommand;
 import seedu.address.logic.commands.DeleteIngredientCommand;
-import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.DeleteRecipeCommand;
-import seedu.address.logic.commands.DeleteShiftCommand;
-import seedu.address.logic.commands.DeleteStaffCommand;
-import seedu.address.logic.commands.EditBookingCommand;
-import seedu.address.logic.commands.EditMemberCommand;
-import seedu.address.logic.commands.EditStaffCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListIngredientsCommand;
-import seedu.address.logic.commands.ListMembersCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RestockIngredientCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.UpdateCapacityCommand;
-import seedu.address.logic.commands.ViewStatsDaysCommand;
-import seedu.address.logic.commands.ViewStatsTimeCommand;
-import seedu.address.logic.commands.add.AddBookingCommand;
 import seedu.address.logic.commands.add.AddIngredientCommand;
-import seedu.address.logic.commands.add.AddMemberCommand;
 import seedu.address.logic.commands.add.AddRecipeCommand;
-import seedu.address.logic.commands.add.AddShiftCommand;
-import seedu.address.logic.commands.add.AddStaffCommand;
+import seedu.address.logic.commands.booking.AddBookingCommand;
+import seedu.address.logic.commands.booking.DeleteBookingCommand;
+import seedu.address.logic.commands.booking.EditBookingCommand;
+import seedu.address.logic.commands.booking.UpdateCapacityCommand;
+import seedu.address.logic.commands.member.AddMemberCommand;
+import seedu.address.logic.commands.member.DeleteMemberCommand;
+import seedu.address.logic.commands.member.EditMemberCommand;
+import seedu.address.logic.commands.member.ListMembersCommand;
+import seedu.address.logic.commands.staff.AddShiftCommand;
+import seedu.address.logic.commands.staff.AddStaffCommand;
+import seedu.address.logic.commands.staff.DeleteShiftCommand;
+import seedu.address.logic.commands.staff.DeleteStaffCommand;
+import seedu.address.logic.commands.staff.EditStaffCommand;
+import seedu.address.logic.commands.staff.ListStaffCommand;
+import seedu.address.logic.commands.stats.ViewStatsDaysCommand;
+import seedu.address.logic.commands.stats.ViewStatsTimeCommand;
+import seedu.address.logic.parser.booking.AddBookingCommandParser;
+import seedu.address.logic.parser.booking.DeleteBookingCommandParser;
+import seedu.address.logic.parser.booking.EditBookingCommandParser;
+import seedu.address.logic.parser.booking.UpdateCapacityCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.member.AddMemberCommandParser;
+import seedu.address.logic.parser.member.DeleteMemberCommandParser;
+import seedu.address.logic.parser.member.EditMemberCommandParser;
+import seedu.address.logic.parser.member.ListMembersCommandParser;
+import seedu.address.logic.parser.staff.AddShiftCommandParser;
+import seedu.address.logic.parser.staff.AddStaffCommandParser;
+import seedu.address.logic.parser.staff.DeleteShiftCommandParser;
+import seedu.address.logic.parser.staff.DeleteStaffCommandParser;
+import seedu.address.logic.parser.staff.EditStaffCommandParser;
+import seedu.address.logic.parser.staff.ListStaffCommandParser;
+import seedu.address.logic.parser.stats.ViewStatsDaysCommandParser;
+import seedu.address.logic.parser.stats.ViewStatsTimeCommandParser;
 
 /**
  * Parses user input.
@@ -96,7 +113,7 @@ public class RestaurantBookParser {
 
         case EditMemberCommand.COMMAND_WORD:
         case EditMemberCommand.COMMAND_ALIAS:
-            return new EditCommandParser().parse(arguments);
+            return new EditMemberCommandParser().parse(arguments);
 
         case EditBookingCommand.COMMAND_WORD:
         case EditBookingCommand.COMMAND_ALIAS:
@@ -148,6 +165,10 @@ public class RestaurantBookParser {
 
         case ListMembersCommand.COMMAND_WORD:
             return new ListMembersCommandParser().parse(arguments);
+
+        case ListStaffCommand.COMMAND_WORD:
+        case ListStaffCommand.COMMAND_ALIAS:
+            return new ListStaffCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:

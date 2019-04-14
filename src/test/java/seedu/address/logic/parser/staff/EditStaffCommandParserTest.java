@@ -26,9 +26,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditStaffCommand;
-import seedu.address.logic.commands.EditStaffCommand.EditStaffDescriptor;
-import seedu.address.logic.parser.EditStaffCommandParser;
+import seedu.address.logic.commands.staff.EditStaffCommand;
+import seedu.address.logic.commands.staff.EditStaffCommand.EditStaffDescriptor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;

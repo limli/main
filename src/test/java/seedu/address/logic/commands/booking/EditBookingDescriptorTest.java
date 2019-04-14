@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditBookingCommand.EditBookingDescriptor;
+import seedu.address.logic.commands.booking.EditBookingCommand.EditBookingDescriptor;
 
 import seedu.address.model.booking.BookingWindow;
 import seedu.address.testutil.EditBookingDescriptorBuilder;
