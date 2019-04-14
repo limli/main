@@ -670,6 +670,8 @@ The restaurant book displays the entire database in the form of "cards", which i
 
 The panel is formatted in the `ItemListPanel.fxml` file, and each item has its own controller (`MemberListPanel`, `StaffListPanel`, `BookingListPanel`, and `IngredientListPanel`) that extends from `ItemListPanel`. The panel displays the database via cards. Each item has its own card (`MemberCard`, `StaffCard`, `BookingCard`, and `IngredientCard`).
 
+image::uiclassdiagram.png[width="1000"]
+
 ==== Design Considerations
 
 ===== Aspect: Design of card display
