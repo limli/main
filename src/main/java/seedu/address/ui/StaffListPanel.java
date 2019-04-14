@@ -18,9 +18,9 @@ public class StaffListPanel extends ItemListPanel<Staff> {
     @FXML
     private Label title;
 
-    public StaffListPanel(ObservableList<Staff> memberList, ObservableValue<Staff> selectedMember,
-                           Consumer<Staff> onSelectedMemberChange) {
-        super(memberList, selectedMember, onSelectedMemberChange, listview -> new StaffListViewCell());
+    public StaffListPanel(ObservableList<Staff> staffList, ObservableValue<Staff> selectedStaff,
+                           Consumer<Staff> onSelectedStaffChange) {
+        super(staffList, selectedStaff, onSelectedStaffChange, listview -> new StaffListViewCell());
         title.setText("Staff");
     }
 }

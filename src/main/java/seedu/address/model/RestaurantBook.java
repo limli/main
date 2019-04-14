@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     private Capacity capacity = Capacity.getDefaultCapacity();
+    private Consumer<Capacity> callback;
 
      /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -389,6 +391,9 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
 
     public void setCapacity(Capacity newCapacity) {
         capacity = newCapacity;
+        if (callback != null) {
+            callback.accept(capacity);
+        }
         if (!newCapacity.canAccommodate(bookings.asUnmodifiableObservableList())) {
             throw new RestaurantOverbookedException();
         }
@@ -482,5 +487,10 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
     @Override
     public int hashCode() {
         return Objects.hash(members, bookings, ingredients, recipes, staff);
+    }
+
+    public void setUpdateCapacityCallback(Consumer<Capacity> callback) {
+        this.callback = callback;
+        callback.accept(capacity);
     }
 }
