@@ -95,7 +95,7 @@ Removes all data from REM.
 Format: `clear`
 
 
-=== Undoing previous command : `undo`
+==== Undoing previous command : `undo`
 
 Restores the restaurant book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -117,7 +117,7 @@ Examples:
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `deleteMember 1` command) +
 
-=== Redoing the previously undone command : `redo`
+==== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -132,7 +132,7 @@ Examples:
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `deleteMember 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `deleteMember 1` command) +
@@ -357,7 +357,7 @@ Adds 10 packets of chicken wing into inventory and when quantity in inventory fa
 
 ==== Delete Ingredient: `deleteIngredient`
 
-Deletes the specified ingredient from the restaurant book. Note that this action also deletes all recipes that contain this ingredient.
+Deletes the specified ingredient from the restaurant book. Note that this action also deletes all recipes that contain this ingredient, and all affected recipes will be shown upon deletion.
 
 Format: `deleteIngredient INDEX` +
 Shortcut: `di INDEX`
@@ -452,15 +452,15 @@ Example:
 
 (Assuming that the restaurant book is empty.)
 
-.  `addingredient in/cheese u/slices q/20`
-   `addingredient in/fries u/packets q/10`
-   * Adds cheese, and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
+.  `addIngredient in/cheese u/slices q/20` +
+   `addIngredient in/fries u/packets q/10`
+   * These commands add cheese and fries into the ingredient panel. Upon success, the ingredient panel should look like this:
 +
 .Successfully adding 2 ingredients into restaurant book
-image::addRecipe-addIngredientCommand.png[width=300]
+image::addRecipe-addIngredientCommand.png[width=1000]
 
-.  `addrecipe r/cheese fries iq/1&1 iq/2&1`
-    • Adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
+.  `addRecipe r/cheese fries iq/1&1 iq/2&1`
+    • This command adds cheese fries into the recipe panel. For each serving of cheese fries, 1 slice of cheese and 1
     packet of fries is needed.
     • There are 20 slices of cheese sufficient for 20 servings of cheese fries, but only 10 packets of fries sufficient for 10 servings of cheese fries.
     Overall, there can only be 10 servings of cheese fries prepared. Upon success, the recipe panel should look like this:
@@ -468,8 +468,8 @@ image::addRecipe-addIngredientCommand.png[width=300]
 .Successfully adding 1 recipe, displaying the number of servings possible.
 image::addRecipe-successful.png[width=1000]
 
-.  `restockingredient i/2 q/10`
-    • Restocks fries by 10 packets, and change in ingredient quantity is reflected in ingredient's panel.
+.  `restockIngredient i/2 q/10`
+    • Restocks fries by 10 packets, and change in ingredient quantity of fries is reflected in ingredient's panel.
     • Now, there are 20 slices of cheese sufficient for 20 servings of cheese fries, and 20 packets of fries sufficient for 20 servings of cheese fries.
     Overall, there can be 20 servings of cheese fries prepared. Upon success, the recipe panel should look like this, with the reflected
     change in number of servings of cheese fries:
