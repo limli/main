@@ -391,7 +391,7 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
 
     public void setCapacity(Capacity newCapacity) {
         capacity = newCapacity;
-        if(callback != null) {
+        if (callback != null) {
             callback.accept(capacity);
         }
         if (!newCapacity.canAccommodate(bookings.asUnmodifiableObservableList())) {
