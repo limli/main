@@ -518,7 +518,7 @@ Example (execute these commands in the order listed with no other commands inser
 This command will fail to execute. As bookings last for 1 hour, accepting this command will cause the restaurant to exceed the capacity of 10 customers at 2019-04-07T12:00 (in fact, 7+7=14 customers will be present if this command executes). Thus this booking is rejected.
 
 .A pictorial representation showing why the capacity will be exceeded
-image::capacityexplanation.png[width="800"]
+image::capacityexplanation.png[width="600"]
 The user may also notice that an alternative booking time of 2019-04-07T13:00 is suggested by REM. The suggested booking time is the next available slot after the input time (in this case, 2019-04-07T11:30) that can hold the booking of 7 members. In this case, the restaurant is only free at 2019-04-07T13:00 after the previous group of 7 customers leave (recall that bookings last for 1 hour).
 
 The below screenshot shows what happens:
@@ -536,11 +536,11 @@ Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
 
 Example:
 
-*`editBooking 3 ts/12:00 n/6`
+* `editBooking 3 ts/12:00 n/6`
 
 Edits the booking at index 3, changing the booking time to 12:00 for 6 persons. Since the date was unspecified, the current date (at the point of entering the command) will be used.
 
-*`editBooking 4 ts/2019-03-30T17:00`
+* `editBooking 4 ts/2019-03-30T17:00`
 
 Edits the booking at index 4, changing the booking time to 30 March 2019, 12:00. The number of persons remains unchanged as it was previously unspecified.
 
@@ -818,7 +818,7 @@ e.g. `recipeSummary`
 * *updateCapacity* `updateCapacity NUMBER` +
 e.g. `updateCapacity 50`
 
-* *addBooking* `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START +
+* *addBooking* `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START` +
 e.g. `addBooking c/1 n/7 ts/2019-04-07T12:00`
 
 * *deleteBooking* `deleteBooking INDEX` +

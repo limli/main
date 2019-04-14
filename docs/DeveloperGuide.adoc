@@ -437,7 +437,7 @@ image::editmembersequencediagram.png[width="800"]
 
 === Suggesting alternative booking timeslots
 
-REM does not allow additional bookings to be added into the system if this causes the capacity to be exceeded. Instead of displaying a message saying that the restaurant is full, we want to suggest an alternative timing to the user instead. In order to achieve this, REM calculates the earliest timeslot after the input date and time that can be accepted.
+REM does not allow additional bookings to be added into the system if this causes the capacity to be exceeded. We want to suggest an alternative timing to the user instead of simply displaying a message saying that the restaurant is full. In order to achieve this, REM calculates the earliest timeslot after the input date and time that can be accepted.
 
 ==== Current implementation
 All calculations involving the restaurant capacity is done in the `Capacity` class. In particular, the following related methods are implemented:
@@ -449,7 +449,7 @@ All calculations involving the restaurant capacity is done in the `Capacity` cla
 
 In this document, we will focus on the implementation of `suggestNextAvailableTime`:
 
-.  The program first check that the input satisfies the preconditions of the method which are required for the method to return a meaningful answer. These are pre-conditions:
+.  The program first checks that the input satisfies the preconditions of the method which are required for the method to return a meaningful answer. These are pre-conditions:
 .. The number of persons of the booking cannot exceed the capacity value (if my restaurant can only seat 20 people, I will never be able to make space for a booking of 30).
 .. `existingBookings` must fit within the capacity (if this condition is violated, it is impossible to add a new booking in a way that fits within capacity).
 .  The program then checks if the current booking can be accepted. If yes, the start time of the booking is returned and no further computations needs to be done.
@@ -458,8 +458,10 @@ In this document, we will focus on the implementation of `suggestNextAvailableTi
 .. The returned time must be later than the start time of the incoming booking.
 .. The incoming booking `toAdd` must fit within the capacity (as determined by `canAddBooking` method) after the time is modified accordingly.
 . If both conditions pass, the end time of the booking is successfully returned. The pre-conditions in Step 1 ensures that at least one of the end times is valid. Since the list is sorted, only the earliest one will be returned (i.e. it is impossible to run through the loop without returning an answer).
+
 The current implementation can be described by the following activity diagram:
 
+.An activity diagram that shows the implementation of the `suggestNextAvailableTime` method.
 image::suggesttimeslot.png[width='800']
 
 // end::suggestbooking[]
