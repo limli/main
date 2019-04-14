@@ -18,7 +18,6 @@ import static seedu.address.logic.commands.CommandTestUtil.PERSON_VALID_PHONE_BO
 import static seedu.address.testutil.TypicalMembers.ALICE;
 import static seedu.address.testutil.TypicalMembers.AMY;
 import static seedu.address.testutil.TypicalMembers.BOB;
-import static seedu.address.testutil.TypicalMembers.CARL;
 import static seedu.address.testutil.TypicalMembers.HOON;
 import static seedu.address.testutil.TypicalMembers.IDA;
 import static seedu.address.testutil.TypicalMembers.KEYWORD_MATCHING_MEIER;
@@ -26,7 +25,6 @@ import static seedu.address.testutil.TypicalMembers.KEYWORD_MATCHING_MEIER;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.member.AddMemberCommand;
