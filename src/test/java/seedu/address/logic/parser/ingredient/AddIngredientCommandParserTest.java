@@ -24,8 +24,7 @@ import static seedu.address.testutil.TypicalIngredients.CHEESE_BASIC;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.add.AddIngredientCommand;
-import seedu.address.logic.parser.AddIngredientCommandParser;
+import seedu.address.logic.commands.ingredient.AddIngredientCommand;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientQuantity;

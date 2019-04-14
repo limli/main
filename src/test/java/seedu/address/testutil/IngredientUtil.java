@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_WARNINGAMOUNT;
 
-import seedu.address.logic.commands.add.AddIngredientCommand;
+import seedu.address.logic.commands.ingredient.AddIngredientCommand;
 import seedu.address.model.ingredient.Ingredient;
 
 /**
