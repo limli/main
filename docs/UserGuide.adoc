@@ -536,11 +536,11 @@ Format: `editBooking INDEX [ts/TIME_START] [n/NUMBER_OF_PERSONS]`
 
 Example:
 
-*`editBooking 3 ts/12:00 n/6`
+* `editBooking 3 ts/12:00 n/6`
 
 Edits the booking at index 3, changing the booking time to 12:00 for 6 persons. Since the date was unspecified, the current date (at the point of entering the command) will be used.
 
-*`editBooking 4 ts/2019-03-30T17:00`
+* `editBooking 4 ts/2019-03-30T17:00`
 
 Edits the booking at index 4, changing the booking time to 30 March 2019, 12:00. The number of persons remains unchanged as it was previously unspecified.
 
@@ -818,7 +818,7 @@ e.g. `recipeSummary`
 * *updateCapacity* `updateCapacity NUMBER` +
 e.g. `updateCapacity 50`
 
-* *addBooking* `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START +
+* *addBooking* `addBooking c/CUSTOMER_INDEX n/NUMBER OF MEMBERS ts/TIME_START` +
 e.g. `addBooking c/1 n/7 ts/2019-04-07T12:00`
 
 * *deleteBooking* `deleteBooking INDEX` +

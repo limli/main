@@ -20,18 +20,18 @@ As the overall team leader, I was responsible for setting clear goals and direct
 
 == Summary of Contributions
 
-* Code contributed: [https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=lingyanhao&sort=displayName&since=2019-02-10&until=2019-03-25&timeframe=day&reverse=false&repoSort=true[Code]]
+* Code contributed: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=lingyanhao&sort=displayName&since=2019-02-10&until=2019-03-25&timeframe=day&reverse=false&repoSort=true[Code]
 
 * *Major enhancement*: added *booking feature*
 ** What it does: allows the user to manage bookings. The system will reject new bookings and suggest better alternative timeslots if the restaurant is full.
-** Justification: When a restaurant needs to manage a large number of bookings, it can be difficult for owners to keep track of how many people are in the restaurant at each point in time. Having a system that rejects new bookings when the restaurant is full can help prevent overbooking. If the user tries to enter a booking when the restaurant is full, not only is the booking rejected, an alternative booking timeslot is also suggested.
+** Justification: When a restaurant needs to manage a large number of bookings, it can be difficult for owners to keep track of how many people are in the restaurant at each point in time. Having a system that rejects new bookings when the restaurant is full can help prevent overbooking. If the user tries to enter a booking when the restaurant is full, not only is the booking rejected, an alternative booking timeslot is also suggested. Suggesting alternative timeslots encourages customers to return the restaurant instead of being chased away.
 ** Highlights: This feature affects the existing delete and edit commands for members as changing a member's personal details requires a corresponding update in the booking panel. It required a significant restructuring of the `Model` component from AB4.
 
 * *Other contributions*:
 
 * Community:
-** PRs reviewed (with non-trivial review comments): [https://github.com/cs2103-ay1819S2-w11-2/main/pull/110], [https://github.com/cs2103-ay1819S2-w11-2/main/pull/138]
-** Reported bugs for other teams: [https://github.com/CS2103-AY1819S2-W14-3/main/issues/309], [https://github.com/CS2103-AY1819S2-W14-3/main/issues/308]
+** PRs reviewed (with non-trivial review comments): [https://github.com/cs2103-ay1819S2-w11-2/main/pull/110[#110]], [https://github.com/cs2103-ay1819S2-w11-2/main/pull/138[#138]]
+** Reported bugs for other teams: [https://github.com/CS2103-AY1819S2-W14-3/main/issues/308[#308]], [https://github.com/CS2103-AY1819S2-W14-3/main/issues/309[#309]]
 
 * Project management:
 *** Managed release v1.1 on GitHub
