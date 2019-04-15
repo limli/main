@@ -1198,6 +1198,34 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
+=== Add and delete members
+. Add and delete members
+.. Prerequisites: List all members using the `listMembers` command. List of all members should be empty. The whole restaurant book can be cleared using the `clear` command
+.. Test case: `addmember n/John Doe p/98765432 e/johnd@example.com l/12` +
+   Expected: A new member is added. The name, phone number, email, as well as loyalty points is shown in the Member column.
+.. Test case: `addmember n/Alice Smith p/91234567 e/alice.s@example.com` +
+   Expected: A new member with 0 loyalty points is added. The name, phone number, email, as well as loyalty points is shown in the Member column.
+.. Test case: `deletemember 1` +
+   Expected: The member corresponding to the first index is deleted.
+
+=== List members
+. List members by name and/or loyalty points
+.. Prerequisites: List all members using the `listMembers` command. List of all members should be empty. The whole restaurant book can be cleared using the `clear` command
+.. Test case: `addmember n/John Doe p/98765432 e/johnd@example.com l/12` +
+   Expected: A new member is added.
+.. Test case: `addmember n/Jane Doe p/98765433 e/janed@example.com l/23` +
+   Expected: A new member is added.
+.. Test case: `addmember n/Alice Smith p/98765434 e/alices@example.com l/100` +
+   Expected: A new member is added.
+.. Test case: `listmembers n/doe` +
+   Expected: `John Doe` and `Jane Doe` are listed.
+.. Test case: `listmembers n/doe l/20` +
+   Expected: `Jane Doe` is listed.
+.. Test case: `listmembers l/20` +
+   Expected: `Jane Doe` and `Alice Smith` are listed.
+.. Test case: `listmembers` +
+   Expected: All members are listed.
+
 === Add and delete bookings
 . Add and delete bookings
 .. Prerequisites: List all members using the `listMembers` command. List of members is non-empty.
@@ -1217,6 +1245,26 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: The system rejects the booking and instead suggests an alternative timeslot of 2019-04-07T13:00. (Explanation: if this booking is accepted, there will be 7+7=14 customers in the restaurant at 2019-04-07T12:00. This exceeds the capacity of 10 and thus REM rejects the booking. For more details, refer to `addbooking` command in the User Guide.)
 .. Test case: `addbooking c/2 n/7 ts/2019-04-07T10:30`
    Expected: The booking is successfully added into the system. (Explanation: REM assumes that bookings last for 1 hour. Since this member is expected to leave by 2019-04-07T11:30, the restaurant will be empty at 2019-04-07T12:00. This set of bookings does not cause the capacity of 10 to be exceeded. For more details, refer to `addbooking` command in the User Guide.)
+
+=== Statistics
+. Test that the statistics feature displays the bar graph correctly.
+.. Prerequisites: There are exactly 3 bookings with date being: today's date, yesterday's date, and the day before's date
+.. Test case: `statsdays 3` +
+   Expected: A new window appears displaying a bar graph with 3 bars. The height of the bar is the number of customers in each booking.
+.. Test case: `statsdays 10` +
+   Expected: A new window appears displaying a bar graph spanning 10 days, but only 3 of them have a bar. The height of the bar is the number of customers in each booking. +
+
+image::statsdays_example.png[width="700"]
+
+The image above shows the new window, and the current bookings. The screenshot is taken on 15 April.
+
+[start=4]
+.. Test case: `statstime 3` +
+   Expected: A new window appears displaying a bar graph. The height of the bar is the number of customers in that specific time slot.
+
+image::statstime_example.png[width="700"]
+
+The image above shows the new window, and the current bookings. The screenshot is taken on 15 April.
 
 === Saving data
 

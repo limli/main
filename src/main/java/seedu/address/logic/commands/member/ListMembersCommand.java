@@ -26,7 +26,7 @@ public class ListMembersCommand extends Command {
             + "the list of words (case-insensitive) and who has at least the specified amount of loyalty points.\n."
             + "If fields are not specified, then all members will be listed.\n"
             + "Parameters: [" + PREFIX_NAME + "NAME_1 NAME_2...] [" + PREFIX_LOYALTY_POINTS + "MIN_LOYALTY_POINTS]\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie l/10";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie l/10";
 
     private final NameAndLoyaltyPointsPredicate predicate;
 
