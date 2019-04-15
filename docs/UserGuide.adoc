@@ -630,7 +630,6 @@ Deletes the booking with index 3.
 ==== Add Staff: `addStaff`
 
 Add a new staff member to the list of all staff.
-The name of the new staff member must not be identical to the name of any existing staff member.
 
 Format: `addStaff n/NAME p/PHONE e/EMAIL a/APPOINTMENT` +
 Shortcut: `as n/NAME p/PHONE e/EMAIL a/APPOINTMENT`
