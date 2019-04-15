@@ -5,30 +5,35 @@
 
 == PROJECT: REstaurant Manager
 
+This portfolio serves to document my contribution to _REstaurant Manager_, an undergraduate level software engineering project for the module CS2103T - Software Engineering. _REstaurant Manager_ was developed over a course of 6 weeks by a team of 4 members. It is written in Java and is based on an existing code base, https://github.com/nus-cs2103-AY1819S2/addressbook-level4[Address Book (Level 4)].
+
 ---
 
 == Overview
 
-REstaurant Manager (REM) is a desktop application that turns your restaurant into a smart restaurant. It is meant for restaurant owners to manage their member base, staff, bookings and food inventory.
+_REstaurant Manager_ (REM) is an application that provides a four-in-one package for restaurant owners to easily manage various aspects of their restaurant.
+It allows restaurant managers to manage their member base, reservations, menu, inventory as well as manpower.
+
+Visit our https://github.com/cs2103-ay1819S2-w11-2/main[project] on github to try out our application.
 
 == Summary of contributions
 
-* Code contributed: (insert link)
-
 * *Major enhancement*: added *staff feature*
-** What it does: allows the user to manage the staff working in a restaurant. Users can also manage the shift roster of the staff working in a restaurant, and to know which staff members are active in the restaurant at the current time.
-** Justification: A restaurant needs to know the number and type of staff working in the restaurant, as well as when each staff member is active, so that it knows if there is sufficient staff to serve customers at any time, and also make manpower and hiring decisions.
-** Highlights: This feature required handling of time ranges for the implementation of the weekly staff shift rosters, which was tricky to implement as care must be taken to handle overnight shifts and shifts across days. It also required an immutable shift roster, which required significant changes to the code.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+** What it does: It acts as a simple manpower management system for restaurant managers. It allows users to add, remove, edit and list staff working in a restaurant. Users can also manage the shift rosters of the staff members.
+** Justification: Restaurant managers need to be able to manage the staff that are working in the restaurant. It is also important for restaurant managers to know when each staff is on shift in the restaurant. With this feature, restaurant managers will be able to easily manage their staff, so that appropriate manpower and hiring decision can be made to keep the restaurant running smoothly.
+** Highlights: To provide flexibility in managing the shift rosters of the staff, the ability to add both weekly shifts that span across multiple days, weekly shifts that span across a short, well-defined period of time as well as weekly overnight shifts was implemented. Shifts that clash must also be prevented. As a result, careful handling of time ranges and intensive testing of the logic was required to ensure that the feature works correctly.
 
-* *Code contributed*: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=zj-cs2103&sort=displayName&since=2019-02-10&until=2019-04-02&timeframe=day&reverse=false&repoSort=true[Link]
+* *Code contributed*: https://nus-cs2103-ay1819s2.github.io/cs2103-dashboard/#search=zj-cs2103&sort=displayName&since=2019-02-10&until=2019-04-02&timeframe=day&reverse=false&repoSort=true[Project Dashboard]
 
 * *Other contributions*:
 
 ** Project management:
 
-*** Managed the release for https://github.com/cs2103-ay1819S2-w11-2/main/releases/tag/v1.2[v1.2].
-*** Wrote tests to improve coverage (Pull requests https://github.com/cs2103-ay1819S2-w11-2/main/pull/52[#52], https://github.com/cs2103-ay1819S2-w11-2/main/pull/58[#58], https://github.com/cs2103-ay1819S2-w11-2/main/pull/88[#88], https://github.com/cs2103-ay1819S2-w11-2/main/pull/99[#99], https://github.com/cs2103-ay1819S2-w11-2/main/pull/131[#131], https://github.com/cs2103-ay1819S2-w11-2/main/pull/135[#135]
+*** Managed the release for https://github.com/cs2103-ay1819S2-w11-2/main/releases/tag/v1.2[v1.2], https://github.com/cs2103-ay1819S2-w11-2/main/releases/tag/v1.3[v1.3] and https://github.com/cs2103-ay1819S2-w11-2/main/releases/tag/v1.3.1[v1.3.1] on Github.
+*** Contributed to user stories on GitHub Issue Tracker: https://github.com/cs2103-ay1819S2-w11-2/main/issues/79[#79], https://github.com/cs2103-ay1819S2-w11-2/main/issues/80[#80].
+*** Wrote tests to improve coverage: https://github.com/cs2103-ay1819S2-w11-2/main/pull/52[#52], https://github.com/cs2103-ay1819S2-w11-2/main/pull/58[#58], https://github.com/cs2103-ay1819S2-w11-2/main/pull/88[#88], https://github.com/cs2103-ay1819S2-w11-2/main/pull/99[#99], https://github.com/cs2103-ay1819S2-w11-2/main/pull/131[#131], https://github.com/cs2103-ay1819S2-w11-2/main/pull/135[#135], https://github.com/cs2103-ay1819S2-w11-2/main/pull/185[#185], https://github.com/cs2103-ay1819S2-w11-2/main/pull/193[#193], https://github.com/cs2103-ay1819S2-w11-2/main/pull/195[#195].
+*** Reviewed pull requests: https://github.com/cs2103-ay1819S2-w11-2/main/pull/101[#101], https://github.com/cs2103-ay1819S2-w11-2/main/pull/184[#184].
+*** Refactored code: https://github.com/cs2103-ay1819S2-w11-2/main/pull/29[#29], https://github.com/cs2103-ay1819S2-w11-2/main/pull/97[#97].
 
 == Contributions to the User Guide
 
