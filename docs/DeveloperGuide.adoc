@@ -1256,7 +1256,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 image::statsdays_example.png[width="700"]
 
-The image above shows the new window, and the current bookings. The screenshot is taken on 15 April.
+The image above shows the new window, and the current bookings. The screenshot is taken on 15 April 2019.
 
 [start=4]
 .. Test case: `statstime 3` +
@@ -1264,7 +1264,7 @@ The image above shows the new window, and the current bookings. The screenshot i
 
 image::statstime_example.png[width="700"]
 
-The image above shows the new window, and the current bookings. The screenshot is taken on 15 April.
+The image above shows the new window, and the current bookings. The screenshot is taken on 15 April 2019.
 
 === Saving data
 
