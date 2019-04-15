@@ -104,7 +104,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the restaurant book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the restaurant book's content (e.g. `add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
