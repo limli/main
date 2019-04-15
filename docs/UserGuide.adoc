@@ -857,7 +857,7 @@ Format: `ratingStats`
 * *addMember*
 *** Format: `addMember n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
 *** Shortcut: `am n/CUSTOMER_NAME e/EMAIL p/PHONE_NUMBER [l/LOYALTY_POINTS]`
-*** e.g. ``addMember n/John Doe e/johnd@gmail.com p/81234567 l/20`
+*** e.g. `addMember n/John Doe e/johnd@gmail.com p/81234567 l/20`
 
 * *listMembers*
 *** Format: `listMembers [n/NAME1 NAME2 ...] [l/LOYALTY_POINTS_MINIMUM]`
